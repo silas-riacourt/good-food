@@ -156,15 +156,15 @@ Project Link: [https://github.com/BoisselNicolas/RESOURCES-RELATIONNELLES/](http
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
 
-[contributors-shield]: https://img.shields.io/github/contributors/BoisselNicolas/RESOURCES-RELATIONNELLES.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/Silasssss/good-food.svg?style=for-the-badge
 [contributors-url]: https://github.com/Silasssss/good-food/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/BoisselNicolas/RESOURCES-RELATIONNELLES.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/Silasssss/good-food.svg?style=for-the-badge
 [forks-url]: https://github.com/Silasssss/good-food/network/members
-[stars-shield]: https://img.shields.io/github/stars/BoisselNicolas/RESOURCES-RELATIONNELLES.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/Silasssss/good-food.svg?style=for-the-badge
 [stars-url]: https://github.com/Silasssss/good-food/stargazers
-[issues-shield]: https://img.shields.io/github/issues/BoisselNicolas/RESOURCES-RELATIONNELLES.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/Silasssss/good-food.svg?style=for-the-badge
 [issues-url]: https://github.com/Silasssss/good-food/issues
-[license-shield]: https://img.shields.io/github/license/BoisselNicolas/RESOURCES-RELATIONNELLES.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/Silasssss/good-food.svg?style=for-the-badge
 [license-url]: https://github.com/Silasssss/good-food/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/nicolas-boissel-410067129/
