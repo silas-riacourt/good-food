@@ -157,9 +157,9 @@ Project Link: [https://github.com/BoisselNicolas/RESOURCES-RELATIONNELLES/](http
 
 
 [contributors-shield]: https://img.shields.io/github/contributors/BoisselNicolas/RESOURCES-RELATIONNELLES.svg?style=for-the-badge
-[contributors-url]: https://github.com/BoisselNicolas/RESOURCES-RELATIONNELLES/graphs/contributors
+[contributors-url]: https://github.com/Silasssss/good-food/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/BoisselNicolas/RESOURCES-RELATIONNELLES.svg?style=for-the-badge
-[forks-url]: https://github.com/BoisselNicolas/RESOURCES-RELATIONNELLES/network/members
+[forks-url]: https://github.com/Silasssss/good-food/network/members
 [stars-shield]: https://img.shields.io/github/stars/BoisselNicolas/RESOURCES-RELATIONNELLES.svg?style=for-the-badge
 [stars-url]: https://github.com/Silasssss/good-food/stargazers
 [issues-shield]: https://img.shields.io/github/issues/BoisselNicolas/RESOURCES-RELATIONNELLES.svg?style=for-the-badge
