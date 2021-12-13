@@ -14,10 +14,10 @@
     <img src="https://ecole-alternance.cesi.fr/wp-content/themes/cesi/static/logo/ecole-alternance.svg">
   </a>
 
-  <h3 align="center">(RE)SOURCES RELATIONNELLES</h3>
+  <h3 align="center">GOOD DEV</h3>
 
   <p align="center">
-    CESI RILS 2020 - Cube 1 - Projet (RE)SOURCES RELATIONNELLES
+    CESI MAALSI 2021 - Cube 1 - GOOD DEV
     <br />
     <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
     <br />
@@ -161,11 +161,11 @@ Project Link: [https://github.com/BoisselNicolas/RESOURCES-RELATIONNELLES/](http
 [forks-shield]: https://img.shields.io/github/forks/BoisselNicolas/RESOURCES-RELATIONNELLES.svg?style=for-the-badge
 [forks-url]: https://github.com/BoisselNicolas/RESOURCES-RELATIONNELLES/network/members
 [stars-shield]: https://img.shields.io/github/stars/BoisselNicolas/RESOURCES-RELATIONNELLES.svg?style=for-the-badge
-[stars-url]: https://github.com/BoisselNicolas/RESOURCES-RELATIONNELLES/stargazers
+[stars-url]: https://github.com/Silasssss/good-food/stargazers
 [issues-shield]: https://img.shields.io/github/issues/BoisselNicolas/RESOURCES-RELATIONNELLES.svg?style=for-the-badge
-[issues-url]: https://github.com/BoisselNicolas/RESOURCES-RELATIONNELLES/issues
+[issues-url]: https://github.com/Silasssss/good-food/issues
 [license-shield]: https://img.shields.io/github/license/BoisselNicolas/RESOURCES-RELATIONNELLES.svg?style=for-the-badge
-[license-url]: https://github.com/BoisselNicolas/RESOURCES-RELATIONNELLES/blob/master/LICENSE.txt
+[license-url]: https://github.com/Silasssss/good-food/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/nicolas-boissel-410067129/
 [product-screenshot]: https://www.bypeople.com/wp-content/uploads/2019/01/travel-mobile-app-template.png
