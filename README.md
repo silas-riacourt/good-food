@@ -1,9 +1,7 @@
 [![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-![Travis (.org)](https://img.shields.io/travis/BoisselNicolas/RESOURCES-RELATIONNELLES?style=for-the-badge)
 
 
 
