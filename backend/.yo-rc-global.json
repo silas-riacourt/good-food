@@ -1,0 +1,8 @@
+{
+  "generator-jhipster:7.4.1": {
+    "promptValues": {
+      "packageName": "fr.cesi.cube",
+      "nativeLanguage": "fr"
+    }
+  }
+}
