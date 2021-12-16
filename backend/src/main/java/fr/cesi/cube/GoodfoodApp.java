@@ -1,6 +1,8 @@
 package fr.cesi.cube;
 
 import fr.cesi.cube.config.ApplicationProperties;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Arrays;
@@ -19,6 +21,7 @@ import tech.jhipster.config.DefaultProfileUtil;
 import tech.jhipster.config.JHipsterConstants;
 
 @SpringBootApplication
+@EnableSwagger2
 @EnableConfigurationProperties({ LiquibaseProperties.class, ApplicationProperties.class })
 public class GoodfoodApp {
 

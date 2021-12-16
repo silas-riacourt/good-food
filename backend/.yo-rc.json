@@ -43,7 +43,7 @@
     "clientTheme": "none",
     "clientThemeVariant": "",
     "withAdminUi": true,
-    "entities": ["Project", "Label", "Ticket", "Attachment", "Comment"],
-    "lastLiquibaseTimestamp": 1639649765000
+    "entities": ["Project", "Label", "Ticket", "Attachment", "Comment", "Restaurant", "Menu", "Produit", "Ingredient"],
+    "lastLiquibaseTimestamp": 1639665177000
   }
 }

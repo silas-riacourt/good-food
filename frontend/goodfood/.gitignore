@@ -12,9 +12,11 @@
 Thumbs.db
 UserInterfaceState.xcuserstate
 $RECYCLE.BIN/
+
 *.log
 log.txt
 npm-debug.log*
+
 /.idea
 /.ionic
 /.sass-cache
@@ -27,5 +29,3 @@ npm-debug.log*
 /platforms
 /plugins
 /www
-coverage/
-idea/
