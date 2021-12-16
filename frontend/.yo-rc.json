@@ -1,8 +1,18 @@
 {
   "generator-jhipster": {
-    "skipClient": true,
-    "blueprints": [],
-    "otherModules": [],
+    "skipClient": false,
+    "blueprints": [
+      {
+        "name": "generator-jhipster-react-native",
+        "version": "4.2.5"
+      }
+    ],
+    "otherModules": [
+      {
+        "name": "generator-jhipster-react-native",
+        "version": "4.2.5"
+      }
+    ],
     "reactNative": {
       "reactNativeAppName": "goodfood",
       "detox": false,
@@ -47,6 +57,8 @@
     "clientPackageManager": "npm",
     "clientTheme": "none",
     "clientThemeVariant": "",
-    "withAdminUi": true
+    "withAdminUi": true,
+    "entities": ["Project", "Label", "Ticket", "Attachment", "Comment"],
+    "lastLiquibaseTimestamp": 1639649595000
   }
 }

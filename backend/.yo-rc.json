@@ -42,6 +42,8 @@
     "clientPackageManager": "npm",
     "clientTheme": "none",
     "clientThemeVariant": "",
-    "withAdminUi": true
+    "withAdminUi": true,
+    "entities": ["Project", "Label", "Ticket", "Attachment", "Comment"],
+    "lastLiquibaseTimestamp": 1639649765000
   }
 }

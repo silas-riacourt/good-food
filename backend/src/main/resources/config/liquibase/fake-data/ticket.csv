@@ -1,0 +1,11 @@
+id;title;description;due_date;date;status;type;priority
+1;out-of-the-box Grocery SMTP;bus;2021-12-16;2021-12-16T07:17:15;IN_PROGRESS;FEATURE;HIGH
+2;Afghanistan Poitou-Charentes c;Licensed;2021-12-15;2021-12-15T18:39:52;WONT_IMPLEMENT;FEATURE;LOW
+3;executive;Auvergne modular;2021-12-15;2021-12-16T00:25:55;OPEN;BUG;LOWER
+4;B2C c;Lombards Chair Music;2021-12-16;2021-12-16T05:09:52;DUPLICATE;BUG;LOW
+5;enable Incredible;Outdoors Fantastic Bûcherie;2021-12-15;2021-12-15T17:24:00;OPEN;FEATURE;NORMAL
+6;deposit Cotton Compatible;matrix Balanced Small;2021-12-15;2021-12-15T12:24:14;OPEN;FEATURE;LOW
+7;Bike;generate systems Dollar;2021-12-16;2021-12-16T03:26:54;CLOSED;FEATURE;LOWER
+8;Innovative utilize Kids;schemas b;2021-12-16;2021-12-16T04:10:12;DUPLICATE;BUG;LOWERST
+9;Rustic attitude-oriented;c Beauty;2021-12-16;2021-12-16T06:24:14;VERIFIED;FEATURE;HIGHER
+10;neural Licensed Refined;payment Steel c;2021-12-15;2021-12-15T12:04:12;WAITING_FOR_RESPONSE;BUG;HIGH
