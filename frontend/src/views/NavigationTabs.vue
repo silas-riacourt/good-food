@@ -2,8 +2,8 @@
 
     <ion-tabs>
       <ion-router-outlet></ion-router-outlet>
-      <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="tab1" href="/">
+      <ion-tab-bar>
+        <ion-tab-button tab="tab1" href="/restaurants">
              <ion-icon :icon="restaurantOutline" />
           <ion-label>Restaurants</ion-label>
         </ion-tab-button>

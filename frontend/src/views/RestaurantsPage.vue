@@ -2,16 +2,26 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
-        <ion-title>Welcome to GoodFood choisissez votre restaurant pour commander!</ion-title>
+        <ion-title
+          >Welcome to GoodFood choisissez votre restaurant pour
+          commander!</ion-title
+        >
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">Restaurants</ion-title>
-        </ion-toolbar>
-      </ion-header>
       <ion-grid>
+        <ion-row class="ion-justify-content-center">
+          <ion-col size-md="5" size-sm="12">
+            <div class="goodfood__header">
+              <ion-searchbar
+                mode="ios"
+                ancel-button-icon
+                placeholder="Brest.."
+              ></ion-searchbar>
+            </div>
+          </ion-col>
+        </ion-row>
+
         <ion-row>
           <ion-col v-for="(restaurant, index) in this.restaurants" :key="index">
             <restaurant-card
@@ -35,7 +45,8 @@ import {
   IonContent,
   IonCol,
   IonRow,
-  IonGrid
+  IonGrid,
+  IonSearchbar,
 } from "@ionic/vue";
 import RestaurantCard from "../components/RestaurantCard.vue";
 
@@ -47,7 +58,10 @@ export default {
     IonTitle,
     IonContent,
     IonPage,
-    IonRow,IonGrid,IonCol
+    IonRow,
+    IonGrid,
+    IonCol,
+    IonSearchbar,
   },
   data() {
     return {
@@ -60,6 +74,16 @@ export default {
         {
           name: "GoodFood PARIS",
           location: "PARIS Avenue des chams ",
+          open: false,
+        },
+        {
+          name: "GoodFood RENNES",
+          location: "RENNES",
+          open: true,
+        },
+        {
+          name: "GoodFood TOULOUSE",
+          location: "TOULOUSE",
           open: false,
         },
       ],

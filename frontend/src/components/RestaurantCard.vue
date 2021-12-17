@@ -1,7 +1,7 @@
 <template>
-  <ion-card>
+  <ion-card mode="ios">
     <ion-card-header>
-      <ion-card-title>{{ name }}</ion-card-title>
+      <ion-card-title style="font-size:1.2em;">{{ name }}</ion-card-title>
       <ion-card-subtitle>{{ location }}</ion-card-subtitle>
       <ion-card-subtitle
         ><ion-icon
