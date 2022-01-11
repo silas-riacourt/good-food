@@ -8,22 +8,20 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
     <img src="https://ecole-alternance.cesi.fr/wp-content/themes/cesi/static/logo/ecole-alternance.svg">
-  </a>
 
   <h3 align="center">GOOD DEV</h3>
 
   <p align="center">
     CESI MAALSI 2021 - Cube 1 - GOOD DEV
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/Silasssss/good-food/wiki"><strong>Voir la documentation »</strong></a>
     <br />
     <br />
     ·
-    <a href="https://github.com/BoisselNicolas/RESOURCES-RELATIONNELLES/issues">Report Bug</a>
+    <a href="https://github.com/Silasssss/good-food/issues">Remonter un problème</a>
     ·
-    <a href="https://github.com/BoisselNicolas/RESOURCES-RELATIONNELLES/issues">Request Feature</a>
+    <a href="https://github.com/Silasssss/good-food/issues">Demande de fonctionnalités</a>
   </p>
 </p>
 
@@ -32,36 +30,46 @@
 <details>
   <summary>A propos du projet</summary>
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot][product-screenshot]]()
 
+Le projet consiste à fournir une architecture applicative au goût du jour, permettant de répondre à l’ensemble de ses besoins et contraintes. Cela contient aussi bien la refonte de l’application de commande que la refonte de l’infrastructure d’hébergement.
 
-There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
+  
+  <strong>Contexte :</strong> 
+  
+L’enseigne Good Food qui est composée de 150 restaurants franchisés sur la France, la Belgique et le Luxembourg propose des prestations de restauration conventionnelle, de la vente à emporter et de la livraison. Aujourd’hui le système d'information atteint ses limites notamment au niveau des performances très médiocres et des choix applicatifs qui empêchent toute évolution. De plus, il n'existe pas de solution mobile.
 
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should element DRY principles to the rest of your life :smile:
+  <strong>Périmètre du projet :</strong>
+  
+La périmètre du projet est le suivant: développer une application de commande mobile et web ainsi qu’une application pour les franchisés afin qu’ils puissent gérer leurs commandes, leurs préparations, leurs fournisseurs et leurs livraisons. Il va aussi être nécessaire de refondre l’infrastructure d’hébergement.
+ 
+  <strong>Contraintes :</strong>
+  
+* La totalité des data doit être conservée et récupérée dans la nouvelle base
+* La migration de l’ancienne base de données vers la nouvelle devra se faire sans aucun impact sur la production
+* Le code devra être documenté
+* Cette évolution de l’application sera concomitante avec l’adoption d’un nouveau système de caisse dont le déploiement est assuré par le fournisseur de caisse lui-même
+* Il conviendra de développer une API RESTful pour permettre la connexion sur l’application depuis d’autres solutions (comptabilité, applications spécifiques à la logistique ou toute autre application sortant du périmètre)
+* Une application conforme au cahier des charges fonctionnel.
+* Le service marketing de Good Food a convenu d’une date de lancement de l’application mobile et de la nouvelle version du site sans consulter le service technique et encore moins le prestataire chargé du développement
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have have contributed to expanding this template!
+  
+  
 
-A list of commonly used resources that I find helpful are listed in the acknowledgements.
-
+  
 ### Développé avec
 
 This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 
 * IONIC
 * Vue JS
-* Express JS
-* MongoDB
+* Java Spring Boot
+* PostgreSQL
 </details>
 
 <details>
    <summary>Démarrage</summary>
 
-
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
 
 ### Pré-requis
 
@@ -75,20 +83,18 @@ To get a local copy up and running follow these simple example steps.
 1. Cloner le repo
 
 ```
-$ git clone git@github.com:BoisselNicolas/RESOURCES-RELATIONNELLES.git
+$ git clone git@github.com:Silasssss/good-food.git
 ```
 2. Installation les paquets de notre API
 
 ```
-$ cd ravenclaw/server/
-$ npm install
+$ cd backend
 ```
 
 3. Installer les paquets nécessaire à IONIC
 
 ```
-$ cd ravenclaw/Cube/
-$ npm install
+$ cd frontend
 ```
 </details>
  <details>
@@ -111,27 +117,15 @@ $ ionic serve
   <summary>Roadmap</summary>
 
 
-See the [open issues](https://github.com/BoisselNicolas/RESOURCES-RELATIONNELLES/issues) for a list of proposed features (and known issues).
-
+Consultez les [problèmes ouverts](https://github.com/Silasssss/good-food/issues) et les fonctionnalités proposées.
+  
 </details>
-<details>
-  <summary>Contribution</summary>
 
-
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-</details>
 <details>
   <summary>License</summary>
 
 
-Distributé sous licence OpenGL-3.0. See `LICENSE` for more information.
+Distributé sous licence MIT. Voir `LICENSE` pour plus d'informations.
 
 </details>
 <details>
@@ -141,7 +135,8 @@ Boissel Nicolas - ncboissel@gmail.com
 
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
-Project Link: [https://github.com/BoisselNicolas/RESOURCES-RELATIONNELLES/](https://github.com/BoisselNicolas/RESOURCES-RELATIONNELLES/)
+Project Link: [https://github.com/Silasssss/good-food/]
+(https://github.com/Silasssss/good-food/)
 
 
 </details>
