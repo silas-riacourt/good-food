@@ -89,28 +89,30 @@ $ git clone git@github.com:Silasssss/good-food.git
 
 ```
 $ cd backend
+$ npm install
 ```
 
 3. Installer les paquets nécessaire à IONIC
 
 ```
 $ cd frontend
+$ npm install
 ```
 </details>
  <details>
  <summary>Usage</summary>
 
-1. Démarrer l'API
+1. Démarrer le backend
 
 ```
-$ cd ravenclaw/server/
-$ node server.js
+$ cd backend
+$ gradlew
 ```
 
-2. Démarrer IONIC
+2. Démarrer le frontend
 ```
-$ cd ravenclaw/Cube/
-$ ionic serve
+$ cd frontend
+$ npm run serve
 ```
 </details>
 <details>
