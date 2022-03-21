@@ -1,11 +1,40 @@
 <template>
   <v-app dark>
-    <v-main>
-      <v-container class="ml-0">
-        <Nuxt />
+    <header class="d-none d-sm-block">
+      <v-container>
+        <v-row justify="center" class="">
+          <v-col cols="12" sm="10" md="8">
+            <v-row align="center" justify="start">
+              <v-col cols="auto">
+                <v-img :src="require(`~/assets/goodfood2.png`)" max-width="100" />
+              </v-col>
+              <v-col cols="auto">
+                Nos engagements
+              </v-col>
+              <v-col cols="auto">
+                Nos restaurants
+              </v-col>
+              <v-col cols="auto" offset-xl="6" offset-lg="3">
+                <v-btn text outlined>
+                  Mon compte
+                </v-btn>
+              </v-col>
+            </v-row>
+          </v-col>
+        </v-row>
       </v-container>
+      <v-divider />
+    </header>
+    <v-main>
+      <Nuxt />
     </v-main>
-    <v-bottom-navigation v-model="value" color="warning" grow horizontal absolute>
+    <v-bottom-navigation
+      v-model="value"
+      color="warning"
+      grow
+      fixed
+      class="d-fixed d-sm-none"
+    >
       <v-btn value="restaurants" to="/">
         <span>Restaurants</span>
         <v-icon>mdi-map-marker-multiple</v-icon>
