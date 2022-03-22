@@ -15,7 +15,7 @@
 
     <v-card-actions class="justify-center pb-4">
       <div class="text-center">
-        <v-btn color="warning">
+        <v-btn color="warning" to="/order">
           Commander
         </v-btn>
       </div>

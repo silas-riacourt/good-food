@@ -14,9 +14,12 @@
               <v-col cols="auto">
                 Nos restaurants
               </v-col>
-              <v-col cols="auto" offset-xl="6" offset-lg="3">
+              <v-col cols="auto" offset-xl="4" offset-lg="3">
                 <v-btn text outlined>
                   Mon compte
+                </v-btn>
+                <v-btn color="warning" class="ml-2">
+                  Mon panier
                 </v-btn>
               </v-col>
             </v-row>
