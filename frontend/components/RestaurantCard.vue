@@ -15,7 +15,7 @@
 
     <v-card-actions class="justify-center pb-4">
       <div class="text-center">
-        <v-btn color="warning" to="/order">
+        <v-btn color="warning" :to="{ path: 'restaurant/'+id, params: { restaurantId: 123 }}" :nuxt="true">
           Commander
         </v-btn>
       </div>
@@ -35,6 +35,10 @@ export default {
     location: {
       type: String,
       default: 'BREST'
+    },
+    id: {
+      type: Number,
+      default: 0
     }
   }
 }

@@ -9,12 +9,16 @@
                 <v-img :src="require(`~/assets/goodfood2.png`)" max-width="100" />
               </v-col>
               <v-col cols="auto">
-                Nos engagements
+                <v-btn text to="/engagements" color="warning">
+                  Nos engagements
+                </v-btn>
               </v-col>
               <v-col cols="auto">
-                Nos restaurants
+                <v-btn text to="/" color="warning">
+                  Nos restaurants
+                </v-btn>
               </v-col>
-              <v-col cols="auto" offset-xl="4" offset-lg="3">
+              <v-col cols="auto" offset-xl="3" offset-lg="3">
                 <v-btn text outlined>
                   Mon compte
                 </v-btn>

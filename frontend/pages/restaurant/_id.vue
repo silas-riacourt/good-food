@@ -124,6 +124,10 @@
 <script>
 export default {
   name: 'AccountPage',
+  validate ({ params }) {
+    // Must be a number
+    return /^\d+$/.test(params.id)
+  },
   data: () => ({
     selectedCategorie: 0,
     categories: [
@@ -178,6 +182,9 @@ export default {
         image: 'dessert'
       }
     ]
-  })
+  }),
+  created () {
+    console.log(this.$route.params)
+  }
 }
 </script>
