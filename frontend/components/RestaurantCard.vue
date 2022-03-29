@@ -1,5 +1,5 @@
 <template>
-  <v-card class="grow" min-width="250px" max-width="250px">
+  <v-card class="grow" min-width="260px" max-width="260px">
     <v-card-title class="text-uppercase">
       {{ name }}
     </v-card-title>

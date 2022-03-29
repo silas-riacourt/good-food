@@ -2,8 +2,8 @@
   <v-app dark>
     <header class="d-none d-sm-block">
       <v-container>
-        <v-row justify="center" class="">
-          <v-col cols="12" sm="10" md="8">
+        <v-row justify="center" class="" align="center">
+          <v-col cols="12" sm="12" md="12" xl="8">
             <v-row align="center" justify="start">
               <v-col cols="auto">
                 <v-img :src="require(`~/assets/goodfood2.png`)" max-width="100" />
@@ -18,7 +18,7 @@
                   Nos restaurants
                 </v-btn>
               </v-col>
-              <v-col cols="auto" offset-xl="3" offset-lg="3">
+              <v-col cols="auto" offset-xl="3">
                 <v-btn text outlined>
                   Mon compte
                 </v-btn>
@@ -46,7 +46,7 @@
         <span>Restaurants</span>
         <v-icon>mdi-map-marker-multiple</v-icon>
       </v-btn>
-      <v-btn value="commander" to="/order">
+      <v-btn value="commander" to="/restaurant/4">
         <span>Commander</span>
         <v-icon>mdi-silverware-fork-knife</v-icon>
       </v-btn>
