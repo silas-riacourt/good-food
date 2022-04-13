@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row justify="center">
-      <v-col cols="12" sm="10" md="6">
+      <v-col cols="12" sm="11" md="8">
         <v-row justify="start" align="center" class="mt-4 mb-4">
           <v-col cols="auto">
             <v-icon x-large color="warning">
@@ -73,7 +73,7 @@
           </v-row>
           <v-card-actions class="justify-center pb-4">
             <div class="text-center">
-              <v-btn block color="warning" light class=" text-none black--text font-weight-light">
+              <v-btn block color="warning" class=" text-none font-weight-light">
                 Valider mon panier
               </v-btn>
             </div>

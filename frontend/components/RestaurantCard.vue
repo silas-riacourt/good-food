@@ -1,5 +1,12 @@
 <template>
-  <v-card class="grow" min-width="260px" max-width="260px">
+  <v-card
+    class="grow"
+    min-width="260px"
+    max-width="260px"
+    :color="selected ? '' :''"
+    :dark="selected"
+    :elevation="fromMap ? '0' : '2'"
+  >
     <v-card-title class="text-uppercase">
       {{ name }}
     </v-card-title>
@@ -39,7 +46,9 @@ export default {
     id: {
       type: Number,
       default: 0
-    }
+    },
+    selected: Boolean,
+    fromMap: Boolean
   }
 }
 </script>

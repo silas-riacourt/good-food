@@ -4,27 +4,86 @@
       <v-container>
         <v-row justify="center" class="" align="center">
           <v-col cols="12" sm="12" md="12" xl="8">
-            <v-row align="center" justify="start">
-              <v-col cols="auto">
-                <v-img :src="require(`~/assets/goodfood2.png`)" max-width="100" />
+            <v-row align="center" justify="center">
+              <v-col cols="auto" class="pa-0">
+                <v-img :src="require(`~/assets/goodfood2.png`)" max-width="80" />
               </v-col>
-              <v-col cols="auto">
-                <v-btn text to="/engagements" color="warning">
-                  Nos engagements
-                </v-btn>
-              </v-col>
-              <v-col cols="auto">
-                <v-btn text to="/" color="warning">
-                  Nos restaurants
-                </v-btn>
-              </v-col>
-              <v-col cols="auto" offset-xl="3">
-                <v-btn text outlined>
-                  Mon compte
-                </v-btn>
-                <v-btn color="warning" class="ml-2">
-                  Mon panier
-                </v-btn>
+              <v-col cols="10">
+                <v-row justify="space-between">
+                  <v-col cols="auto">
+                    <v-row>
+                      <v-col cols="auto">
+                        <v-btn text to="/engagements" active-class="warning">
+                          Nos engagements
+                        </v-btn>
+                      </v-col>
+                      <v-col cols="auto">
+                        <v-btn text to="/" color="warning">
+                          Nos restaurants
+                        </v-btn>
+                      </v-col>
+                    </v-row>
+                  </v-col>
+
+                  <v-col cols="auto" offset-xl="3">
+                    <v-menu
+                      nudge-bottom="20"
+                      bottom
+                      offset-y
+                    >
+                      <template #activator="{ on, attrs }">
+                        <v-btn
+                          text
+                          outlined
+                          v-bind="attrs"
+                          plain
+                          v-on="on"
+                        >
+                          Mon Compte
+                        </v-btn>
+                      </template>
+                      <v-card class="pa-2">
+                        <v-card-title>Bonjour {{ $auth.user.firstName }}</v-card-title>
+                        <v-list>
+                          <v-list-item to="/orders">
+                            <v-list-item-icon>
+                              <v-icon>mdi-food</v-icon>
+                            </v-list-item-icon>
+
+                            <v-list-item-content>
+                              <v-list-item-title>Mes commandes</v-list-item-title>
+                            </v-list-item-content>
+                          </v-list-item>
+                          <v-divider />
+                          <v-list-item to="/account">
+                            <v-list-item-icon>
+                              <v-icon>mdi-account-circle</v-icon>
+                            </v-list-item-icon>
+
+                            <v-list-item-content>
+                              <v-list-item-title>Mon compte</v-list-item-title>
+                            </v-list-item-content>
+                          </v-list-item>
+                          <v-divider />
+                          <v-list-item @click="logout()">
+                            <v-list-item-icon>
+                              <v-icon>mdi-logout</v-icon>
+                            </v-list-item-icon>
+
+                            <v-list-item-content>
+                              <v-list-item-title>
+                                Se deconnecter
+                              </v-list-item-title>
+                            </v-list-item-content>
+                          </v-list-item>
+                        </v-list>
+                      </v-card>
+                    </v-menu>
+                    <v-btn color="warning" class="ml-2">
+                      Mon panier
+                    </v-btn>
+                  </v-col>
+                </v-row>
               </v-col>
             </v-row>
           </v-col>
@@ -83,6 +142,11 @@ export default {
       right: true,
       rightDrawer: false,
       title: 'Vuetify.js'
+    }
+  },
+  methods: {
+    logout () {
+      this.$auth.logout()
     }
   }
 }

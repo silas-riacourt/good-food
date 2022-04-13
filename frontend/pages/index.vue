@@ -13,6 +13,7 @@
                   :name="restaurant.name"
                   :open="restaurant.open"
                   :location="restaurant.location"
+                  :selected="restaurant.open"
                 />
               </v-col>
             </v-row>
@@ -22,7 +23,24 @@
               <client-only>
                 <l-map style="height: 100%" :zoom="zoom" :center="center" @ready="setIconStyles">
                   <l-tile-layer :url="url" :attribution="attribution" />
-                  <l-marker v-for="(restaurant, index) in restaurants" :key="index" :lat-lng="restaurant.locationCoords" :icon="icon" @click="checkRestaurant(restaurant)" />
+                  <l-marker
+                    v-for="(restaurant, index) in restaurants"
+                    :key="index"
+                    :lat-lng="restaurant.locationCoords"
+                    :icon="icon"
+                    @mouseenter="checkRestaurant(restaurant)"
+                    @mouseleave="uncheckRestaurant(restaurant)"
+                  >
+                    <l-popup>
+                      <RestaurantCard
+                        :name="restaurant.name"
+                        :open="restaurant.open"
+                        :location="restaurant.location"
+                        :selected="restaurant.open"
+                        :from-map="true"
+                      />
+                    </l-popup>
+                  </l-marker>
                 </l-map>
               </client-only>
             </div>
@@ -44,7 +62,7 @@ export default {
         {
           name: 'GoodFood BREST',
           locationName: 'BREST 29910 10 route test',
-          open: true,
+          open: false,
           locationCoords: [48.390392, -4.486076]
         },
         {
@@ -56,7 +74,7 @@ export default {
         {
           name: 'GoodFood RENNES',
           locationName: 'RENNES',
-          open: true,
+          open: false,
           locationCoords: [48.117268, -1.677793]
         },
         {
@@ -103,7 +121,10 @@ export default {
   },
   methods: {
     checkRestaurant (restaurant) {
-      console.log(restaurant)
+      this.restaurants[this.restaurants.indexOf(restaurant)].open = true
+    },
+    uncheckRestaurant (restaurant) {
+      this.restaurants[this.restaurants.indexOf(restaurant)].open = false
     },
     setIconStyles () {
       this.icon = this.$L.icon({
