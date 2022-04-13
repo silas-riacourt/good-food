@@ -21,7 +21,7 @@
           <v-col cols="5">
             <div id="map-wrap" style="height: 100vh" class="d-none d-sm-block">
               <client-only>
-                <l-map style="height: 100%" :zoom="zoom" :center="center" @ready="setIconStyles">
+                <l-map style="height: 100%;z-index:0;" :zoom="zoom" :center="center" @ready="setIconStyles">
                   <l-tile-layer :url="url" :attribution="attribution" />
                   <l-marker
                     v-for="(restaurant, index) in restaurants"
