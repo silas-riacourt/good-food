@@ -1,27 +1,28 @@
 <template>
   <v-container fluid>
     <v-row justify="center" class="">
-      <v-col cols="12" sm="12" md="11">
-        <v-row no-gutters class="">
-          <v-col cols="7" class="mt-2">
+      <v-col cols="12" sm="12" md="12" class="pa-0">
+        <v-row no-gutters>
+          <v-col class="pt-4 pl-8 elevation-0" style="z-index:10">
             <h1 class="font-weight-light">
               Nos restaurants
             </h1>
-            <v-row align="center" class="mt-2">
+            <v-row align="center" class="mt-2" justify="center">
               <v-col v-for="(restaurant, index) in restaurants" :key="index" cols="auto">
                 <RestaurantCard
                   :name="restaurant.name"
                   :open="restaurant.open"
                   :location="restaurant.location"
+                  :locationname="restaurant.locationName"
                   :selected="restaurant.open"
                 />
               </v-col>
             </v-row>
           </v-col>
-          <v-col cols="5">
+          <v-col>
             <div id="map-wrap" style="height: 100vh" class="d-none d-sm-block">
               <client-only>
-                <l-map style="height: 100%;z-index:0;" :zoom="zoom" :center="center" @ready="setIconStyles">
+                <l-map :options="{zoomControl: false}" style="height: 100%;z-index:0;" :zoom="zoom" :center="center" @ready="setIconStyles">
                   <l-tile-layer :url="url" :attribution="attribution" />
                   <l-marker
                     v-for="(restaurant, index) in restaurants"
@@ -36,11 +37,30 @@
                         :name="restaurant.name"
                         :open="restaurant.open"
                         :location="restaurant.location"
+                        :locationname="restaurant.locationName"
                         :selected="restaurant.open"
                         :from-map="true"
                       />
                     </l-popup>
                   </l-marker>
+                  <l-control position="topleft">
+                    <v-toolbar
+                      dense
+                      floating
+                    >
+                      <v-text-field
+                        v-if="false"
+                        hide-details
+                        prepend-icon="mdi-magnify"
+                        single-line
+                      />
+
+                      <v-btn icon @click="locatorButtonPressed()">
+                        <v-icon>mdi-crosshairs-gps</v-icon>
+                      </v-btn>
+                    </v-toolbar>
+                  </l-control>
+                  <l-control-zoom position="bottomright" />
                 </l-map>
               </client-only>
             </div>
@@ -73,13 +93,13 @@ export default {
         },
         {
           name: 'GoodFood RENNES',
-          locationName: 'RENNES',
+          locationName: 'RENNES location address',
           open: false,
           locationCoords: [48.117268, -1.677793]
         },
         {
           name: 'GoodFood TOULOUSE',
-          locationName: 'TOULOUSE',
+          locationName: 'TOULOUSE location address',
           open: false,
           locationCoords: [43.604652, 1.444209]
         },
@@ -120,6 +140,17 @@ export default {
     }
   },
   methods: {
+    locatorButtonPressed () {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          this.center = [position.coords.latitude, position.coords.longitude]
+          this.zoom = 7
+        },
+        (error) => {
+          console.log(error.message)
+        }
+      )
+    },
     checkRestaurant (restaurant) {
       this.restaurants[this.restaurants.indexOf(restaurant)].open = true
     },

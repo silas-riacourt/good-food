@@ -44,6 +44,12 @@
                       </template>
                       <v-card class="pa-2">
                         <v-card-title>Bonjour {{ $auth.user.firstName }}</v-card-title>
+                        <v-card-subtitle>
+                          <nuxt-link to="/account" class="text-overline mb-4" style="text-decoration: none;  color: inherit;">
+                            mon compte >
+                          </nuxt-link>
+                        </v-card-subtitle>
+
                         <v-list>
                           <v-list-item to="/orders">
                             <v-list-item-icon>

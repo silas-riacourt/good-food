@@ -18,7 +18,7 @@
       {{ open ? "Ouvert" : "Fermé" }} | 10 kms
     </v-card-subtitle>
 
-    <v-card-text> BREST 29910 10 route test </v-card-text>
+    <v-card-text>{{ locationname }}</v-card-text>
 
     <v-card-actions class="justify-center pb-4">
       <div class="text-center">
@@ -42,6 +42,10 @@ export default {
     location: {
       type: String,
       default: 'BREST'
+    },
+    locationname: {
+      type: String,
+      required: true
     },
     id: {
       type: Number,
