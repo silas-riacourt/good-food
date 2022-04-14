@@ -1,7 +1,7 @@
 {
-  "generator-jhipster:7.4.1": {
+  "generator-jhipster:7.8.1": {
     "promptValues": {
-      "packageName": "fr.cesi.cube",
+      "packageName": "fr.cesi.goodfood",
       "nativeLanguage": "fr"
     }
   }

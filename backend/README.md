@@ -1,6 +1,6 @@
 # goodfood
 
-This application was generated using JHipster 7.4.1, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v7.4.1](https://www.jhipster.tech/documentation-archive/v7.4.1).
+This application was generated using JHipster 7.8.1, you can find documentation and help at [https://www.jhipster.tech](https://www.jhipster.tech).
 
 ## Project Structure
 
@@ -22,7 +22,7 @@ In the project root, JHipster generates configuration files for tools like git, 
 To start your application in the dev profile, run:
 
 ```
-./gradlew
+./mvnw
 ```
 
 For further instructions on how to develop with JHipster, have a look at [Using JHipster in development][].
@@ -42,13 +42,13 @@ docker-compose -f src/main/docker/jhipster-control-center.yml up
 To build the final jar and optimize the goodfood application for production, run:
 
 ```
-./gradlew -Pprod clean bootJar
+./mvnw -Pprod clean verify
 ```
 
 To ensure everything worked, run:
 
 ```
-java -jar build/libs/*.jar
+java -jar target/*.jar
 ```
 
 Refer to [Using JHipster in production][] for more details.
@@ -58,7 +58,7 @@ Refer to [Using JHipster in production][] for more details.
 To package your application as a war in order to deploy it to an application server, run:
 
 ```
-./gradlew -Pprod -Pwar clean bootWar
+./mvnw -Pprod,war clean verify
 ```
 
 ## Testing
@@ -66,7 +66,7 @@ To package your application as a war in order to deploy it to an application ser
 To launch your application's tests, run:
 
 ```
-./gradlew test integrationTest jacocoTestReport
+./mvnw verify
 ```
 
 For more information, refer to the [Running tests page][].
@@ -81,12 +81,18 @@ docker-compose -f src/main/docker/sonar.yml up -d
 
 Note: we have turned off authentication in [src/main/docker/sonar.yml](src/main/docker/sonar.yml) for out of the box experience while trying out SonarQube, for real use cases turn it back on.
 
-You can run a Sonar analysis with using the [sonar-scanner](https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner) or by using the gradle plugin.
+You can run a Sonar analysis with using the [sonar-scanner](https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner) or by using the maven plugin.
 
 Then, run a Sonar analysis:
 
 ```
-./gradlew -Pprod clean check jacocoTestReport sonarqube
+./mvnw -Pprod clean verify sonar:sonar
+```
+
+If you need to re-run the Sonar phase, please be sure to specify at least the `initialize` phase since Sonar properties are loaded from the sonar-project.properties file.
+
+```
+./mvnw initialize sonar:sonar
 ```
 
 For more information, refer to the [Code quality page][].
@@ -111,7 +117,7 @@ You can also fully dockerize your application and all the services that it depen
 To achieve this, first build a docker image of your app by running:
 
 ```
-./gradlew bootJar -Pprod jibDockerBuild
+./mvnw -Pprod verify jib:dockerBuild
 ```
 
 Then run:
@@ -127,12 +133,13 @@ For more information refer to [Using Docker and Docker-Compose][], this page als
 To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`), this will let you generate configuration files for a number of Continuous Integration systems. Consult the [Setting up Continuous Integration][] page for more information.
 
 [jhipster homepage and latest documentation]: https://www.jhipster.tech
-[jhipster 7.4.1 archive]: https://www.jhipster.tech/documentation-archive/v7.4.1
-[using jhipster in development]: https://www.jhipster.tech/documentation-archive/v7.4.1/development/
-[using docker and docker-compose]: https://www.jhipster.tech/documentation-archive/v7.4.1/docker-compose
-[using jhipster in production]: https://www.jhipster.tech/documentation-archive/v7.4.1/production/
-[running tests page]: https://www.jhipster.tech/documentation-archive/v7.4.1/running-tests/
-[code quality page]: https://www.jhipster.tech/documentation-archive/v7.4.1/code-quality/
-[setting up continuous integration]: https://www.jhipster.tech/documentation-archive/v7.4.1/setting-up-ci/
+[jhipster 7.8.1 archive]: https://www.jhipster.tech
+[using jhipster in development]: https://www.jhipster.tech/development/
+[service discovery and configuration with the jhipster-registry]: https://www.jhipster.tech/microservices-architecture/#jhipster-registry
+[using docker and docker-compose]: https://www.jhipster.tech/docker-compose
+[using jhipster in production]: https://www.jhipster.tech/production/
+[running tests page]: https://www.jhipster.tech/running-tests/
+[code quality page]: https://www.jhipster.tech/code-quality/
+[setting up continuous integration]: https://www.jhipster.tech/setting-up-ci/
 [node.js]: https://nodejs.org/
 [npm]: https://www.npmjs.com/
