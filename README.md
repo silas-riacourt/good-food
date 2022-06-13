@@ -73,9 +73,10 @@ This section should list any major frameworks that you built your project using.
 
 ### Pré-requis
 
- - MongoDB
+ - Java
  - node
  - npm
+ - Maven
 
 
 ### Installation
@@ -88,15 +89,15 @@ $ git clone git@github.com:Silasssss/good-food.git
 2. Installation les paquets de notre API
 
 ```
-$ cd backend
-$ npm install
+$ cd api
+$ ./mvnw
 ```
 
 3. Installer les paquets nécessaire à IONIC
 
 ```
 $ cd frontend
-$ npm install
+$ npm i
 ```
 </details>
  <details>
@@ -106,13 +107,13 @@ $ npm install
 
 ```
 $ cd backend
-$ gradlew
+$ ./mvnw
 ```
 
 2. Démarrer le frontend
 ```
 $ cd frontend
-$ npm run serve
+$ npm run dev
 ```
 </details>
 <details>
