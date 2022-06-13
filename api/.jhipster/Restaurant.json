@@ -1,0 +1,44 @@
+{
+  "applications": "*",
+  "changelogDate": "20220510122626",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "restaurant",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "locationName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "open",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "locationLat",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "locationLng",
+      "fieldType": "Double"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Restaurant",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "menu",
+      "otherEntityRelationshipName": "restaurant",
+      "ownerSide": false,
+      "relationshipName": "menu",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "no"
+}

@@ -1,100 +1,94 @@
 <template>
-  <section class="section">
-    <div class="container">
-      <div class="columns">
-        <div class="column is-4 is-offset-4">
-          <h2 class="title has-text-centered">
-            Register!
-          </h2>
-
-          <form method="post" @submit.prevent="register">
-            <div class="field">
-              <label class="label">Username</label>
-              <div class="control">
-                <input
-                  v-model="username"
-                  type="text"
-                  class="input"
-                  name="username"
-                  required
-                >
-              </div>
-            </div>
-            <div class="field">
-              <label class="label">Email</label>
-              <div class="control">
-                <input
-                  v-model="email"
-                  type="email"
-                  class="input"
-                  name="email"
-                  required
-                >
-              </div>
-            </div>
-            <div class="field">
-              <label class="label">Password</label>
-              <div class="control">
-                <input
-                  v-model="password"
-                  type="password"
-                  class="input"
-                  name="password"
-                  required
-                >
-              </div>
-            </div>
-            <div class="control">
-              <button type="submit" class="button is-dark is-fullwidth">
-                Register
-              </button>
-            </div>
-          </form>
-
-          <div class="has-text-centered" style="margin-top: 20px">
-            Already got an account? <nuxt-link to="/login">
-              Login
-            </nuxt-link>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <v-container fill-height fluid>
+    <v-row align="center" justify="center">
+      <v-col cols="4">
+        <v-card class="elevation-6">
+          <v-card-title>
+            S'enregistrer
+          </v-card-title>
+          <v-card-text>
+            <v-form>
+              <v-text-field
+                v-model="user.login"
+                color="warning"
+                prepend-icon="mdi-account"
+                label="Nom d'utilisateur"
+                type="text"
+              />
+              <v-text-field
+                v-model="user.email"
+                color="warning"
+                prepend-icon="mdi-account"
+                label="Email"
+                type="email"
+              />
+              <v-text-field
+                v-model="user.firstName"
+                color="warning"
+                prepend-icon="mdi-account"
+                label="Prénom"
+                type="text"
+              />
+              <v-text-field
+                v-model="user.lastName"
+                color="warning"
+                prepend-icon="mdi-account"
+                label="Nom"
+                type="text"
+              />
+              <v-text-field
+                v-model="user.password"
+                color="warning"
+                prepend-icon="mdi-lock"
+                name="password"
+                label="Mot de passe"
+                :type="showPassword ? 'text' : 'password'"
+                :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                @click:append="showPassword = !showPassword"
+              />
+            </v-form>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer />
+            <v-btn color="warning" @click="register()">
+              Valider
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
 
 export default {
   name: 'RegisterPage',
-
+  auth: false,
+  layout: 'login',
   data () {
     return {
-      username: '',
-      email: '',
-      password: '',
-      error: null
+      user: {
+        login: '',
+        firstName: '',
+        lastName: '',
+        email: '',
+        langKey: 'fr',
+        password: ''
+      },
+      showPassword: false,
+      loading: false
     }
   },
 
   methods: {
     async register () {
+      this.loading = true
       try {
-        await this.$axios.post('register', {
-          username: this.username,
-          email: this.email,
-          password: this.password
-        })
-
-        await this.$auth.loginWith('local', {
-          data: {
-            email: this.email,
-            password: this.password
-          }
-        })
-
-        this.$router.push('/')
-      } catch (e) {
-        this.error = e.response.data.message
+        await this.$axios.post('/api/register', this.user)
+        this.loading = false
+      } catch (error) {
+        this.loading = false
       }
     }
   }

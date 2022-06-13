@@ -1,0 +1,52 @@
+{
+  "applications": "*",
+  "changelogDate": "20220510122629",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "menu",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "price",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "image",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Menu",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "item",
+      "otherEntityRelationshipName": "menu",
+      "relationshipName": "item",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "restaurant",
+      "otherEntityRelationshipName": "menu",
+      "ownerSide": true,
+      "relationshipName": "restaurant",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "categorie",
+      "otherEntityRelationshipName": "menu",
+      "relationshipName": "categorie",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

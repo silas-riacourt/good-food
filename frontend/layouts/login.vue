@@ -8,7 +8,7 @@
           </v-col>
 
           <v-col cols="auto">
-            <v-btn text outlined class="ml-2">
+            <v-btn text outlined class="ml-2" to="/register">
               Inscription
             </v-btn>
           </v-col>

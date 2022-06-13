@@ -1,0 +1,35 @@
+{
+  "applications": "*",
+  "changelogDate": "20220510122627",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "categorie",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "image",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Categorie",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "menu",
+      "otherEntityRelationshipName": "categorie",
+      "relationshipName": "menu",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no"
+}

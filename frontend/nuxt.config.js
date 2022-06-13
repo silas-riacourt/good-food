@@ -55,7 +55,7 @@ export default {
     baseURL: 'http://localhost:8080'
   },
   router: {
-    middleware: ['auth'] //'auth'
+    middleware: ['auth']
   },
   auth: {
     strategies: {
@@ -82,6 +82,11 @@ export default {
           user: { url: '/api/account', method: 'get' }
         }
       }
+    },
+    redirect: {
+      login: '/login',
+      logout: '/login',
+      home: false
     }
   },
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
