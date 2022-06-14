@@ -11,7 +11,7 @@ export const state = () => ({
     },
     {
       name: 'Burger 2',
-      price: 3,
+      price: 3.0,
       image: 'burger_2',
       description: 'description',
       quantity: 2
@@ -37,11 +37,16 @@ export const getters = {
 }
 
 export const mutations = {
-  setRestaurants (state, { restaurants }) {
-    state.restaurants = restaurants
-  },
   setLoading (state, loading) {
     state.loading = loading
+  },
+  updateQuantityAddOne (state, { product }) {
+    const index = state.products.indexOf(product)
+    state.products[index].quantity++
+  },
+  updateQuantityRemoveOne (state, { product }) {
+    const index = state.products.indexOf(product)
+    state.products[index].quantity--
   }
 }
 

@@ -10,7 +10,7 @@
         <h4> Total (TTC)</h4>
       </v-col>
       <v-col class="text-right">
-        <h4> {{ totalPrice }}€</h4>
+        <h4> {{ totalPrice.toFixed(2) }}€</h4>
       </v-col>
     </v-row>
     <v-card-actions class="justify-center pb-4">
@@ -35,6 +35,7 @@
               x-small
               color="warning"
               outlined
+              @click="$store.commit('cart/updateQuantityRemoveOne', {product})"
             >
               <v-icon color="black">
                 mdi-minus
@@ -47,6 +48,7 @@
               x-small
               color="warning"
               outlined
+              @click="$store.commit('cart/updateQuantityAddOne', {product})"
             >
               <v-icon color="black">
                 mdi-plus
@@ -54,7 +56,7 @@
             </v-btn>
           </v-col>
           <v-col cols="4">
-            {{ product.price * product.quantity }} €
+            {{ (product.price * product.quantity).toFixed(2) }} €
           </v-col>
         </v-row>
       </div>
