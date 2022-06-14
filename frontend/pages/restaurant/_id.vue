@@ -37,7 +37,7 @@
             <h2>{{ categories[selectedCategorie].name }}</h2>
             <v-row class="mt-2">
               <v-col v-for="(product,i) in categories[selectedCategorie].products" :key="i" cols="auto">
-                <v-card outlined min-width="200px" max-width="200px">
+                <v-card outlined min-width="200px" max-width="200px" @click="showProductModal(product)">
                   <v-list-item>
                     <v-list-item-avatar class="mr-0">
                       <v-img :src="require(`~/assets/dessert.png`)" max-width="50" />
@@ -57,79 +57,33 @@
         </v-row>
       </v-col>
       <v-col cols="12" sm="1" md="2" class="mt-4 mb-4">
-        <v-card class="grow" min-width="250px" max-width="250px">
-          <v-row justify="space-between" no-gutters class="pa-4">
-            <v-col cols="12" class="mb-2">
-              <h3>
-                Votre panier
-              </h3>
-            </v-col>
-            <v-col>
-              <h4> Total (TTC)</h4>
-            </v-col>
-            <v-col class="text-right">
-              <h4> 13,01€</h4>
-            </v-col>
-          </v-row>
-          <v-card-actions class="justify-center pb-4">
-            <div class="text-center">
-              <v-btn block color="warning" class=" text-none font-weight-light">
-                Valider mon panier
-              </v-btn>
-            </div>
-          </v-card-actions>
-          <v-divider />
-          <v-card-text>
-            <p class="font-weight-bold">
-              MENU BEST OF™
-            </p>
-            <p>CBO™<br>MOYENNE FRITE<br>PÉTILLANTE 40CL</p>
-            <v-row justify="space-between" align="center">
-              <v-col cols="8">
-                <v-btn
-                  class="mx-2"
-                  fab
-                  x-small
-                  color="warning"
-                  outlined
-                >
-                  <v-icon color="black">
-                    mdi-minus
-                  </v-icon>
-                </v-btn>
-                1
-                <v-btn
-                  class="mx-2"
-                  fab
-                  x-small
-                  color="warning"
-                  outlined
-                >
-                  <v-icon color="black">
-                    mdi-plus
-                  </v-icon>
-                </v-btn>
-              </v-col>
-              <v-col cols="4">
-                12.98€
-              </v-col>
-            </v-row>
-          </v-card-text>
-        </v-card>
+        <CartCard />
       </v-col>
+      <ProductModal :product="selectedProduct" :show="productModal" @add-product="addProductHandler" />
     </v-row>
   </v-container>
 </template>
 
 <script>
+import ProductModal from '../../components/ProductModal.vue'
+import CartCard from '../../components/CartCard.vue'
 export default {
   name: 'AccountPage',
+  components: {
+    ProductModal,
+    CartCard
+  },
   validate ({ params }) {
     // Must be a number
     return /^\d+$/.test(params.id)
   },
   data: () => ({
     selectedCategorie: 0,
+    productModal: false,
+    selectedProduct: {
+      name: 'Burger 1',
+      price: 4.95
+    },
     categories: [
       {
         id: 1,
@@ -157,8 +111,22 @@ export default {
       },
       {
         id: 2,
-        name: 'Catégorie 2',
-        image: 'menu'
+        name: 'Nos burgers',
+        image: 'menu',
+        products: [
+          {
+            name: 'Burger 1',
+            price: 4.95,
+            image: 'burger_1',
+            description: 'description'
+          },
+          {
+            name: 'Burger 2',
+            price: 3,
+            image: 'burger_2',
+            description: 'description'
+          }
+        ]
       },
       {
         id: 3,
@@ -168,16 +136,6 @@ export default {
       {
         id: 4,
         name: 'Catégorie 4',
-        image: 'menu'
-      },
-      {
-        id: 5,
-        name: 'Catégorie 5',
-        image: 'menu'
-      },
-      {
-        id: 6,
-        name: 'Nos burgers',
         image: 'menu'
       },
       {
@@ -192,6 +150,16 @@ export default {
   },
   mounted () {
     console.log(this.$route.params)
+  },
+  methods: {
+    addProductHandler (data) {
+      console.log(data)
+      this.productModal = false
+    },
+    showProductModal (product) {
+      this.selectedProduct = product
+      this.productModal = true
+    }
   }
 }
 </script>

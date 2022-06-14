@@ -97,19 +97,28 @@
                     <v-btn v-if="!$auth.loggedIn" text outlined class="ml-2" to="/register">
                       Inscription
                     </v-btn>
-                    <v-badge
-                      :content="6"
-                      color="warning"
-                      bordered
-                      overlap
+                    <v-menu
+                      nudge-bottom="10"
+                      bottom
+                      offset-y
                     >
-                      <v-btn color="warning" class="ml-2">
-                        Mon panier
-                        <v-icon right>
-                          mdi-cart
-                        </v-icon>
-                      </v-btn>
-                    </v-badge>
+                      <template #activator="{ on, attrs }">
+                        <v-badge
+                          :content="6"
+                          color="warning"
+                          bordered
+                          overlap
+                        >
+                          <v-btn color="warning" class="ml-2" v-bind="attrs" v-on="on">
+                            Mon panier
+                            <v-icon right>
+                              mdi-cart
+                            </v-icon>
+                          </v-btn>
+                        </v-badge>
+                      </template>
+                      <CartCard />
+                    </v-menu>
                   </v-col>
                 </v-row>
               </v-col>
@@ -146,8 +155,12 @@
 </template>
 
 <script>
+import CartCard from '../components/CartCard.vue'
 export default {
   name: 'DefaultLayout',
+  components: {
+    CartCard
+  },
   data () {
     return {
       value: null,
