@@ -147,6 +147,10 @@ export default {
           {
             name: 'Menu 3',
             price: 8.95
+          },
+          {
+            name: 'Menu 4',
+            price: 10
           }
 
         ]
