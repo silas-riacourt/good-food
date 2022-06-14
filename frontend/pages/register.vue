@@ -65,7 +65,7 @@
 export default {
   name: 'RegisterPage',
   auth: false,
-  layout: 'login',
+  layout: 'default',
   data () {
     return {
       user: {

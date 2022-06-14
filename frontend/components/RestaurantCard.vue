@@ -1,13 +1,16 @@
 <template>
   <v-card
     class="grow"
-    min-width="260px"
-    max-width="260px"
+    min-width="280px"
+    max-width="280px"
     :color="selected ? '' :''"
     :dark="selected"
     :elevation="fromMap ? '0' : '2'"
   >
     <v-card-title class="text-uppercase">
+      <v-icon left>
+        mdi-silverware-fork-knife
+      </v-icon>
       {{ name }}
     </v-card-title>
 

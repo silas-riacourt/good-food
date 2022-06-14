@@ -6,14 +6,14 @@
           <v-col cols="12" sm="12" md="12" xl="8">
             <v-row align="center" justify="center">
               <v-col cols="auto" class="pa-0">
-                <v-img :src="require(`~/assets/goodfood2.png`)" max-width="80" />
+                <v-img :src="require(`~/assets/goodfood.png`)" max-width="120" />
               </v-col>
               <v-col cols="10">
                 <v-row justify="space-between">
                   <v-col cols="auto">
                     <v-row>
                       <v-col cols="auto">
-                        <v-btn text to="/engagements" active-class="warning">
+                        <v-btn text to="/engagements" color="warning">
                           Nos engagements
                         </v-btn>
                       </v-col>
@@ -27,6 +27,7 @@
 
                   <v-col cols="auto" offset-xl="3">
                     <v-menu
+                      v-if="$auth.loggedIn"
                       nudge-bottom="20"
                       bottom
                       offset-y
@@ -85,9 +86,30 @@
                         </v-list>
                       </v-card>
                     </v-menu>
-                    <v-btn color="warning" class="ml-2">
-                      Mon panier
+                    <v-btn
+                      v-else
+                      text
+                      outlined
+                      to="/login"
+                    >
+                      Connexion
                     </v-btn>
+                    <v-btn v-if="!$auth.loggedIn" text outlined class="ml-2" to="/register">
+                      Inscription
+                    </v-btn>
+                    <v-badge
+                      :content="6"
+                      color="warning"
+                      bordered
+                      overlap
+                    >
+                      <v-btn color="warning" class="ml-2">
+                        Mon panier
+                        <v-icon right>
+                          mdi-cart
+                        </v-icon>
+                      </v-btn>
+                    </v-badge>
                   </v-col>
                 </v-row>
               </v-col>

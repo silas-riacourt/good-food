@@ -29,7 +29,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer />
-            <v-btn color="warning" to="/" :loading="loading" @click="login()">
+            <v-btn color="warning" :loading="loading" @click="login()">
               Se connecter
             </v-btn>
           </v-card-actions>
@@ -43,7 +43,7 @@
 
 export default {
   name: 'LoginPage',
-  layout: 'login',
+  layout: 'default',
   data () {
     return {
       username: '',
@@ -56,6 +56,7 @@ export default {
   methods: {
     async login () {
       try {
+        console.log('login')
         this.loading = true
         await this.$auth.loginWith('local', {
           data: {
