@@ -104,7 +104,7 @@
                     >
                       <template #activator="{ on, attrs }">
                         <v-badge
-                          :content="6"
+                          :content="numberOfProductsInCart"
                           color="warning"
                           bordered
                           overlap
@@ -167,22 +167,15 @@ export default {
       clipped: false,
       drawer: false,
       fixed: false,
-      items: [
-        {
-          icon: 'mdi-apps',
-          title: 'Welcome',
-          to: '/'
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
-        }
-      ],
       miniVariant: false,
       right: true,
-      rightDrawer: false,
-      title: 'Vuetify.js'
+      rightDrawer: false
+    }
+  },
+
+  computed: {
+    numberOfProductsInCart () {
+      return this.$store.state.cart.products.length
     }
   },
   methods: {
