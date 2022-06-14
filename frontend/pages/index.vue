@@ -7,7 +7,7 @@
             <h1 class="font-weight-light">
               Nos restaurants
             </h1>
-            <v-row align="center" class="mt-2" justify="center">
+            <v-row v-if="!loading" align="center" class="mt-2" justify="center">
               <v-col v-for="(restaurant, index) in restaurants" :key="index" cols="auto">
                 <RestaurantCard
                   :name="restaurant.name"
@@ -15,6 +15,15 @@
                   :location="restaurant.location"
                   :locationname="restaurant.locationName"
                   :selected="false"
+                />
+              </v-col>
+            </v-row>
+            <v-row v-else align="center" class="mt-2" justify="center">
+              <v-col v-for="index in 4" :key="index" cols="auto">
+                <v-skeleton-loader
+                  class="mx-auto"
+                  width="300"
+                  type="card"
                 />
               </v-col>
             </v-row>
@@ -73,76 +82,16 @@
 </template>
 
 <script>
-
+import { mapGetters } from 'vuex'
 export default {
   name: 'IndexPage',
 
   data () {
     return {
-      restaurants: [
-        {
-          name: 'GoodFood BREST',
-          locationName: 'BREST 29910 10 route test',
-          open: false,
-          locationLat: 48.390392,
-          locationLng: -4.486076
-        },
-        {
-          name: 'GoodFood PARIS',
-          locationName: 'PARIS Avenue des chams ',
-          open: false,
-          locationCoords: [48.856613, 2.352222],
-          locationLat: 48.390392,
-          locationLng: -4.486076
-        },
-        {
-          name: 'GoodFood RENNES',
-          locationName: 'RENNES location address',
-          open: false,
-          locationCoords: [48.117268, -1.677793],
-          locationLat: 48.390392,
-          locationLng: -4.486076
-        },
-        {
-          name: 'GoodFood TOULOUSE',
-          locationName: 'TOULOUSE location address',
-          open: false,
-          locationCoords: [43.604652, 1.444209],
-          locationLat: 48.390392,
-          locationLng: -4.486076
-        },
-        {
-          name: 'GoodFood GRENOBLE',
-          locationName: 'adresse',
-          open: false,
-          locationCoords: [45.194260, 5.731670],
-          locationLat: 48.390392,
-          locationLng: -4.486076
-        },
-        {
-          name: 'GoodFood BRUXELLES',
-          locationName: 'adresse',
-          open: false,
-          locationCoords: [50.8465573, 4.351697],
-          locationLat: 48.390392,
-          locationLng: -4.486076
-        },
-        {
-          name: 'GoodFood LUXEMBOURG',
-          locationName: 'adresse',
-          open: false,
-          locationCoords: [49.8158683, 6.1296751],
-          locationLat: 48.390392,
-          locationLng: -4.486076
-        }
-      ],
       url: 'https://api.mapbox.com/styles/v1/silass22/cl15fh7zt000d15lj8g5vger1/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2lsYXNzMjIiLCJhIjoiY2wxNWYwZ2pkMGplaDNic2dkbnFra2p1dyJ9.8QDRbHYvC4-FEvfG6W8R6Q', // https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png
       attribution: '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       zoom: 6,
       center: [47.1749, 2.185],
-      latTest: 48.390392,
-      lngTest: -4.486076,
-      accessToken: '',
       iconSize: 40,
       icon: null
     }
@@ -153,10 +102,15 @@ export default {
     },
     dynamicAnchor () {
       return [this.iconSize / 2, this.iconSize * 1.15]
-    }
+    },
+    ...mapGetters({
+      restaurants: 'restaurant/getAll',
+      loading: 'restaurant/isLoading'
+    })
+
   },
   mounted () {
-    this.getRestaurants()
+    this.$store.dispatch('restaurant/getRestaurants')
   },
   methods: {
     locatorButtonPressed () {
@@ -171,10 +125,10 @@ export default {
       )
     },
     checkRestaurant (restaurant) {
-      this.restaurants[this.restaurants.indexOf(restaurant)].open = true
+      // this.restaurants[this.restaurants.indexOf(restaurant)].open = true
     },
     uncheckRestaurant (restaurant) {
-      this.restaurants[this.restaurants.indexOf(restaurant)].open = false
+      // this.restaurants[this.restaurants.indexOf(restaurant)].open = false
     },
     setIconStyles () {
       this.icon = this.$L.icon({
@@ -182,11 +136,8 @@ export default {
         iconSize: this.dynamicSize,
         iconAnchor: this.dynamicAnchor
       })
-    },
-    async getRestaurants () {
-      const restaurants = await this.$axios.$get('/api/restaurants')
-      this.restaurants = restaurants
     }
+
   }
 }
 </script>

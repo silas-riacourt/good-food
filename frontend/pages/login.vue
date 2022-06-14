@@ -29,7 +29,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer />
-            <v-btn color="warning" to="/" @click="login()">
+            <v-btn color="warning" to="/" :loading="loading" @click="login()">
               Se connecter
             </v-btn>
           </v-card-actions>
@@ -48,23 +48,26 @@ export default {
     return {
       username: '',
       password: '',
-      showPassword: false
+      showPassword: false,
+      loading: false
     }
   },
 
   methods: {
     async login () {
       try {
+        this.loading = true
         await this.$auth.loginWith('local', {
           data: {
             username: this.username,
             password: this.password
           }
         })
-
+        this.loading = false
         this.$router.push('/')
       } catch (e) {
         console.log(e)
+        this.loading = true
       }
     }
   }
