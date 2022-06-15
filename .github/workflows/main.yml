@@ -42,7 +42,7 @@ jobs:
               echo No SONAR_TOKEN, skipping...
           fi
       - name: Package application
-        orking-directory: ./api
+        working-directory: ./api
         run: npm run java:jar:prod
       - name: Deploy to Heroku
 
