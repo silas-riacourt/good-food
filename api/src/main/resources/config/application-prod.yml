@@ -33,9 +33,10 @@ spring:
       enabled: false
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5432/goodfood
-    username: goodfood
-    password:
+    #url: jdbc:h2:file:./target/h2db/db/goodfood;DB_CLOSE_DELAY=-1
+    url: jdbc:postgresql://silasriacourt.fr:5432/goodfood
+    username: dbuser
+    password: djhasds486165x
     hikari:
       poolName: Hikari
       auto-commit: false
@@ -44,6 +45,7 @@ spring:
   # Replace by 'prod, faker' to add the faker context and have sample data loaded in production
   liquibase:
     contexts: prod
+    enabled: false
   mail:
     host: localhost
     port: 25

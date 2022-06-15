@@ -22,14 +22,15 @@
               {{ item.status }}
             </v-chip>
           </template>
-          <template #[`item.id`]>
-            <v-icon @click="orderDetails()">
+          <template #[`item.id`]="{ item }">
+            <v-icon @click="orderDetails(item)">
               mdi-chevron-right
             </v-icon>
           </template>
         </v-data-table>
       </v-col>
     </v-row>
+    <OrderModal :order="selectedOrder" :show="orderModal" @close="orderModal = false" />
   </v-container>
 </template>
 
@@ -38,6 +39,8 @@ export default {
   name: 'OrderPage',
   data () {
     return {
+      selectedOrder: {},
+      orderModal: false,
       orders: [
         {
           id: 10,
@@ -209,8 +212,9 @@ export default {
           return 'black'
       }
     },
-    orderDetails () {
-      console.log("J'ai cliqué")
+    orderDetails (order) {
+      this.selectedOrder = order
+      this.orderModal = true
     }
   }
 

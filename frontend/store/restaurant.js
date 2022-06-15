@@ -1,6 +1,6 @@
 export const state = () => ({
   counter: 0,
-  loading: false,
+  loading: true,
   restaurants: [
     {
       name: 'GoodFood BREST',
@@ -102,7 +102,6 @@ export const actions = {
     try {
       const restaurant = await this.$axios.$get('/api/restaurants/' + id)
       context.commit('setRestaurant', { restaurant })
-      context.commit('setLoading', false)
       context.dispatch('categorie/getCategorieById', restaurant.categories[0].id, { root: true })
     } catch (error) {
       context.commit('setLoading', false)

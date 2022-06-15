@@ -55,7 +55,7 @@
               </v-icon>
             </v-btn>
           </v-col>
-          <v-col cols="4">
+          <v-col :key="product.quantity" cols="4">
             {{ (product.price * product.quantity).toFixed(2) }} €
           </v-col>
         </v-row>
@@ -68,6 +68,11 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'CartCard',
   props: {
+  },
+  data () {
+    return {
+      quantity: 1
+    }
   },
   computed: {
     dynamicSize () {
@@ -83,11 +88,7 @@ export default {
     })
 
   },
-  data () {
-    return {
-      quantity: 1
-    }
-  },
+
   methods: {
   }
 
