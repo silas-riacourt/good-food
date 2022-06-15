@@ -10,6 +10,7 @@
             <v-row v-if="!loading" align="center" class="mt-2" justify="center">
               <v-col v-for="(restaurant, index) in restaurants" :key="index" cols="auto">
                 <RestaurantCard
+                  :id="restaurant.id"
                   :name="restaurant.name"
                   :open="restaurant.open"
                   :location="restaurant.location"
