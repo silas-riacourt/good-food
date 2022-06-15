@@ -2,8 +2,8 @@
   <v-container fluid>
     <v-row justify="center" class="">
       <v-col cols="12" sm="12" md="12" class="pa-0">
-        <v-row no-gutters>
-          <v-col class="pt-4 pl-8 elevation-0" style="z-index:10">
+        <v-row no-gutters justify="center">
+          <v-col class="pt-4 pl-8 elevation-0" style="z-index:1">
             <h1 class="font-weight-light">
               Nos restaurants
             </h1>

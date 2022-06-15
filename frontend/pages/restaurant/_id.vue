@@ -110,10 +110,11 @@ export default {
 
   },
   created () {
-
+    this.$store.commit('restaurant/setLoading', true)
   },
   mounted () {
     // récuper les info du restaurant
+
     this.$store.dispatch('restaurant/getRestaurant', this.$route.params.id)
   },
   methods: {

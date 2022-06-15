@@ -25,7 +25,7 @@
                     </v-row>
                   </v-col>
 
-                  <v-col cols="auto" offset-xl="3">
+                  <v-col cols="auto" offset-xl="1" offset-sm="1">
                     <v-menu
                       v-if="$auth.loggedIn"
                       nudge-bottom="20"
@@ -101,6 +101,7 @@
                       nudge-bottom="10"
                       bottom
                       offset-y
+                      :close-on-content-click="false"
                     >
                       <template #activator="{ on, attrs }">
                         <v-badge
