@@ -23,9 +23,9 @@ jobs:
       - name: Install node.js packages
         working-directory: ./api
         run: npm install
-      - name: Run frontend test
-        working-directory: ./api
-        run: npm run ci:frontend:test
+      #- name: Run frontend test
+       # working-directory: ./api
+       # run: npm run ci:frontend:test
       - name: Analyze code with SonarQube
         working-directory: ./api
         env:
@@ -44,12 +44,12 @@ jobs:
           npm run java:jar:prod
       - name: Deploy to Heroku
         working-directory: ./api
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/master'
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: |
           if [ ! -z "$HEROKU_API_KEY" ]; then
-              ./mvnw -ntp com.heroku.sdk:heroku-maven-plugin:2.0.5:deploy -DskipTests -Pprod -Dheroku.buildpacks=heroku/jvm -Dheroku.appName=goodfood
+              ./mvnw -ntp com.heroku.sdk:heroku-maven-plugin:2.0.5:deploy -DskipTests -Pprod -Dheroku.buildpacks=heroku/jvm -Dheroku.appName=goodfood-back
           else
               echo No HEROKU_API_KEY, skipping...
           fi
