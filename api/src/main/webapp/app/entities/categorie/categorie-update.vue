@@ -44,6 +44,21 @@
               v-model="$v.categorie.image.$model"
             />
           </div>
+          <div class="form-group">
+            <label class="form-control-label" for="categorie-restaurant">Restaurant</label>
+            <select class="form-control" id="categorie-restaurant" data-cy="restaurant" name="restaurant" v-model="categorie.restaurant">
+              <option v-bind:value="null"></option>
+              <option
+                v-bind:value="
+                  categorie.restaurant && restaurantOption.id === categorie.restaurant.id ? categorie.restaurant : restaurantOption
+                "
+                v-for="restaurantOption in restaurants"
+                :key="restaurantOption.id"
+              >
+                {{ restaurantOption.name }}
+              </option>
+            </select>
+          </div>
         </div>
         <div>
           <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" v-on:click="previousState()">

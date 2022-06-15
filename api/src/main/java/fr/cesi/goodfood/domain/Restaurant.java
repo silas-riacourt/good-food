@@ -27,6 +27,12 @@ public class Restaurant implements Serializable {
     @Column(name = "location_name")
     private String locationName;
 
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "schedule")
+    private String schedule;
+
     @Column(name = "open")
     private Boolean open;
 
@@ -36,9 +42,17 @@ public class Restaurant implements Serializable {
     @Column(name = "location_lng")
     private Double locationLng;
 
-    @ManyToMany(mappedBy = "restaurants")
-    @JsonIgnoreProperties(value = { "items", "restaurants", "categorie" }, allowSetters = true)
-    private Set<Menu> menus = new HashSet<>();
+    @JsonIgnoreProperties(value = { "restaurant", "ingredient" }, allowSetters = true)
+    @OneToOne(mappedBy = "restaurant")
+    private Stock stock;
+
+    @JsonIgnoreProperties(value = { "restaurant", "productOrders", "client" }, allowSetters = true)
+    @OneToOne(mappedBy = "restaurant")
+    private Order order;
+
+    @OneToMany(mappedBy = "restaurant")
+    @JsonIgnoreProperties(value = { "products", "restaurant" }, allowSetters = true)
+    private Set<Categorie> categories = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -81,6 +95,32 @@ public class Restaurant implements Serializable {
         this.locationName = locationName;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
+    public Restaurant description(String description) {
+        this.setDescription(description);
+        return this;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getSchedule() {
+        return this.schedule;
+    }
+
+    public Restaurant schedule(String schedule) {
+        this.setSchedule(schedule);
+        return this;
+    }
+
+    public void setSchedule(String schedule) {
+        this.schedule = schedule;
+    }
+
     public Boolean getOpen() {
         return this.open;
     }
@@ -120,34 +160,72 @@ public class Restaurant implements Serializable {
         this.locationLng = locationLng;
     }
 
-    public Set<Menu> getMenus() {
-        return this.menus;
+    public Stock getStock() {
+        return this.stock;
     }
 
-    public void setMenus(Set<Menu> menus) {
-        if (this.menus != null) {
-            this.menus.forEach(i -> i.removeRestaurant(this));
+    public void setStock(Stock stock) {
+        if (this.stock != null) {
+            this.stock.setRestaurant(null);
         }
-        if (menus != null) {
-            menus.forEach(i -> i.addRestaurant(this));
+        if (stock != null) {
+            stock.setRestaurant(this);
         }
-        this.menus = menus;
+        this.stock = stock;
     }
 
-    public Restaurant menus(Set<Menu> menus) {
-        this.setMenus(menus);
+    public Restaurant stock(Stock stock) {
+        this.setStock(stock);
         return this;
     }
 
-    public Restaurant addMenu(Menu menu) {
-        this.menus.add(menu);
-        menu.getRestaurants().add(this);
+    public Order getOrder() {
+        return this.order;
+    }
+
+    public void setOrder(Order order) {
+        if (this.order != null) {
+            this.order.setRestaurant(null);
+        }
+        if (order != null) {
+            order.setRestaurant(this);
+        }
+        this.order = order;
+    }
+
+    public Restaurant order(Order order) {
+        this.setOrder(order);
         return this;
     }
 
-    public Restaurant removeMenu(Menu menu) {
-        this.menus.remove(menu);
-        menu.getRestaurants().remove(this);
+    public Set<Categorie> getCategories() {
+        return this.categories;
+    }
+
+    public void setCategories(Set<Categorie> categories) {
+        if (this.categories != null) {
+            this.categories.forEach(i -> i.setRestaurant(null));
+        }
+        if (categories != null) {
+            categories.forEach(i -> i.setRestaurant(this));
+        }
+        this.categories = categories;
+    }
+
+    public Restaurant categories(Set<Categorie> categories) {
+        this.setCategories(categories);
+        return this;
+    }
+
+    public Restaurant addCategorie(Categorie categorie) {
+        this.categories.add(categorie);
+        categorie.setRestaurant(this);
+        return this;
+    }
+
+    public Restaurant removeCategorie(Categorie categorie) {
+        this.categories.remove(categorie);
+        categorie.setRestaurant(null);
         return this;
     }
 
@@ -177,6 +255,8 @@ public class Restaurant implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", locationName='" + getLocationName() + "'" +
+            ", description='" + getDescription() + "'" +
+            ", schedule='" + getSchedule() + "'" +
             ", open='" + getOpen() + "'" +
             ", locationLat=" + getLocationLat() +
             ", locationLng=" + getLocationLng() +

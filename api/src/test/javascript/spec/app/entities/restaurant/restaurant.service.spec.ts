@@ -29,7 +29,7 @@ describe('Service Tests', () => {
 
     beforeEach(() => {
       service = new RestaurantService();
-      elemDefault = new Restaurant(123, 'AAAAAAA', 'AAAAAAA', false, 0, 0);
+      elemDefault = new Restaurant(123, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', false, 0, 0);
     });
 
     describe('Service methods', () => {
@@ -83,6 +83,8 @@ describe('Service Tests', () => {
           {
             name: 'BBBBBB',
             locationName: 'BBBBBB',
+            description: 'BBBBBB',
+            schedule: 'BBBBBB',
             open: true,
             locationLat: 1,
             locationLng: 1,
@@ -113,7 +115,8 @@ describe('Service Tests', () => {
         const patchObject = Object.assign(
           {
             name: 'BBBBBB',
-            locationLat: 1,
+            schedule: 'BBBBBB',
+            locationLng: 1,
           },
           new Restaurant()
         );
@@ -143,6 +146,8 @@ describe('Service Tests', () => {
           {
             name: 'BBBBBB',
             locationName: 'BBBBBB',
+            description: 'BBBBBB',
+            schedule: 'BBBBBB',
             open: true,
             locationLat: 1,
             locationLng: 1,

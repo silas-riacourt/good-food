@@ -31,8 +31,12 @@ public class Categorie implements Serializable {
     private String image;
 
     @OneToMany(mappedBy = "categorie")
-    @JsonIgnoreProperties(value = { "items", "restaurants", "categorie" }, allowSetters = true)
-    private Set<Menu> menus = new HashSet<>();
+    @JsonIgnoreProperties(value = { "ingredients", "categorie" }, allowSetters = true)
+    private Set<Product> products = new HashSet<>();
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "stock", "order", "categories" }, allowSetters = true)
+    private Restaurant restaurant;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -88,34 +92,47 @@ public class Categorie implements Serializable {
         this.image = image;
     }
 
-    public Set<Menu> getMenus() {
-        return this.menus;
+    public Set<Product> getProducts() {
+        return this.products;
     }
 
-    public void setMenus(Set<Menu> menus) {
-        if (this.menus != null) {
-            this.menus.forEach(i -> i.setCategorie(null));
+    public void setProducts(Set<Product> products) {
+        if (this.products != null) {
+            this.products.forEach(i -> i.setCategorie(null));
         }
-        if (menus != null) {
-            menus.forEach(i -> i.setCategorie(this));
+        if (products != null) {
+            products.forEach(i -> i.setCategorie(this));
         }
-        this.menus = menus;
+        this.products = products;
     }
 
-    public Categorie menus(Set<Menu> menus) {
-        this.setMenus(menus);
+    public Categorie products(Set<Product> products) {
+        this.setProducts(products);
         return this;
     }
 
-    public Categorie addMenu(Menu menu) {
-        this.menus.add(menu);
-        menu.setCategorie(this);
+    public Categorie addProduct(Product product) {
+        this.products.add(product);
+        product.setCategorie(this);
         return this;
     }
 
-    public Categorie removeMenu(Menu menu) {
-        this.menus.remove(menu);
-        menu.setCategorie(null);
+    public Categorie removeProduct(Product product) {
+        this.products.remove(product);
+        product.setCategorie(null);
+        return this;
+    }
+
+    public Restaurant getRestaurant() {
+        return this.restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
+
+    public Categorie restaurant(Restaurant restaurant) {
+        this.setRestaurant(restaurant);
         return this;
     }
 

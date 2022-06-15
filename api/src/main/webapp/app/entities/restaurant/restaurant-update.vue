@@ -33,6 +33,30 @@
             />
           </div>
           <div class="form-group">
+            <label class="form-control-label" for="restaurant-description">Description</label>
+            <input
+              type="text"
+              class="form-control"
+              name="description"
+              id="restaurant-description"
+              data-cy="description"
+              :class="{ valid: !$v.restaurant.description.$invalid, invalid: $v.restaurant.description.$invalid }"
+              v-model="$v.restaurant.description.$model"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" for="restaurant-schedule">Schedule</label>
+            <input
+              type="text"
+              class="form-control"
+              name="schedule"
+              id="restaurant-schedule"
+              data-cy="schedule"
+              :class="{ valid: !$v.restaurant.schedule.$invalid, invalid: $v.restaurant.schedule.$invalid }"
+              v-model="$v.restaurant.schedule.$model"
+            />
+          </div>
+          <div class="form-group">
             <label class="form-control-label" for="restaurant-open">Open</label>
             <input
               type="checkbox"

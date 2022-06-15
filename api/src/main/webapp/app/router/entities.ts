@@ -16,17 +16,47 @@ const CategorieUpdate = () => import('@/entities/categorie/categorie-update.vue'
 // prettier-ignore
 const CategorieDetails = () => import('@/entities/categorie/categorie-details.vue');
 // prettier-ignore
-const Item = () => import('@/entities/item/item.vue');
+const Product = () => import('@/entities/product/product.vue');
 // prettier-ignore
-const ItemUpdate = () => import('@/entities/item/item-update.vue');
+const ProductUpdate = () => import('@/entities/product/product-update.vue');
 // prettier-ignore
-const ItemDetails = () => import('@/entities/item/item-details.vue');
+const ProductDetails = () => import('@/entities/product/product-details.vue');
 // prettier-ignore
-const Menu = () => import('@/entities/menu/menu.vue');
+const Ingredient = () => import('@/entities/ingredient/ingredient.vue');
 // prettier-ignore
-const MenuUpdate = () => import('@/entities/menu/menu-update.vue');
+const IngredientUpdate = () => import('@/entities/ingredient/ingredient-update.vue');
 // prettier-ignore
-const MenuDetails = () => import('@/entities/menu/menu-details.vue');
+const IngredientDetails = () => import('@/entities/ingredient/ingredient-details.vue');
+// prettier-ignore
+const Client = () => import('@/entities/client/client.vue');
+// prettier-ignore
+const ClientUpdate = () => import('@/entities/client/client-update.vue');
+// prettier-ignore
+const ClientDetails = () => import('@/entities/client/client-details.vue');
+// prettier-ignore
+const Order = () => import('@/entities/order/order.vue');
+// prettier-ignore
+const OrderUpdate = () => import('@/entities/order/order-update.vue');
+// prettier-ignore
+const OrderDetails = () => import('@/entities/order/order-details.vue');
+// prettier-ignore
+const ProductOrder = () => import('@/entities/product-order/product-order.vue');
+// prettier-ignore
+const ProductOrderUpdate = () => import('@/entities/product-order/product-order-update.vue');
+// prettier-ignore
+const ProductOrderDetails = () => import('@/entities/product-order/product-order-details.vue');
+// prettier-ignore
+const Supplier = () => import('@/entities/supplier/supplier.vue');
+// prettier-ignore
+const SupplierUpdate = () => import('@/entities/supplier/supplier-update.vue');
+// prettier-ignore
+const SupplierDetails = () => import('@/entities/supplier/supplier-details.vue');
+// prettier-ignore
+const Stock = () => import('@/entities/stock/stock.vue');
+// prettier-ignore
+const StockUpdate = () => import('@/entities/stock/stock-update.vue');
+// prettier-ignore
+const StockDetails = () => import('@/entities/stock/stock-details.vue');
 // jhipster-needle-add-entity-to-router-import - JHipster will import entities to the router here
 
 export default {
@@ -82,51 +112,171 @@ export default {
       meta: { authorities: [Authority.USER] },
     },
     {
-      path: 'item',
-      name: 'Item',
-      component: Item,
+      path: 'product',
+      name: 'Product',
+      component: Product,
       meta: { authorities: [Authority.USER] },
     },
     {
-      path: 'item/new',
-      name: 'ItemCreate',
-      component: ItemUpdate,
+      path: 'product/new',
+      name: 'ProductCreate',
+      component: ProductUpdate,
       meta: { authorities: [Authority.USER] },
     },
     {
-      path: 'item/:itemId/edit',
-      name: 'ItemEdit',
-      component: ItemUpdate,
+      path: 'product/:productId/edit',
+      name: 'ProductEdit',
+      component: ProductUpdate,
       meta: { authorities: [Authority.USER] },
     },
     {
-      path: 'item/:itemId/view',
-      name: 'ItemView',
-      component: ItemDetails,
+      path: 'product/:productId/view',
+      name: 'ProductView',
+      component: ProductDetails,
       meta: { authorities: [Authority.USER] },
     },
     {
-      path: 'menu',
-      name: 'Menu',
-      component: Menu,
+      path: 'ingredient',
+      name: 'Ingredient',
+      component: Ingredient,
       meta: { authorities: [Authority.USER] },
     },
     {
-      path: 'menu/new',
-      name: 'MenuCreate',
-      component: MenuUpdate,
+      path: 'ingredient/new',
+      name: 'IngredientCreate',
+      component: IngredientUpdate,
       meta: { authorities: [Authority.USER] },
     },
     {
-      path: 'menu/:menuId/edit',
-      name: 'MenuEdit',
-      component: MenuUpdate,
+      path: 'ingredient/:ingredientId/edit',
+      name: 'IngredientEdit',
+      component: IngredientUpdate,
       meta: { authorities: [Authority.USER] },
     },
     {
-      path: 'menu/:menuId/view',
-      name: 'MenuView',
-      component: MenuDetails,
+      path: 'ingredient/:ingredientId/view',
+      name: 'IngredientView',
+      component: IngredientDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'client',
+      name: 'Client',
+      component: Client,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'client/new',
+      name: 'ClientCreate',
+      component: ClientUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'client/:clientId/edit',
+      name: 'ClientEdit',
+      component: ClientUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'client/:clientId/view',
+      name: 'ClientView',
+      component: ClientDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'order',
+      name: 'Order',
+      component: Order,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'order/new',
+      name: 'OrderCreate',
+      component: OrderUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'order/:orderId/edit',
+      name: 'OrderEdit',
+      component: OrderUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'order/:orderId/view',
+      name: 'OrderView',
+      component: OrderDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'product-order',
+      name: 'ProductOrder',
+      component: ProductOrder,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'product-order/new',
+      name: 'ProductOrderCreate',
+      component: ProductOrderUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'product-order/:productOrderId/edit',
+      name: 'ProductOrderEdit',
+      component: ProductOrderUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'product-order/:productOrderId/view',
+      name: 'ProductOrderView',
+      component: ProductOrderDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'supplier',
+      name: 'Supplier',
+      component: Supplier,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'supplier/new',
+      name: 'SupplierCreate',
+      component: SupplierUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'supplier/:supplierId/edit',
+      name: 'SupplierEdit',
+      component: SupplierUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'supplier/:supplierId/view',
+      name: 'SupplierView',
+      component: SupplierDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'stock',
+      name: 'Stock',
+      component: Stock,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'stock/new',
+      name: 'StockCreate',
+      component: StockUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'stock/:stockId/edit',
+      name: 'StockEdit',
+      component: StockUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'stock/:stockId/view',
+      name: 'StockView',
+      component: StockDetails,
       meta: { authorities: [Authority.USER] },
     },
     // jhipster-needle-add-entity-to-router - JHipster will add entities to the router here

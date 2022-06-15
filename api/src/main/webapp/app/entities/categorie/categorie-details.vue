@@ -22,6 +22,16 @@
           <dd>
             <span>{{ categorie.image }}</span>
           </dd>
+          <dt>
+            <span>Restaurant</span>
+          </dt>
+          <dd>
+            <div v-if="categorie.restaurant">
+              <router-link :to="{ name: 'RestaurantView', params: { restaurantId: categorie.restaurant.id } }">{{
+                categorie.restaurant.name
+              }}</router-link>
+            </div>
+          </dd>
         </dl>
         <button type="submit" v-on:click.prevent="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
           <font-awesome-icon icon="arrow-left"></font-awesome-icon>&nbsp;<span> Back</span>

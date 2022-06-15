@@ -33,9 +33,9 @@ spring:
       enabled: false
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://ec2-52-30-159-47.eu-west-1.compute.amazonaws.com:5432/dbh6qcvndnltn8
-    username: cveqpzkektrsfy
-    password: 0ed4645af71ba09d15410bca0926f7ae96c727560fcc34d9a4e1e0b9ceb2e4a2
+    url: jdbc:postgresql://localhost:5432/goodfood
+    username: goodfood
+    password:
     hikari:
       poolName: Hikari
       auto-commit: false
@@ -115,7 +115,7 @@ jhipster:
         # - In the JHipster Registry (which includes a Spring Cloud Config server)
         # - In a separate `application-prod.yml` file, in the same folder as your executable JAR file
         # - In the `JHIPSTER_SECURITY_AUTHENTICATION_JWT_BASE64_SECRET` environment variable
-        base64-secret: ZGNlMjk4NjJjNzVmMTNlMmFkZDU5MGIyNmQ5YWIzMGE5OWU4ZGNjYTJmYjgzMjdmYjU0YWYzNjRjMTY3YWE2YjQwNjliOWJlZmYzOGY2YTc2ZTc0MGM2YWE0Y2E2NjBmMTU3MmYyZDFjYTM0NTM1NWFhMDdjZTA5YTFjNTY0NGE=
+        base64-secret: NGIwMDYxYTdjNmMzYjRkMDI3OWQwYTM1ZmRiZWRmNDk0NTU4YWY0NTY5YmY5OWY4Y2NlOTNhMGY5YWQ4ZTNiNzdiYzVjMTUwNjhjM2Y0MDcwMDQ5NmFjZDA5MmRhYjZkYmZhZWQwMzBhMDI4OWViNzBiMmNhODExYjhlNWZmMTI=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 2592000

@@ -1,0 +1,58 @@
+{
+  "applications": "*",
+  "changelogDate": "20220615092309",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "jhi_order",
+  "fields": [
+    {
+      "fieldName": "totalPrice",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "OrderStatus",
+      "fieldValues": "IN_PROGRESS,ENDED,CANCELED"
+    },
+    {
+      "fieldName": "paymentMethod",
+      "fieldType": "PaymentMethod",
+      "fieldValues": "CREDITCARD,PAYPAL"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Order",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "restaurant",
+      "otherEntityRelationshipName": "order",
+      "ownerSide": true,
+      "relationshipName": "restaurant",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "productOrder",
+      "otherEntityRelationshipName": "order",
+      "relationshipName": "productOrder",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "fullname",
+      "otherEntityName": "client",
+      "otherEntityRelationshipName": "order",
+      "relationshipName": "client",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

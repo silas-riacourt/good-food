@@ -9,7 +9,9 @@ import CategorieUpdateComponent from '@/entities/categorie/categorie-update.vue'
 import CategorieClass from '@/entities/categorie/categorie-update.component';
 import CategorieService from '@/entities/categorie/categorie.service';
 
-import MenuService from '@/entities/menu/menu.service';
+import ProductService from '@/entities/product/product.service';
+
+import RestaurantService from '@/entities/restaurant/restaurant.service';
 import AlertService from '@/shared/alert/alert.service';
 
 const localVue = createLocalVue();
@@ -42,8 +44,13 @@ describe('Component Tests', () => {
           categorieService: () => categorieServiceStub,
           alertService: () => new AlertService(),
 
-          menuService: () =>
-            sinon.createStubInstance<MenuService>(MenuService, {
+          productService: () =>
+            sinon.createStubInstance<ProductService>(ProductService, {
+              retrieve: sinon.stub().resolves({}),
+            } as any),
+
+          restaurantService: () =>
+            sinon.createStubInstance<RestaurantService>(RestaurantService, {
               retrieve: sinon.stub().resolves({}),
             } as any),
         },

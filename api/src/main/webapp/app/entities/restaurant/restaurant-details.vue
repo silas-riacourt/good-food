@@ -17,6 +17,18 @@
             <span>{{ restaurant.locationName }}</span>
           </dd>
           <dt>
+            <span>Description</span>
+          </dt>
+          <dd>
+            <span>{{ restaurant.description }}</span>
+          </dd>
+          <dt>
+            <span>Schedule</span>
+          </dt>
+          <dd>
+            <span>{{ restaurant.schedule }}</span>
+          </dd>
+          <dt>
             <span>Open</span>
           </dt>
           <dd>

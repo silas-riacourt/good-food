@@ -30,6 +30,8 @@
             <th scope="row"><span>ID</span></th>
             <th scope="row"><span>Name</span></th>
             <th scope="row"><span>Location Name</span></th>
+            <th scope="row"><span>Description</span></th>
+            <th scope="row"><span>Schedule</span></th>
             <th scope="row"><span>Open</span></th>
             <th scope="row"><span>Location Lat</span></th>
             <th scope="row"><span>Location Lng</span></th>
@@ -43,6 +45,8 @@
             </td>
             <td>{{ restaurant.name }}</td>
             <td>{{ restaurant.locationName }}</td>
+            <td>{{ restaurant.description }}</td>
+            <td>{{ restaurant.schedule }}</td>
             <td>{{ restaurant.open }}</td>
             <td>{{ restaurant.locationLat }}</td>
             <td>{{ restaurant.locationLng }}</td>

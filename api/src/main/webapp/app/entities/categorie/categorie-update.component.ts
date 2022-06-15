@@ -2,8 +2,11 @@ import { Component, Vue, Inject } from 'vue-property-decorator';
 
 import AlertService from '@/shared/alert/alert.service';
 
-import MenuService from '@/entities/menu/menu.service';
-import { IMenu } from '@/shared/model/menu.model';
+import ProductService from '@/entities/product/product.service';
+import { IProduct } from '@/shared/model/product.model';
+
+import RestaurantService from '@/entities/restaurant/restaurant.service';
+import { IRestaurant } from '@/shared/model/restaurant.model';
 
 import { ICategorie, Categorie } from '@/shared/model/categorie.model';
 import CategorieService from './categorie.service';
@@ -25,9 +28,13 @@ export default class CategorieUpdate extends Vue {
 
   public categorie: ICategorie = new Categorie();
 
-  @Inject('menuService') private menuService: () => MenuService;
+  @Inject('productService') private productService: () => ProductService;
 
-  public menus: IMenu[] = [];
+  public products: IProduct[] = [];
+
+  @Inject('restaurantService') private restaurantService: () => RestaurantService;
+
+  public restaurants: IRestaurant[] = [];
   public isSaving = false;
   public currentLanguage = '';
 
@@ -109,10 +116,15 @@ export default class CategorieUpdate extends Vue {
   }
 
   public initRelationships(): void {
-    this.menuService()
+    this.productService()
       .retrieve()
       .then(res => {
-        this.menus = res.data;
+        this.products = res.data;
+      });
+    this.restaurantService()
+      .retrieve()
+      .then(res => {
+        this.restaurants = res.data;
       });
   }
 }

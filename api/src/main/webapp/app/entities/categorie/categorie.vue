@@ -31,6 +31,7 @@
             <th scope="row"><span>Name</span></th>
             <th scope="row"><span>Description</span></th>
             <th scope="row"><span>Image</span></th>
+            <th scope="row"><span>Restaurant</span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -42,6 +43,13 @@
             <td>{{ categorie.name }}</td>
             <td>{{ categorie.description }}</td>
             <td>{{ categorie.image }}</td>
+            <td>
+              <div v-if="categorie.restaurant">
+                <router-link :to="{ name: 'RestaurantView', params: { restaurantId: categorie.restaurant.id } }">{{
+                  categorie.restaurant.name
+                }}</router-link>
+              </div>
+            </td>
             <td class="text-right">
               <div class="btn-group">
                 <router-link :to="{ name: 'CategorieView', params: { categorieId: categorie.id } }" custom v-slot="{ navigate }">

@@ -1,11 +1,13 @@
-import { IMenu } from '@/shared/model/menu.model';
+import { IProduct } from '@/shared/model/product.model';
+import { IRestaurant } from '@/shared/model/restaurant.model';
 
 export interface ICategorie {
   id?: number;
   name?: string | null;
   description?: string | null;
   image?: string | null;
-  menus?: IMenu[] | null;
+  products?: IProduct[] | null;
+  restaurant?: IRestaurant | null;
 }
 
 export class Categorie implements ICategorie {
@@ -14,6 +16,7 @@ export class Categorie implements ICategorie {
     public name?: string | null,
     public description?: string | null,
     public image?: string | null,
-    public menus?: IMenu[] | null
+    public products?: IProduct[] | null,
+    public restaurant?: IRestaurant | null
   ) {}
 }

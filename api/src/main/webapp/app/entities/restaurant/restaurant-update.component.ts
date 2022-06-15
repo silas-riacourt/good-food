@@ -2,8 +2,14 @@ import { Component, Vue, Inject } from 'vue-property-decorator';
 
 import AlertService from '@/shared/alert/alert.service';
 
-import MenuService from '@/entities/menu/menu.service';
-import { IMenu } from '@/shared/model/menu.model';
+import StockService from '@/entities/stock/stock.service';
+import { IStock } from '@/shared/model/stock.model';
+
+import OrderService from '@/entities/order/order.service';
+import { IOrder } from '@/shared/model/order.model';
+
+import CategorieService from '@/entities/categorie/categorie.service';
+import { ICategorie } from '@/shared/model/categorie.model';
 
 import { IRestaurant, Restaurant } from '@/shared/model/restaurant.model';
 import RestaurantService from './restaurant.service';
@@ -12,6 +18,8 @@ const validations: any = {
   restaurant: {
     name: {},
     locationName: {},
+    description: {},
+    schedule: {},
     open: {},
     locationLat: {},
     locationLng: {},
@@ -27,9 +35,17 @@ export default class RestaurantUpdate extends Vue {
 
   public restaurant: IRestaurant = new Restaurant();
 
-  @Inject('menuService') private menuService: () => MenuService;
+  @Inject('stockService') private stockService: () => StockService;
 
-  public menus: IMenu[] = [];
+  public stocks: IStock[] = [];
+
+  @Inject('orderService') private orderService: () => OrderService;
+
+  public orders: IOrder[] = [];
+
+  @Inject('categorieService') private categorieService: () => CategorieService;
+
+  public categories: ICategorie[] = [];
   public isSaving = false;
   public currentLanguage = '';
 
@@ -111,10 +127,20 @@ export default class RestaurantUpdate extends Vue {
   }
 
   public initRelationships(): void {
-    this.menuService()
+    this.stockService()
       .retrieve()
       .then(res => {
-        this.menus = res.data;
+        this.stocks = res.data;
+      });
+    this.orderService()
+      .retrieve()
+      .then(res => {
+        this.orders = res.data;
+      });
+    this.categorieService()
+      .retrieve()
+      .then(res => {
+        this.categories = res.data;
       });
   }
 }

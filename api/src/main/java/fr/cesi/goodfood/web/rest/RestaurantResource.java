@@ -8,6 +8,8 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -129,6 +131,12 @@ public class RestaurantResource {
                 if (restaurant.getLocationName() != null) {
                     existingRestaurant.setLocationName(restaurant.getLocationName());
                 }
+                if (restaurant.getDescription() != null) {
+                    existingRestaurant.setDescription(restaurant.getDescription());
+                }
+                if (restaurant.getSchedule() != null) {
+                    existingRestaurant.setSchedule(restaurant.getSchedule());
+                }
                 if (restaurant.getOpen() != null) {
                     existingRestaurant.setOpen(restaurant.getOpen());
                 }
@@ -152,10 +160,26 @@ public class RestaurantResource {
     /**
      * {@code GET  /restaurants} : get all the restaurants.
      *
+     * @param filter the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of restaurants in body.
      */
     @GetMapping("/restaurants")
-    public List<Restaurant> getAllRestaurants() {
+    public List<Restaurant> getAllRestaurants(@RequestParam(required = false) String filter) {
+        if ("stock-is-null".equals(filter)) {
+            log.debug("REST request to get all Restaurants where stock is null");
+            return StreamSupport
+                .stream(restaurantRepository.findAll().spliterator(), false)
+                .filter(restaurant -> restaurant.getStock() == null)
+                .collect(Collectors.toList());
+        }
+
+        if ("order-is-null".equals(filter)) {
+            log.debug("REST request to get all Restaurants where order is null");
+            return StreamSupport
+                .stream(restaurantRepository.findAll().spliterator(), false)
+                .filter(restaurant -> restaurant.getOrder() == null)
+                .collect(Collectors.toList());
+        }
         log.debug("REST request to get all Restaurants");
         return restaurantRepository.findAll();
     }

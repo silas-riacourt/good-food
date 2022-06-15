@@ -35,6 +35,12 @@ class RestaurantResourceIT {
     private static final String DEFAULT_LOCATION_NAME = "AAAAAAAAAA";
     private static final String UPDATED_LOCATION_NAME = "BBBBBBBBBB";
 
+    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
+    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
+
+    private static final String DEFAULT_SCHEDULE = "AAAAAAAAAA";
+    private static final String UPDATED_SCHEDULE = "BBBBBBBBBB";
+
     private static final Boolean DEFAULT_OPEN = false;
     private static final Boolean UPDATED_OPEN = true;
 
@@ -71,6 +77,8 @@ class RestaurantResourceIT {
         Restaurant restaurant = new Restaurant()
             .name(DEFAULT_NAME)
             .locationName(DEFAULT_LOCATION_NAME)
+            .description(DEFAULT_DESCRIPTION)
+            .schedule(DEFAULT_SCHEDULE)
             .open(DEFAULT_OPEN)
             .locationLat(DEFAULT_LOCATION_LAT)
             .locationLng(DEFAULT_LOCATION_LNG);
@@ -87,6 +95,8 @@ class RestaurantResourceIT {
         Restaurant restaurant = new Restaurant()
             .name(UPDATED_NAME)
             .locationName(UPDATED_LOCATION_NAME)
+            .description(UPDATED_DESCRIPTION)
+            .schedule(UPDATED_SCHEDULE)
             .open(UPDATED_OPEN)
             .locationLat(UPDATED_LOCATION_LAT)
             .locationLng(UPDATED_LOCATION_LNG);
@@ -113,6 +123,8 @@ class RestaurantResourceIT {
         Restaurant testRestaurant = restaurantList.get(restaurantList.size() - 1);
         assertThat(testRestaurant.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testRestaurant.getLocationName()).isEqualTo(DEFAULT_LOCATION_NAME);
+        assertThat(testRestaurant.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testRestaurant.getSchedule()).isEqualTo(DEFAULT_SCHEDULE);
         assertThat(testRestaurant.getOpen()).isEqualTo(DEFAULT_OPEN);
         assertThat(testRestaurant.getLocationLat()).isEqualTo(DEFAULT_LOCATION_LAT);
         assertThat(testRestaurant.getLocationLng()).isEqualTo(DEFAULT_LOCATION_LNG);
@@ -150,6 +162,8 @@ class RestaurantResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(restaurant.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].locationName").value(hasItem(DEFAULT_LOCATION_NAME)))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
+            .andExpect(jsonPath("$.[*].schedule").value(hasItem(DEFAULT_SCHEDULE)))
             .andExpect(jsonPath("$.[*].open").value(hasItem(DEFAULT_OPEN.booleanValue())))
             .andExpect(jsonPath("$.[*].locationLat").value(hasItem(DEFAULT_LOCATION_LAT.doubleValue())))
             .andExpect(jsonPath("$.[*].locationLng").value(hasItem(DEFAULT_LOCATION_LNG.doubleValue())));
@@ -169,6 +183,8 @@ class RestaurantResourceIT {
             .andExpect(jsonPath("$.id").value(restaurant.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.locationName").value(DEFAULT_LOCATION_NAME))
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
+            .andExpect(jsonPath("$.schedule").value(DEFAULT_SCHEDULE))
             .andExpect(jsonPath("$.open").value(DEFAULT_OPEN.booleanValue()))
             .andExpect(jsonPath("$.locationLat").value(DEFAULT_LOCATION_LAT.doubleValue()))
             .andExpect(jsonPath("$.locationLng").value(DEFAULT_LOCATION_LNG.doubleValue()));
@@ -196,6 +212,8 @@ class RestaurantResourceIT {
         updatedRestaurant
             .name(UPDATED_NAME)
             .locationName(UPDATED_LOCATION_NAME)
+            .description(UPDATED_DESCRIPTION)
+            .schedule(UPDATED_SCHEDULE)
             .open(UPDATED_OPEN)
             .locationLat(UPDATED_LOCATION_LAT)
             .locationLng(UPDATED_LOCATION_LNG);
@@ -214,6 +232,8 @@ class RestaurantResourceIT {
         Restaurant testRestaurant = restaurantList.get(restaurantList.size() - 1);
         assertThat(testRestaurant.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testRestaurant.getLocationName()).isEqualTo(UPDATED_LOCATION_NAME);
+        assertThat(testRestaurant.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testRestaurant.getSchedule()).isEqualTo(UPDATED_SCHEDULE);
         assertThat(testRestaurant.getOpen()).isEqualTo(UPDATED_OPEN);
         assertThat(testRestaurant.getLocationLat()).isEqualTo(UPDATED_LOCATION_LAT);
         assertThat(testRestaurant.getLocationLng()).isEqualTo(UPDATED_LOCATION_LNG);
@@ -287,6 +307,8 @@ class RestaurantResourceIT {
         Restaurant partialUpdatedRestaurant = new Restaurant();
         partialUpdatedRestaurant.setId(restaurant.getId());
 
+        partialUpdatedRestaurant.locationLat(UPDATED_LOCATION_LAT).locationLng(UPDATED_LOCATION_LNG);
+
         restRestaurantMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedRestaurant.getId())
@@ -301,9 +323,11 @@ class RestaurantResourceIT {
         Restaurant testRestaurant = restaurantList.get(restaurantList.size() - 1);
         assertThat(testRestaurant.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testRestaurant.getLocationName()).isEqualTo(DEFAULT_LOCATION_NAME);
+        assertThat(testRestaurant.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testRestaurant.getSchedule()).isEqualTo(DEFAULT_SCHEDULE);
         assertThat(testRestaurant.getOpen()).isEqualTo(DEFAULT_OPEN);
-        assertThat(testRestaurant.getLocationLat()).isEqualTo(DEFAULT_LOCATION_LAT);
-        assertThat(testRestaurant.getLocationLng()).isEqualTo(DEFAULT_LOCATION_LNG);
+        assertThat(testRestaurant.getLocationLat()).isEqualTo(UPDATED_LOCATION_LAT);
+        assertThat(testRestaurant.getLocationLng()).isEqualTo(UPDATED_LOCATION_LNG);
     }
 
     @Test
@@ -321,6 +345,8 @@ class RestaurantResourceIT {
         partialUpdatedRestaurant
             .name(UPDATED_NAME)
             .locationName(UPDATED_LOCATION_NAME)
+            .description(UPDATED_DESCRIPTION)
+            .schedule(UPDATED_SCHEDULE)
             .open(UPDATED_OPEN)
             .locationLat(UPDATED_LOCATION_LAT)
             .locationLng(UPDATED_LOCATION_LNG);
@@ -339,6 +365,8 @@ class RestaurantResourceIT {
         Restaurant testRestaurant = restaurantList.get(restaurantList.size() - 1);
         assertThat(testRestaurant.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testRestaurant.getLocationName()).isEqualTo(UPDATED_LOCATION_NAME);
+        assertThat(testRestaurant.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testRestaurant.getSchedule()).isEqualTo(UPDATED_SCHEDULE);
         assertThat(testRestaurant.getOpen()).isEqualTo(UPDATED_OPEN);
         assertThat(testRestaurant.getLocationLat()).isEqualTo(UPDATED_LOCATION_LAT);
         assertThat(testRestaurant.getLocationLng()).isEqualTo(UPDATED_LOCATION_LNG);
