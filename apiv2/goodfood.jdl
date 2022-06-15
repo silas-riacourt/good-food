@@ -1,0 +1,78 @@
+
+entity Restaurant {
+	name String
+    locationName String
+    description String
+    schedule String
+    open Boolean
+    locationLat Double
+    locationLng Double
+}
+entity Categorie {
+	name String
+    description String
+    image String
+}
+entity Product {
+	name String
+    description String
+    price Double
+    image String
+    
+}
+entity Ingredient {
+	name String
+    quantity Integer
+}
+
+entity Client {
+	firstName String,
+    lastName String,
+  	phone String,
+    mail String,
+}
+enum OrderStatus {
+    IN_PROGRESS, ENDED, CANCELED
+}
+enum PaymentMethod {
+    CREDITCARD, PAYPAL
+}
+entity Order {
+    totalPrice BigDecimal required min(0)
+    date LocalDate
+    status OrderStatus
+    paymentMethod PaymentMethod
+}
+relationship OneToMany {
+	Client to Order
+    Order to Product
+}
+relationship OneToOne {
+	Order to Restaurant
+}
+entity Stock {
+	quantity Integer
+}
+entity Supplier {
+	name String,
+    number String,
+    address String,
+}
+
+relationship OneToMany {
+	Stock to Ingredient
+    Ingredient to Supplier
+}
+relationship OneToMany {
+    Stock to Restaurant
+    Product to Ingredient
+}
+relationship OneToMany {
+	Categorie to Product
+}
+relationship ManyToOne {
+    Categorie to Restaurant
+}
+
+
+
