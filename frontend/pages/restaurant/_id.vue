@@ -16,7 +16,7 @@
         <v-divider />
         <v-row class="mt-4 mb-4">
           <v-col cols="12" sm="4" md="4">
-            <v-list>
+            <v-list v-if="!loading">
               <v-list-item-group v-model="selectedCategorie" mandatory color="warning" @change="changeCategorie(restaurant.categories[selectedCategorie])">
                 <v-list-item
                   v-for="(item) in restaurant.categories"
@@ -32,10 +32,18 @@
                 </v-list-item>
               </v-list-item-group>
             </v-list>
+            <v-skeleton-loader
+              v-else
+              class="mx-auto"
+              max-width="300"
+              type="list-item-three-line"
+            />
           </v-col>
           <v-col cols="12" sm="8" md="8">
-            <h2>{{ restaurant.categories[selectedCategorie].name }}</h2>
-            <v-row class="mt-2">
+            <h2 v-if="!loading">
+              {{ restaurant.categories[selectedCategorie].name }}
+            </h2>
+            <v-row v-if="!loading" class="mt-2">
               <v-col v-for="(product,i) in categorie.products" :key="i" cols="auto">
                 <v-card outlined min-width="200px" max-width="200px" @click="showProductModal(product)">
                   <v-list-item>
@@ -53,13 +61,19 @@
                 </v-card>
               </v-col>
             </v-row>
+            <v-skeleton-loader
+              v-else
+              class="mx-auto"
+              max-width="100"
+              type="button"
+            />
           </v-col>
         </v-row>
       </v-col>
       <v-col cols="12" sm="1" md="2" class="mt-4 mb-4">
         <CartCard />
       </v-col>
-      <ProductModal :product="selectedProduct" :show="productModal" @add-product="addProductHandler" />
+      <ProductModal :product="selectedProduct" :show="productModal" @add-product="addProductHandler" @close="productModal = false" />
     </v-row>
   </v-container>
 </template>
@@ -84,67 +98,8 @@ export default {
     selectedProduct: {
       name: 'Burger 1',
       price: 4.95
-    },
-    categories: [
-      {
-        id: 1,
-        name: 'Nos menus',
-        image: 'menu',
-        products: [
-          {
-            name: 'Menu 1',
-            price: 8.95
-          },
-          {
-            name: 'Menu 2',
-            price: 8.95
-          },
-          {
-            name: 'Menu 3',
-            price: 8.95
-          },
-          {
-            name: 'Menu 4',
-            price: 10
-          }
+    }
 
-        ]
-      },
-      {
-        id: 2,
-        name: 'Nos burgers',
-        image: 'menu',
-        products: [
-          {
-            name: 'Burger 1',
-            price: 4.95,
-            image: 'burger_1',
-            description: 'description'
-          },
-          {
-            name: 'Burger 2',
-            price: 3,
-            image: 'burger_2',
-            description: 'description'
-          }
-        ]
-      },
-      {
-        id: 3,
-        name: 'Catégorie 3',
-        image: 'menu'
-      },
-      {
-        id: 4,
-        name: 'Catégorie 4',
-        image: 'menu'
-      },
-      {
-        id: 7,
-        name: 'Nos desserts',
-        image: 'dessert'
-      }
-    ]
   }),
   computed: {
     ...mapGetters({
@@ -158,19 +113,16 @@ export default {
 
   },
   mounted () {
-    console.log(this.$route.params)
-
     // récuper les info du restaurant
     this.$store.dispatch('restaurant/getRestaurant', this.$route.params.id)
   },
   methods: {
     changeCategorie (categorie) {
-      console.log(categorie)
       this.$store.dispatch('categorie/getCategorieById', categorie.id)
     },
     addProductHandler (data) {
-      console.log(data)
       this.productModal = false
+      this.$store.commit('cart/addProductToCart', { product: data.product, quantity: data.quantity })
     },
     showProductModal (product) {
       this.selectedProduct = product

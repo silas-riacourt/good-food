@@ -46,7 +46,21 @@ export const mutations = {
   },
   updateQuantityRemoveOne (state, { product }) {
     const index = state.products.indexOf(product)
-    state.products[index].quantity--
+    if (state.products[index].quantity === 1) {
+      state.products.splice(index, 1)
+    } else {
+      state.products[index].quantity--
+    }
+  },
+  addProductToCart (state, { product, quantity }) {
+    const newProduct = JSON.parse(JSON.stringify(product))
+    const index = state.products.indexOf(product)
+    if (index !== -1) {
+      state.products[index].quantity++
+    } else {
+      newProduct.quantity = quantity
+      state.products.push(newProduct)
+    }
   }
 }
 

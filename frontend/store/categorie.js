@@ -30,6 +30,7 @@ export const actions = {
       const categorie = await this.$axios.$get('/api/categories/' + id)
       commit('setCategorie', { categorie })
       commit('setLoading', false)
+      commit('restaurant/setLoading', false, { root: true })
     } catch (error) {
       commit('setLoading', false)
     }
