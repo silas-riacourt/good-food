@@ -21,14 +21,18 @@ jobs:
           distribution: 'temurin'
           java-version: 11
       - name: Install node.js packages
+        working-directory: ./api
         run: npm install
       - name: Run backend test
+        working-directory: ./api
         run: |
           chmod +x mvnw
           npm run ci:backend:test
       - name: Run frontend test
+        working-directory: ./api
         run: npm run ci:frontend:test
       - name: Analyze code with SonarQube
+        working-directory: ./api
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -39,8 +43,10 @@ jobs:
               echo No SONAR_TOKEN, skipping...
           fi
       - name: Package application
+        working-directory: ./api
         run: npm run java:jar:prod
       - name: Deploy to Heroku
+        working-directory: ./api
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
