@@ -105,7 +105,7 @@
                       <template #activator="{ on, attrs }">
                         <v-badge
                           :content="numberOfProductsInCart"
-                          color="warning"
+                          color="red"
                           bordered
                           overlap
                         >
