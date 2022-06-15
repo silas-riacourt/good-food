@@ -1,6 +1,6 @@
 {
   "applications": "*",
-  "changelogDate": "20220615092306",
+  "changelogDate": "20220615120858",
   "dto": "no",
   "embedded": false,
   "entityTableName": "product",
@@ -40,8 +40,9 @@
       "otherEntityField": "name",
       "otherEntityName": "categorie",
       "otherEntityRelationshipName": "product",
+      "ownerSide": false,
       "relationshipName": "categorie",
-      "relationshipType": "many-to-one"
+      "relationshipType": "many-to-many"
     }
   ],
   "service": "no"

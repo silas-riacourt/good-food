@@ -30,13 +30,18 @@ public class Categorie implements Serializable {
     @Column(name = "image")
     private String image;
 
-    @OneToMany(mappedBy = "categorie")
-    @JsonIgnoreProperties(value = { "ingredients", "categorie" }, allowSetters = true)
+    @ManyToMany
+    @JoinTable(
+        name = "rel_categorie__product",
+        joinColumns = @JoinColumn(name = "categorie_id"),
+        inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    @JsonIgnoreProperties(value = { "ingredients", "categories" }, allowSetters = true)
     private Set<Product> products = new HashSet<>();
 
-    @ManyToOne
-    @JsonIgnoreProperties(value = { "stock", "order", "categories" }, allowSetters = true)
-    private Restaurant restaurant;
+    @ManyToMany(mappedBy = "categories")
+    @JsonIgnoreProperties(value = { "categories", "stock", "order" }, allowSetters = true)
+    private Set<Restaurant> restaurants = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -97,12 +102,6 @@ public class Categorie implements Serializable {
     }
 
     public void setProducts(Set<Product> products) {
-        if (this.products != null) {
-            this.products.forEach(i -> i.setCategorie(null));
-        }
-        if (products != null) {
-            products.forEach(i -> i.setCategorie(this));
-        }
         this.products = products;
     }
 
@@ -113,26 +112,44 @@ public class Categorie implements Serializable {
 
     public Categorie addProduct(Product product) {
         this.products.add(product);
-        product.setCategorie(this);
+        product.getCategories().add(this);
         return this;
     }
 
     public Categorie removeProduct(Product product) {
         this.products.remove(product);
-        product.setCategorie(null);
+        product.getCategories().remove(this);
         return this;
     }
 
-    public Restaurant getRestaurant() {
-        return this.restaurant;
+    public Set<Restaurant> getRestaurants() {
+        return this.restaurants;
     }
 
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
+    public void setRestaurants(Set<Restaurant> restaurants) {
+        if (this.restaurants != null) {
+            this.restaurants.forEach(i -> i.removeCategorie(this));
+        }
+        if (restaurants != null) {
+            restaurants.forEach(i -> i.addCategorie(this));
+        }
+        this.restaurants = restaurants;
     }
 
-    public Categorie restaurant(Restaurant restaurant) {
-        this.setRestaurant(restaurant);
+    public Categorie restaurants(Set<Restaurant> restaurants) {
+        this.setRestaurants(restaurants);
+        return this;
+    }
+
+    public Categorie addRestaurant(Restaurant restaurant) {
+        this.restaurants.add(restaurant);
+        restaurant.getCategories().add(this);
+        return this;
+    }
+
+    public Categorie removeRestaurant(Restaurant restaurant) {
+        this.restaurants.remove(restaurant);
+        restaurant.getCategories().remove(this);
         return this;
     }
 

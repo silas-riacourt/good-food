@@ -7,41 +7,50 @@
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
     <!--
-        Added the entity Product.
+        Added the entity Restaurant.
     -->
-    <changeSet id="20220615092306-1" author="jhipster">
-        <createTable tableName="product">
+    <changeSet id="20220615120856-1" author="jhipster">
+        <createTable tableName="restaurant">
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="location_name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="description" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="price" type="double">
+            <column name="schedule" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="image" type="varchar(255)">
+            <column name="open" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="location_lat" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="location_lng" type="double">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
     </changeSet>
 
-    <changeSet id="20220615092306-1-relations" author="jhipster">
+    <changeSet id="20220615120856-1-relations" author="jhipster">
 
-        <createTable tableName="rel_product__ingredient">
-            <column name="ingredient_id" type="bigint">
+        <createTable tableName="rel_restaurant__categorie">
+            <column name="categorie_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
-            <column name="product_id" type="bigint">
+            <column name="restaurant_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
         </createTable>
 
-        <addPrimaryKey columnNames="product_id, ingredient_id" tableName="rel_product__ingredient"/>
+        <addPrimaryKey columnNames="restaurant_id, categorie_id" tableName="rel_restaurant__categorie"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
@@ -54,17 +63,20 @@
           This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
           Spring Boot configuration key.
     -->
-    <changeSet id="20220615092306-1-data" author="jhipster" context="faker">
+    <changeSet id="20220615120856-1-data" author="jhipster" context="faker">
         <loadData
-                  file="config/liquibase/fake-data/product.csv"
+                  file="config/liquibase/fake-data/restaurant.csv"
                   separator=";"
-                  tableName="product"
+                  tableName="restaurant"
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
             <column name="name" type="string"/>
+            <column name="location_name" type="string"/>
             <column name="description" type="string"/>
-            <column name="price" type="numeric"/>
-            <column name="image" type="string"/>
+            <column name="schedule" type="string"/>
+            <column name="open" type="boolean"/>
+            <column name="location_lat" type="numeric"/>
+            <column name="location_lng" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

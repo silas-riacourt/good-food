@@ -42,6 +42,15 @@ public class Restaurant implements Serializable {
     @Column(name = "location_lng")
     private Double locationLng;
 
+    @ManyToMany
+    @JoinTable(
+        name = "rel_restaurant__categorie",
+        joinColumns = @JoinColumn(name = "restaurant_id"),
+        inverseJoinColumns = @JoinColumn(name = "categorie_id")
+    )
+    @JsonIgnoreProperties(value = { "products", "restaurants" }, allowSetters = true)
+    private Set<Categorie> categories = new HashSet<>();
+
     @JsonIgnoreProperties(value = { "restaurant", "ingredient" }, allowSetters = true)
     @OneToOne(mappedBy = "restaurant")
     private Stock stock;
@@ -49,10 +58,6 @@ public class Restaurant implements Serializable {
     @JsonIgnoreProperties(value = { "restaurant", "productOrders", "client" }, allowSetters = true)
     @OneToOne(mappedBy = "restaurant")
     private Order order;
-
-    @OneToMany(mappedBy = "restaurant")
-    @JsonIgnoreProperties(value = { "products", "restaurant" }, allowSetters = true)
-    private Set<Categorie> categories = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -160,6 +165,31 @@ public class Restaurant implements Serializable {
         this.locationLng = locationLng;
     }
 
+    public Set<Categorie> getCategories() {
+        return this.categories;
+    }
+
+    public void setCategories(Set<Categorie> categories) {
+        this.categories = categories;
+    }
+
+    public Restaurant categories(Set<Categorie> categories) {
+        this.setCategories(categories);
+        return this;
+    }
+
+    public Restaurant addCategorie(Categorie categorie) {
+        this.categories.add(categorie);
+        categorie.getRestaurants().add(this);
+        return this;
+    }
+
+    public Restaurant removeCategorie(Categorie categorie) {
+        this.categories.remove(categorie);
+        categorie.getRestaurants().remove(this);
+        return this;
+    }
+
     public Stock getStock() {
         return this.stock;
     }
@@ -195,37 +225,6 @@ public class Restaurant implements Serializable {
 
     public Restaurant order(Order order) {
         this.setOrder(order);
-        return this;
-    }
-
-    public Set<Categorie> getCategories() {
-        return this.categories;
-    }
-
-    public void setCategories(Set<Categorie> categories) {
-        if (this.categories != null) {
-            this.categories.forEach(i -> i.setRestaurant(null));
-        }
-        if (categories != null) {
-            categories.forEach(i -> i.setRestaurant(this));
-        }
-        this.categories = categories;
-    }
-
-    public Restaurant categories(Set<Categorie> categories) {
-        this.setCategories(categories);
-        return this;
-    }
-
-    public Restaurant addCategorie(Categorie categorie) {
-        this.categories.add(categorie);
-        categorie.setRestaurant(this);
-        return this;
-    }
-
-    public Restaurant removeCategorie(Categorie categorie) {
-        this.categories.remove(categorie);
-        categorie.setRestaurant(null);
         return this;
     }
 

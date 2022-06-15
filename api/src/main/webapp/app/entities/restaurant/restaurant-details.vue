@@ -46,6 +46,15 @@
           <dd>
             <span>{{ restaurant.locationLng }}</span>
           </dd>
+          <dt>
+            <span>Categorie</span>
+          </dt>
+          <dd>
+            <span v-for="(categorie, i) in restaurant.categories" :key="categorie.id"
+              >{{ i > 0 ? ', ' : '' }}
+              <router-link :to="{ name: 'CategorieView', params: { categorieId: categorie.id } }">{{ categorie.name }}</router-link>
+            </span>
+          </dd>
         </dl>
         <button type="submit" v-on:click.prevent="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
           <font-awesome-icon icon="arrow-left"></font-awesome-icon>&nbsp;<span> Back</span>

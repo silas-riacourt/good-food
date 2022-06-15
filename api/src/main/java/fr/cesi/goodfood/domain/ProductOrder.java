@@ -33,7 +33,7 @@ public class ProductOrder implements Serializable {
 
     @ManyToOne(optional = false)
     @NotNull
-    @JsonIgnoreProperties(value = { "ingredients", "categorie" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "ingredients", "categories" }, allowSetters = true)
     private Product product;
 
     @ManyToOne

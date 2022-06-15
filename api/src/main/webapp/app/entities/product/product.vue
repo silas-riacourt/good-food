@@ -33,7 +33,6 @@
             <th scope="row"><span>Price</span></th>
             <th scope="row"><span>Image</span></th>
             <th scope="row"><span>Ingredient</span></th>
-            <th scope="row"><span>Categorie</span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -53,13 +52,6 @@
                   ingredient.name
                 }}</router-link>
               </span>
-            </td>
-            <td>
-              <div v-if="product.categorie">
-                <router-link :to="{ name: 'CategorieView', params: { categorieId: product.categorie.id } }">{{
-                  product.categorie.name
-                }}</router-link>
-              </div>
             </td>
             <td class="text-right">
               <div class="btn-group">

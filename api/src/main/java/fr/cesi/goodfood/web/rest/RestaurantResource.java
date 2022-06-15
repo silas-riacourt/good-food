@@ -160,11 +160,15 @@ public class RestaurantResource {
     /**
      * {@code GET  /restaurants} : get all the restaurants.
      *
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @param filter the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of restaurants in body.
      */
     @GetMapping("/restaurants")
-    public List<Restaurant> getAllRestaurants(@RequestParam(required = false) String filter) {
+    public List<Restaurant> getAllRestaurants(
+        @RequestParam(required = false) String filter,
+        @RequestParam(required = false, defaultValue = "false") boolean eagerload
+    ) {
         if ("stock-is-null".equals(filter)) {
             log.debug("REST request to get all Restaurants where stock is null");
             return StreamSupport
@@ -181,7 +185,7 @@ public class RestaurantResource {
                 .collect(Collectors.toList());
         }
         log.debug("REST request to get all Restaurants");
-        return restaurantRepository.findAll();
+        return restaurantRepository.findAllWithEagerRelationships();
     }
 
     /**
@@ -193,7 +197,7 @@ public class RestaurantResource {
     @GetMapping("/restaurants/{id}")
     public ResponseEntity<Restaurant> getRestaurant(@PathVariable Long id) {
         log.debug("REST request to get Restaurant : {}", id);
-        Optional<Restaurant> restaurant = restaurantRepository.findById(id);
+        Optional<Restaurant> restaurant = restaurantRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(restaurant);
     }
 

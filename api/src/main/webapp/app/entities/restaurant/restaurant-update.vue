@@ -92,6 +92,26 @@
               v-model.number="$v.restaurant.locationLng.$model"
             />
           </div>
+          <div class="form-group">
+            <label for="restaurant-categorie">Categorie</label>
+            <select
+              class="form-control"
+              id="restaurant-categories"
+              data-cy="categorie"
+              multiple
+              name="categorie"
+              v-if="restaurant.categories !== undefined"
+              v-model="restaurant.categories"
+            >
+              <option
+                v-bind:value="getSelected(restaurant.categories, categorieOption)"
+                v-for="categorieOption in categories"
+                :key="categorieOption.id"
+              >
+                {{ categorieOption.name }}
+              </option>
+            </select>
+          </div>
         </div>
         <div>
           <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" v-on:click="previousState()">

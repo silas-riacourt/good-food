@@ -9,11 +9,11 @@ import RestaurantUpdateComponent from '@/entities/restaurant/restaurant-update.v
 import RestaurantClass from '@/entities/restaurant/restaurant-update.component';
 import RestaurantService from '@/entities/restaurant/restaurant.service';
 
+import CategorieService from '@/entities/categorie/categorie.service';
+
 import StockService from '@/entities/stock/stock.service';
 
 import OrderService from '@/entities/order/order.service';
-
-import CategorieService from '@/entities/categorie/categorie.service';
 import AlertService from '@/shared/alert/alert.service';
 
 const localVue = createLocalVue();
@@ -46,6 +46,11 @@ describe('Component Tests', () => {
           restaurantService: () => restaurantServiceStub,
           alertService: () => new AlertService(),
 
+          categorieService: () =>
+            sinon.createStubInstance<CategorieService>(CategorieService, {
+              retrieve: sinon.stub().resolves({}),
+            } as any),
+
           stockService: () =>
             sinon.createStubInstance<StockService>(StockService, {
               retrieve: sinon.stub().resolves({}),
@@ -53,11 +58,6 @@ describe('Component Tests', () => {
 
           orderService: () =>
             sinon.createStubInstance<OrderService>(OrderService, {
-              retrieve: sinon.stub().resolves({}),
-            } as any),
-
-          categorieService: () =>
-            sinon.createStubInstance<CategorieService>(CategorieService, {
               retrieve: sinon.stub().resolves({}),
             } as any),
         },

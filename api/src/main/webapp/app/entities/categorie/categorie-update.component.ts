@@ -55,6 +55,7 @@ export default class CategorieUpdate extends Vue {
         this.currentLanguage = this.$store.getters.currentLanguage;
       }
     );
+    this.categorie.products = [];
   }
 
   public save(): void {
@@ -126,5 +127,12 @@ export default class CategorieUpdate extends Vue {
       .then(res => {
         this.restaurants = res.data;
       });
+  }
+
+  public getSelected(selectedVals, option): any {
+    if (selectedVals) {
+      return selectedVals.find(value => option.id === value.id) ?? option;
+    }
+    return option;
   }
 }

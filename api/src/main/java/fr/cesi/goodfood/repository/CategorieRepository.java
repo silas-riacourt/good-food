@@ -13,28 +13,16 @@ import org.springframework.stereotype.Repository;
  * Spring Data SQL repository for the Categorie entity.
  */
 @Repository
-public interface CategorieRepository extends JpaRepository<Categorie, Long> {
+public interface CategorieRepository extends CategorieRepositoryWithBagRelationships, JpaRepository<Categorie, Long> {
     default Optional<Categorie> findOneWithEagerRelationships(Long id) {
-        return this.findOneWithToOneRelationships(id);
+        return this.fetchBagRelationships(this.findById(id));
     }
 
     default List<Categorie> findAllWithEagerRelationships() {
-        return this.findAllWithToOneRelationships();
+        return this.fetchBagRelationships(this.findAll());
     }
 
     default Page<Categorie> findAllWithEagerRelationships(Pageable pageable) {
-        return this.findAllWithToOneRelationships(pageable);
+        return this.fetchBagRelationships(this.findAll(pageable));
     }
-
-    @Query(
-        value = "select distinct categorie from Categorie categorie left join fetch categorie.restaurant",
-        countQuery = "select count(distinct categorie) from Categorie categorie"
-    )
-    Page<Categorie> findAllWithToOneRelationships(Pageable pageable);
-
-    @Query("select distinct categorie from Categorie categorie left join fetch categorie.restaurant")
-    List<Categorie> findAllWithToOneRelationships();
-
-    @Query("select categorie from Categorie categorie left join fetch categorie.restaurant where categorie.id =:id")
-    Optional<Categorie> findOneWithToOneRelationships(@Param("id") Long id);
 }

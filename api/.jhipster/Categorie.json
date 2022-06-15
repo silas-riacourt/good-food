@@ -1,6 +1,6 @@
 {
   "applications": "*",
-  "changelogDate": "20220615092305",
+  "changelogDate": "20220615120857",
   "dto": "no",
   "embedded": false,
   "entityTableName": "categorie",
@@ -28,15 +28,17 @@
       "otherEntityField": "name",
       "otherEntityName": "product",
       "otherEntityRelationshipName": "categorie",
+      "ownerSide": true,
       "relationshipName": "product",
-      "relationshipType": "one-to-many"
+      "relationshipType": "many-to-many"
     },
     {
       "otherEntityField": "name",
       "otherEntityName": "restaurant",
       "otherEntityRelationshipName": "categorie",
+      "ownerSide": false,
       "relationshipName": "restaurant",
-      "relationshipType": "many-to-one"
+      "relationshipType": "many-to-many"
     }
   ],
   "service": "no"

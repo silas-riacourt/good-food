@@ -35,6 +35,7 @@
             <th scope="row"><span>Open</span></th>
             <th scope="row"><span>Location Lat</span></th>
             <th scope="row"><span>Location Lng</span></th>
+            <th scope="row"><span>Categorie</span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -50,6 +51,14 @@
             <td>{{ restaurant.open }}</td>
             <td>{{ restaurant.locationLat }}</td>
             <td>{{ restaurant.locationLng }}</td>
+            <td>
+              <span v-for="(categorie, i) in restaurant.categories" :key="categorie.id"
+                >{{ i > 0 ? ', ' : '' }}
+                <router-link class="form-control-static" :to="{ name: 'CategorieView', params: { categorieId: categorie.id } }">{{
+                  categorie.name
+                }}</router-link>
+              </span>
+            </td>
             <td class="text-right">
               <div class="btn-group">
                 <router-link :to="{ name: 'RestaurantView', params: { restaurantId: restaurant.id } }" custom v-slot="{ navigate }">

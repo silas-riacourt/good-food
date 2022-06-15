@@ -22,7 +22,7 @@ public class Stock implements Serializable {
     @Column(name = "quantity")
     private Integer quantity;
 
-    @JsonIgnoreProperties(value = { "stock", "order", "categories" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "categories", "stock", "order" }, allowSetters = true)
     @OneToOne
     @JoinColumn(unique = true)
     private Restaurant restaurant;

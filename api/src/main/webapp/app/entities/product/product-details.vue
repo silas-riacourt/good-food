@@ -37,16 +37,6 @@
               <router-link :to="{ name: 'IngredientView', params: { ingredientId: ingredient.id } }">{{ ingredient.name }}</router-link>
             </span>
           </dd>
-          <dt>
-            <span>Categorie</span>
-          </dt>
-          <dd>
-            <div v-if="product.categorie">
-              <router-link :to="{ name: 'CategorieView', params: { categorieId: product.categorie.id } }">{{
-                product.categorie.name
-              }}</router-link>
-            </div>
-          </dd>
         </dl>
         <button type="submit" v-on:click.prevent="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
           <font-awesome-icon icon="arrow-left"></font-awesome-icon>&nbsp;<span> Back</span>

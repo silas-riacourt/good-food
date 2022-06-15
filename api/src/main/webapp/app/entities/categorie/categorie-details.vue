@@ -23,14 +23,13 @@
             <span>{{ categorie.image }}</span>
           </dd>
           <dt>
-            <span>Restaurant</span>
+            <span>Product</span>
           </dt>
           <dd>
-            <div v-if="categorie.restaurant">
-              <router-link :to="{ name: 'RestaurantView', params: { restaurantId: categorie.restaurant.id } }">{{
-                categorie.restaurant.name
-              }}</router-link>
-            </div>
+            <span v-for="(product, i) in categorie.products" :key="product.id"
+              >{{ i > 0 ? ', ' : '' }}
+              <router-link :to="{ name: 'ProductView', params: { productId: product.id } }">{{ product.name }}</router-link>
+            </span>
           </dd>
         </dl>
         <button type="submit" v-on:click.prevent="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

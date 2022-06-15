@@ -2,14 +2,14 @@ import { Component, Vue, Inject } from 'vue-property-decorator';
 
 import AlertService from '@/shared/alert/alert.service';
 
+import CategorieService from '@/entities/categorie/categorie.service';
+import { ICategorie } from '@/shared/model/categorie.model';
+
 import StockService from '@/entities/stock/stock.service';
 import { IStock } from '@/shared/model/stock.model';
 
 import OrderService from '@/entities/order/order.service';
 import { IOrder } from '@/shared/model/order.model';
-
-import CategorieService from '@/entities/categorie/categorie.service';
-import { ICategorie } from '@/shared/model/categorie.model';
 
 import { IRestaurant, Restaurant } from '@/shared/model/restaurant.model';
 import RestaurantService from './restaurant.service';
@@ -35,6 +35,10 @@ export default class RestaurantUpdate extends Vue {
 
   public restaurant: IRestaurant = new Restaurant();
 
+  @Inject('categorieService') private categorieService: () => CategorieService;
+
+  public categories: ICategorie[] = [];
+
   @Inject('stockService') private stockService: () => StockService;
 
   public stocks: IStock[] = [];
@@ -42,10 +46,6 @@ export default class RestaurantUpdate extends Vue {
   @Inject('orderService') private orderService: () => OrderService;
 
   public orders: IOrder[] = [];
-
-  @Inject('categorieService') private categorieService: () => CategorieService;
-
-  public categories: ICategorie[] = [];
   public isSaving = false;
   public currentLanguage = '';
 
@@ -66,6 +66,7 @@ export default class RestaurantUpdate extends Vue {
         this.currentLanguage = this.$store.getters.currentLanguage;
       }
     );
+    this.restaurant.categories = [];
   }
 
   public save(): void {
@@ -127,6 +128,11 @@ export default class RestaurantUpdate extends Vue {
   }
 
   public initRelationships(): void {
+    this.categorieService()
+      .retrieve()
+      .then(res => {
+        this.categories = res.data;
+      });
     this.stockService()
       .retrieve()
       .then(res => {
@@ -137,10 +143,12 @@ export default class RestaurantUpdate extends Vue {
       .then(res => {
         this.orders = res.data;
       });
-    this.categorieService()
-      .retrieve()
-      .then(res => {
-        this.categories = res.data;
-      });
+  }
+
+  public getSelected(selectedVals, option): any {
+    if (selectedVals) {
+      return selectedVals.find(value => option.id === value.id) ?? option;
+    }
+    return option;
   }
 }

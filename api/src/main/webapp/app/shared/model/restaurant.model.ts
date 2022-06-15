@@ -1,6 +1,6 @@
+import { ICategorie } from '@/shared/model/categorie.model';
 import { IStock } from '@/shared/model/stock.model';
 import { IOrder } from '@/shared/model/order.model';
-import { ICategorie } from '@/shared/model/categorie.model';
 
 export interface IRestaurant {
   id?: number;
@@ -11,9 +11,9 @@ export interface IRestaurant {
   open?: boolean | null;
   locationLat?: number | null;
   locationLng?: number | null;
+  categories?: ICategorie[] | null;
   stock?: IStock | null;
   order?: IOrder | null;
-  categories?: ICategorie[] | null;
 }
 
 export class Restaurant implements IRestaurant {
@@ -26,9 +26,9 @@ export class Restaurant implements IRestaurant {
     public open?: boolean | null,
     public locationLat?: number | null,
     public locationLng?: number | null,
+    public categories?: ICategorie[] | null,
     public stock?: IStock | null,
-    public order?: IOrder | null,
-    public categories?: ICategorie[] | null
+    public order?: IOrder | null
   ) {
     this.open = this.open ?? false;
   }

@@ -23,11 +23,22 @@
             <column name="image" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="restaurant_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
+    </changeSet>
+
+    <changeSet id="20220615092305-1-relations" author="jhipster">
+
+        <createTable tableName="rel_categorie__product">
+            <column name="product_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="categorie_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="categorie_id, product_id" tableName="rel_categorie__product"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->

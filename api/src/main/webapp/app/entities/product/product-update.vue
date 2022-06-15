@@ -76,19 +76,6 @@
               </option>
             </select>
           </div>
-          <div class="form-group">
-            <label class="form-control-label" for="product-categorie">Categorie</label>
-            <select class="form-control" id="product-categorie" data-cy="categorie" name="categorie" v-model="product.categorie">
-              <option v-bind:value="null"></option>
-              <option
-                v-bind:value="product.categorie && categorieOption.id === product.categorie.id ? product.categorie : categorieOption"
-                v-for="categorieOption in categories"
-                :key="categorieOption.id"
-              >
-                {{ categorieOption.name }}
-              </option>
-            </select>
-          </div>
         </div>
         <div>
           <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" v-on:click="previousState()">

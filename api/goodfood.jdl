@@ -79,13 +79,17 @@ relationship OneToMany {
 }
 relationship ManyToMany {
     Product{ingredient(name)} to Ingredient{product(name)}
+    Restaurant{categorie(name)} to Categorie{restaurant(name)} 
+    Categorie{product(name)} to Product{categorie(name)}
 }
-relationship OneToMany {
-	Categorie{product(name)} to Product{categorie(name)}
-}
-relationship ManyToOne {
-    Categorie{restaurant(name)} to Restaurant{categorie(name)}
-}
+//relationship OneToMany {
+
+      
+//}
+//relationship ManyToOne {
+    //Categorie{restaurant(name)} to Restaurant{categorie(name)}
+     //Product{categorie(name)} to Categorie{product(name)} 
+//}
 
 
 

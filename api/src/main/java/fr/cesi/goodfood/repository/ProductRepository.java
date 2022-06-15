@@ -15,26 +15,14 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProductRepository extends ProductRepositoryWithBagRelationships, JpaRepository<Product, Long> {
     default Optional<Product> findOneWithEagerRelationships(Long id) {
-        return this.fetchBagRelationships(this.findOneWithToOneRelationships(id));
+        return this.fetchBagRelationships(this.findById(id));
     }
 
     default List<Product> findAllWithEagerRelationships() {
-        return this.fetchBagRelationships(this.findAllWithToOneRelationships());
+        return this.fetchBagRelationships(this.findAll());
     }
 
     default Page<Product> findAllWithEagerRelationships(Pageable pageable) {
-        return this.fetchBagRelationships(this.findAllWithToOneRelationships(pageable));
+        return this.fetchBagRelationships(this.findAll(pageable));
     }
-
-    @Query(
-        value = "select distinct product from Product product left join fetch product.categorie",
-        countQuery = "select count(distinct product) from Product product"
-    )
-    Page<Product> findAllWithToOneRelationships(Pageable pageable);
-
-    @Query("select distinct product from Product product left join fetch product.categorie")
-    List<Product> findAllWithToOneRelationships();
-
-    @Query("select product from Product product left join fetch product.categorie where product.id =:id")
-    Optional<Product> findOneWithToOneRelationships(@Param("id") Long id);
 }

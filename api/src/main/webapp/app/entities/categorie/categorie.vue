@@ -31,7 +31,7 @@
             <th scope="row"><span>Name</span></th>
             <th scope="row"><span>Description</span></th>
             <th scope="row"><span>Image</span></th>
-            <th scope="row"><span>Restaurant</span></th>
+            <th scope="row"><span>Product</span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -44,11 +44,12 @@
             <td>{{ categorie.description }}</td>
             <td>{{ categorie.image }}</td>
             <td>
-              <div v-if="categorie.restaurant">
-                <router-link :to="{ name: 'RestaurantView', params: { restaurantId: categorie.restaurant.id } }">{{
-                  categorie.restaurant.name
+              <span v-for="(product, i) in categorie.products" :key="product.id"
+                >{{ i > 0 ? ', ' : '' }}
+                <router-link class="form-control-static" :to="{ name: 'ProductView', params: { productId: product.id } }">{{
+                  product.name
                 }}</router-link>
-              </div>
+              </span>
             </td>
             <td class="text-right">
               <div class="btn-group">

@@ -4,19 +4,19 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
     <!--
-        Added the constraints for entity Product.
+        Added the constraints for entity Stock.
     -->
-    <changeSet id="20220615092306-2" author="jhipster">
+    <changeSet id="20220615120904-2" author="jhipster">
 
-        <addForeignKeyConstraint baseColumnNames="product_id"
-                                 baseTableName="rel_product__ingredient"
-                                 constraintName="fk_rel_product__ingredient__product_id"
+        <addForeignKeyConstraint baseColumnNames="restaurant_id"
+                                 baseTableName="stock"
+                                 constraintName="fk_stock__restaurant_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="product"/>
+                                 referencedTableName="restaurant"/>
 
         <addForeignKeyConstraint baseColumnNames="ingredient_id"
-                                 baseTableName="rel_product__ingredient"
-                                 constraintName="fk_rel_product__ingredient__ingredient_id"
+                                 baseTableName="stock"
+                                 constraintName="fk_stock__ingredient_id"
                                  referencedColumnNames="id"
                                  referencedTableName="ingredient"/>
     </changeSet>

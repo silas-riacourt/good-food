@@ -1,6 +1,6 @@
 {
   "applications": "*",
-  "changelogDate": "20220615092304",
+  "changelogDate": "20220615120856",
   "dto": "no",
   "embedded": false,
   "entityTableName": "restaurant",
@@ -41,6 +41,14 @@
   "readOnly": false,
   "relationships": [
     {
+      "otherEntityField": "name",
+      "otherEntityName": "categorie",
+      "otherEntityRelationshipName": "restaurant",
+      "ownerSide": true,
+      "relationshipName": "categorie",
+      "relationshipType": "many-to-many"
+    },
+    {
       "otherEntityName": "stock",
       "otherEntityRelationshipName": "restaurant",
       "ownerSide": false,
@@ -53,13 +61,6 @@
       "ownerSide": false,
       "relationshipName": "order",
       "relationshipType": "one-to-one"
-    },
-    {
-      "otherEntityField": "name",
-      "otherEntityName": "categorie",
-      "otherEntityRelationshipName": "restaurant",
-      "relationshipName": "categorie",
-      "relationshipType": "one-to-many"
     }
   ],
   "service": "no"

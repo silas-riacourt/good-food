@@ -7,7 +7,7 @@ export interface ICategorie {
   description?: string | null;
   image?: string | null;
   products?: IProduct[] | null;
-  restaurant?: IRestaurant | null;
+  restaurants?: IRestaurant[] | null;
 }
 
 export class Categorie implements ICategorie {
@@ -17,6 +17,6 @@ export class Categorie implements ICategorie {
     public description?: string | null,
     public image?: string | null,
     public products?: IProduct[] | null,
-    public restaurant?: IRestaurant | null
+    public restaurants?: IRestaurant[] | null
   ) {}
 }

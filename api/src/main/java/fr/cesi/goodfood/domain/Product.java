@@ -42,9 +42,9 @@ public class Product implements Serializable {
     @JsonIgnoreProperties(value = { "suppliers", "stocks", "products" }, allowSetters = true)
     private Set<Ingredient> ingredients = new HashSet<>();
 
-    @ManyToOne
-    @JsonIgnoreProperties(value = { "products", "restaurant" }, allowSetters = true)
-    private Categorie categorie;
+    @ManyToMany(mappedBy = "products")
+    @JsonIgnoreProperties(value = { "products", "restaurants" }, allowSetters = true)
+    private Set<Categorie> categories = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -138,16 +138,34 @@ public class Product implements Serializable {
         return this;
     }
 
-    public Categorie getCategorie() {
-        return this.categorie;
+    public Set<Categorie> getCategories() {
+        return this.categories;
     }
 
-    public void setCategorie(Categorie categorie) {
-        this.categorie = categorie;
+    public void setCategories(Set<Categorie> categories) {
+        if (this.categories != null) {
+            this.categories.forEach(i -> i.removeProduct(this));
+        }
+        if (categories != null) {
+            categories.forEach(i -> i.addProduct(this));
+        }
+        this.categories = categories;
     }
 
-    public Product categorie(Categorie categorie) {
-        this.setCategorie(categorie);
+    public Product categories(Set<Categorie> categories) {
+        this.setCategories(categories);
+        return this;
+    }
+
+    public Product addCategorie(Categorie categorie) {
+        this.categories.add(categorie);
+        categorie.getProducts().add(this);
+        return this;
+    }
+
+    public Product removeCategorie(Categorie categorie) {
+        this.categories.remove(categorie);
+        categorie.getProducts().remove(this);
         return this;
     }
 

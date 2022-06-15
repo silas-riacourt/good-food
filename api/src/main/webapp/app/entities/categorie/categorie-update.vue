@@ -45,17 +45,22 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" for="categorie-restaurant">Restaurant</label>
-            <select class="form-control" id="categorie-restaurant" data-cy="restaurant" name="restaurant" v-model="categorie.restaurant">
-              <option v-bind:value="null"></option>
+            <label for="categorie-product">Product</label>
+            <select
+              class="form-control"
+              id="categorie-products"
+              data-cy="product"
+              multiple
+              name="product"
+              v-if="categorie.products !== undefined"
+              v-model="categorie.products"
+            >
               <option
-                v-bind:value="
-                  categorie.restaurant && restaurantOption.id === categorie.restaurant.id ? categorie.restaurant : restaurantOption
-                "
-                v-for="restaurantOption in restaurants"
-                :key="restaurantOption.id"
+                v-bind:value="getSelected(categorie.products, productOption)"
+                v-for="productOption in products"
+                :key="productOption.id"
               >
-                {{ restaurantOption.name }}
+                {{ productOption.name }}
               </option>
             </select>
           </div>

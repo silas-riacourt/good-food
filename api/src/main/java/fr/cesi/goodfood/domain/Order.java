@@ -42,7 +42,7 @@ public class Order implements Serializable {
     @Column(name = "payment_method")
     private PaymentMethod paymentMethod;
 
-    @JsonIgnoreProperties(value = { "stock", "order", "categories" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "categories", "stock", "order" }, allowSetters = true)
     @OneToOne
     @JoinColumn(unique = true)
     private Restaurant restaurant;
