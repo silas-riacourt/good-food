@@ -39,7 +39,9 @@ jobs:
           fi
       - name: Package application
         working-directory: ./api
-        run: npm run java:jar:prod
+        run: |
+          chmod +x mvnw
+          npm run java:jar:prod
       - name: Deploy to Heroku
         working-directory: ./api
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
