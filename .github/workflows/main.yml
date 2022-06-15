@@ -23,11 +23,6 @@ jobs:
       - name: Install node.js packages
         working-directory: ./api
         run: npm install
-      - name: Run backend test
-        working-directory: ./api
-        run: |
-          chmod +x mvnw
-          npm run ci:backend:test
       - name: Run frontend test
         working-directory: ./api
         run: npm run ci:frontend:test
@@ -44,7 +39,9 @@ jobs:
           fi
       - name: Package application
         working-directory: ./api
-        run: npm run java:jar:prod
+        run: |
+          chmod +x mvnw
+          npm run java:jar:prod
       - name: Deploy to Heroku
         working-directory: ./api
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
