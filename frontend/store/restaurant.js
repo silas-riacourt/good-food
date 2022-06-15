@@ -57,12 +57,16 @@ export const state = () => ({
       locationLat: 48.390392,
       locationLng: -4.486076
     }
-  ]
+  ],
+  restaurant: {}
 })
 
 export const getters = {
   getAll (state) {
     return state.restaurants
+  },
+  getRestaurant (state) {
+    return state.restaurant
   },
   isLoading (state) {
     return state.loading
@@ -72,6 +76,9 @@ export const getters = {
 export const mutations = {
   setRestaurants (state, { restaurants }) {
     state.restaurants = restaurants
+  },
+  setRestaurant (state, { restaurant }) {
+    state.restaurants = restaurant
   },
   setLoading (state, loading) {
     state.loading = loading
@@ -89,6 +96,15 @@ export const actions = {
     } catch (error) {
       commit('setLoading', false)
     }
+  },
+  async getRestaurant ({ commit }, id) {
+    commit('setLoading', true)
+    try {
+      const restaurant = await this.$axios.$get('/api/restaurants/' + id)
+      commit('setRestaurant', { restaurant })
+      commit('setLoading', false)
+    } catch (error) {
+      commit('setLoading', false)
+    }
   }
-
 }
