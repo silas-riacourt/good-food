@@ -150,6 +150,8 @@ export default {
   },
   mounted () {
     console.log(this.$route.params)
+
+    this.$store.dispatch('restaurant/getRestaurant', this.$route.params)
   },
   methods: {
     addProductHandler (data) {

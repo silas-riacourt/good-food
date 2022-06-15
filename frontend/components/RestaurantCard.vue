@@ -2,7 +2,7 @@
   <v-card
     class="grow"
     min-width="280px"
-    max-width="280px"
+    max-width="300px"
     :color="selected ? '' :''"
     :dark="selected"
     :elevation="fromMap ? '0' : '2'"
