@@ -78,7 +78,7 @@ export const mutations = {
     state.restaurants = restaurants
   },
   setRestaurant (state, { restaurant }) {
-    state.restaurants = restaurant
+    state.restaurant = restaurant
   },
   setLoading (state, loading) {
     state.loading = loading
@@ -97,14 +97,15 @@ export const actions = {
       commit('setLoading', false)
     }
   },
-  async getRestaurant ({ commit }, id) {
-    commit('setLoading', true)
+  async getRestaurant (context, id) {
+    context.commit('setLoading', true)
     try {
       const restaurant = await this.$axios.$get('/api/restaurants/' + id)
-      commit('setRestaurant', { restaurant })
-      commit('setLoading', false)
+      context.commit('setRestaurant', { restaurant })
+      context.commit('setLoading', false)
+      context.dispatch('categorie/getCategorieById', restaurant.categories[0].id, { root: true })
     } catch (error) {
-      commit('setLoading', false)
+      context.commit('setLoading', false)
     }
   }
 }

@@ -9,7 +9,7 @@
             </v-icon>
           </v-col>
           <v-col>
-            <h1>GoodFood LOUDEAC</h1>
+            <h1>{{ restaurant.name }}</h1>
             <p><v-icon>mdi-table-chair</v-icon> Sur place </p>
           </v-col>
         </v-row>
@@ -17,9 +17,9 @@
         <v-row class="mt-4 mb-4">
           <v-col cols="12" sm="4" md="4">
             <v-list>
-              <v-list-item-group v-model="selectedCategorie" mandatory color="warning">
+              <v-list-item-group v-model="selectedCategorie" mandatory color="warning" @change="changeCategorie(restaurant.categories[selectedCategorie])">
                 <v-list-item
-                  v-for="(item) in categories"
+                  v-for="(item) in restaurant.categories"
                   :key="item.title"
                 >
                   <v-list-item-avatar>
@@ -34,9 +34,9 @@
             </v-list>
           </v-col>
           <v-col cols="12" sm="8" md="8">
-            <h2>{{ categories[selectedCategorie].name }}</h2>
+            <h2>{{ restaurant.categories[selectedCategorie].name }}</h2>
             <v-row class="mt-2">
-              <v-col v-for="(product,i) in categories[selectedCategorie].products" :key="i" cols="auto">
+              <v-col v-for="(product,i) in categorie.products" :key="i" cols="auto">
                 <v-card outlined min-width="200px" max-width="200px" @click="showProductModal(product)">
                   <v-list-item>
                     <v-list-item-avatar class="mr-0">
@@ -65,6 +65,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import ProductModal from '../../components/ProductModal.vue'
 import CartCard from '../../components/CartCard.vue'
 export default {
@@ -145,15 +146,28 @@ export default {
       }
     ]
   }),
+  computed: {
+    ...mapGetters({
+      restaurant: 'restaurant/getRestaurant',
+      loading: 'restaurant/isLoading',
+      categorie: 'categorie/getCategorie'
+    })
+
+  },
   created () {
 
   },
   mounted () {
     console.log(this.$route.params)
 
-    this.$store.dispatch('restaurant/getRestaurant', this.$route.params)
+    // récuper les info du restaurant
+    this.$store.dispatch('restaurant/getRestaurant', this.$route.params.id)
   },
   methods: {
+    changeCategorie (categorie) {
+      console.log(categorie)
+      this.$store.dispatch('categorie/getCategorieById', categorie.id)
+    },
     addProductHandler (data) {
       console.log(data)
       this.productModal = false
