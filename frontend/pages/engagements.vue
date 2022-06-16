@@ -1,7 +1,7 @@
 <template>
   <v-row justify="center" align="center">
     <v-col cols="12" xs="12" lg="6" class="pt-2  elevation-0" style="z-index:1">
-      <h1 class="font-weight-light pl-4">
+      <h1 class="font-weight-light pt-4">
         Nos engagements
       </h1>
       <v-col cols="12" class="mt-4 mb-4">

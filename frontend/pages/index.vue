@@ -7,7 +7,7 @@
             <h1 class="font-weight-light pl-4">
               Nos restaurants
             </h1>
-            <v-row justify="center" class="pt-2 pb-2">
+            <v-row justify="center" class="pt-2 pb-2 ">
               <v-col cols="10" xs="10" lg="8">
                 <v-autocomplete
                   v-model="search"
@@ -21,7 +21,7 @@
                 />
               </v-col>
             </v-row>
-            <v-row v-if="!loading" align="center" class="mt-2" justify="center">
+            <v-row v-if="!loading" align="center" class="mt-2 pa-2" justify="center">
               <v-col v-for="(restaurant, index) in filterRestaurant" :key="index" cols="auto">
                 <RestaurantCard
                   :id="restaurant.id"
@@ -59,6 +59,7 @@
                   >
                     <l-popup>
                       <RestaurantCard
+                        :id="restaurant.id"
                         :name="restaurant.name"
                         :open="restaurant.open"
                         :location="restaurant.location"
