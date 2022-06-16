@@ -45,14 +45,14 @@
             </h2>
             <v-row v-if="!loading" class="mt-2">
               <v-col v-for="(product,i) in categorie.products" :key="i" cols="auto">
-                <v-card outlined min-width="200px" max-width="200px" @click="showProductModal(product)">
+                <v-card outlined min-width="280px" max-width="280px" @click="showProductModal(product)">
                   <v-list-item>
                     <v-list-item-avatar class="mr-0">
-                      <v-img :src="require(`~/assets/dessert.png`)" max-width="50" />
+                      <v-img :src="require(`~/assets/${product.image}.png`)" max-width="50" />
                     </v-list-item-avatar>
 
                     <v-list-item-content>
-                      <v-card-title class="text-uppercase">
+                      <v-card-title class="text-uppercase" style="word-break:normal;">
                         {{ product.name }}
                       </v-card-title>
                       <v-card-subtitle>{{ product.price }} €</v-card-subtitle>

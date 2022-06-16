@@ -47,10 +47,16 @@ spring:
     contexts: prod
     enabled: false
   mail:
-    host: localhost
-    port: 25
-    username:
-    password:
+    host: smtp.gmail.com
+    port: 587
+    username: goodfoodchain.company@gmail.com
+    password: ThisisGoodfood!
+    protocol: smtp
+    tls: true
+    properties.mail.smtp:
+        auth: true
+        starttls.enable: true
+        ssl.trust: smtp.gmail.com
   thymeleaf:
     cache: true
   sleuth:

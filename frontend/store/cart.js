@@ -2,20 +2,7 @@ export const state = () => ({
 
   loading: false,
   products: [
-    {
-      name: 'Burger 1',
-      price: 4.95,
-      image: 'burger_1',
-      description: 'description',
-      quantity: 1
-    },
-    {
-      name: 'Burger 2',
-      price: 3.0,
-      image: 'burger_2',
-      description: 'description',
-      quantity: 2
-    }
+
   ]
 })
 
