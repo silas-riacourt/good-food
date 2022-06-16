@@ -33,7 +33,7 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     #url: jdbc:h2:file:./target/h2db/db/goodfood;DB_CLOSE_DELAY=-1
-    url: jdbc:postgresql://silasriacourt.fr:5432/goodfood2
+    url: jdbc:postgresql://silasriacourt.fr:5432/goodfood
     username: dbuser
     password: ${DB_PASS}
     hikari:

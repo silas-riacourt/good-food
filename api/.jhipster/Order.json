@@ -45,6 +45,12 @@
       "relationshipType": "one-to-one"
     },
     {
+      "otherEntityName": "productOrder",
+      "otherEntityRelationshipName": "order",
+      "relationshipName": "productOrder",
+      "relationshipType": "one-to-many"
+    },
+    {
       "otherEntityField": "fullname",
       "otherEntityName": "client",
       "otherEntityRelationshipName": "order",

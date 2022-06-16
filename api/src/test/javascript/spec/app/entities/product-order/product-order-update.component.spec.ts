@@ -10,6 +10,8 @@ import ProductOrderClass from '@/entities/product-order/product-order-update.com
 import ProductOrderService from '@/entities/product-order/product-order.service';
 
 import ProductService from '@/entities/product/product.service';
+
+import OrderService from '@/entities/order/order.service';
 import AlertService from '@/shared/alert/alert.service';
 
 const localVue = createLocalVue();
@@ -44,6 +46,11 @@ describe('Component Tests', () => {
 
           productService: () =>
             sinon.createStubInstance<ProductService>(ProductService, {
+              retrieve: sinon.stub().resolves({}),
+            } as any),
+
+          orderService: () =>
+            sinon.createStubInstance<OrderService>(OrderService, {
               retrieve: sinon.stub().resolves({}),
             } as any),
         },

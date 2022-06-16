@@ -6,6 +6,8 @@ import fr.cesi.goodfood.domain.enumeration.PaymentMethod;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
@@ -47,6 +49,10 @@ public class Order implements Serializable {
     @OneToOne
     @JoinColumn(unique = true)
     private Restaurant restaurant;
+
+    @OneToMany(mappedBy = "order")
+    @JsonIgnoreProperties(value = { "product", "order" }, allowSetters = true)
+    private Set<ProductOrder> productOrders = new HashSet<>();
 
     @ManyToOne
     @JsonIgnoreProperties(value = { "internalUser", "orders" }, allowSetters = true)
@@ -142,6 +148,37 @@ public class Order implements Serializable {
 
     public Order restaurant(Restaurant restaurant) {
         this.setRestaurant(restaurant);
+        return this;
+    }
+
+    public Set<ProductOrder> getProductOrders() {
+        return this.productOrders;
+    }
+
+    public void setProductOrders(Set<ProductOrder> productOrders) {
+        if (this.productOrders != null) {
+            this.productOrders.forEach(i -> i.setOrder(null));
+        }
+        if (productOrders != null) {
+            productOrders.forEach(i -> i.setOrder(this));
+        }
+        this.productOrders = productOrders;
+    }
+
+    public Order productOrders(Set<ProductOrder> productOrders) {
+        this.setProductOrders(productOrders);
+        return this;
+    }
+
+    public Order addProductOrder(ProductOrder productOrder) {
+        this.productOrders.add(productOrder);
+        productOrder.setOrder(this);
+        return this;
+    }
+
+    public Order removeProductOrder(ProductOrder productOrder) {
+        this.productOrders.remove(productOrder);
+        productOrder.setOrder(null);
         return this;
     }
 

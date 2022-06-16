@@ -69,6 +69,19 @@
           <div v-if="$v.productOrder.product.$anyDirty && $v.productOrder.product.$invalid">
             <small class="form-text text-danger" v-if="!$v.productOrder.product.required"> This field is required. </small>
           </div>
+          <div class="form-group">
+            <label class="form-control-label" for="product-order-order">Order</label>
+            <select class="form-control" id="product-order-order" data-cy="order" name="order" v-model="productOrder.order">
+              <option v-bind:value="null"></option>
+              <option
+                v-bind:value="productOrder.order && orderOption.id === productOrder.order.id ? productOrder.order : orderOption"
+                v-for="orderOption in orders"
+                :key="orderOption.id"
+              >
+                {{ orderOption.id }}
+              </option>
+            </select>
+          </div>
         </div>
         <div>
           <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" v-on:click="previousState()">

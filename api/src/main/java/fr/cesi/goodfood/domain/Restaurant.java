@@ -59,7 +59,7 @@ public class Restaurant implements Serializable {
     @OneToOne(mappedBy = "restaurant")
     private Stock stock;
 
-    @JsonIgnoreProperties(value = { "restaurant", "client" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "restaurant", "productOrders", "client" }, allowSetters = true)
     @OneToOne(mappedBy = "restaurant")
     private Order order;
 

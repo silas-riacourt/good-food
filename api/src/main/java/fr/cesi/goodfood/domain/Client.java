@@ -41,7 +41,7 @@ public class Client implements Serializable {
     private User internalUser;
 
     @OneToMany(mappedBy = "client")
-    @JsonIgnoreProperties(value = { "restaurant", "client" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "restaurant", "productOrders", "client" }, allowSetters = true)
     private Set<Order> orders = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
