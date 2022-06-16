@@ -1,8 +1,9 @@
 <template>
   <v-card
     class="grow"
-    min-width="280px"
-    max-width="300px"
+    min-width="290px"
+    max-width="290px"
+    max-height="220px"
     :color="selected ? '' :''"
     :dark="selected"
     :elevation="fromMap ? '0' : '2'"
@@ -21,7 +22,9 @@
       {{ open ? "Ouvert" : "Fermé" }} | 10 kms
     </v-card-subtitle>
 
-    <v-card-text>{{ locationname }}</v-card-text>
+    <v-card-text>
+      {{ locationname }}
+    </v-card-text>
 
     <v-card-actions class="justify-center pb-4">
       <div class="text-center">
