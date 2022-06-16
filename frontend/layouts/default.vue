@@ -105,6 +105,7 @@
                     >
                       <template #activator="{ on, attrs }">
                         <v-badge
+                          v-if="numberOfProductsInCart != 0"
                           :content="numberOfProductsInCart"
                           color="red"
                           bordered
@@ -117,6 +118,12 @@
                             </v-icon>
                           </v-btn>
                         </v-badge>
+                        <v-btn v-else color="warning" class="ml-2" v-bind="attrs" v-on="on">
+                          Mon panier
+                          <v-icon right>
+                            mdi-cart
+                          </v-icon>
+                        </v-btn>
                       </template>
                       <CartCard />
                     </v-menu>

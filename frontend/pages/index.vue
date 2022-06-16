@@ -3,10 +3,24 @@
     <v-row justify="center" class="">
       <v-col cols="12" sm="12" md="12" class="pa-0">
         <v-row no-gutters justify="center">
-          <v-col class="pt-4 pl-8 elevation-0" style="z-index:1">
-            <h1 class="font-weight-light">
+          <v-col cols="12" xs="12" lg="6" class="pt-2  elevation-0" style="z-index:1">
+            <h1 class="font-weight-light pl-4">
               Nos restaurants
             </h1>
+            <v-row justify="center" class="pt-2 pb-2">
+              <v-col cols="10" xs="10" lg="8">
+                <v-autocomplete
+                  v-model="search"
+                  filled
+                  rounded
+                  solo
+                  label="Choisir une ville"
+                  hide-details
+                  :items="items"
+                  no-data-text="Désolé nous ne sommes pas encore présent dans cette ville"
+                />
+              </v-col>
+            </v-row>
             <v-row v-if="!loading" align="center" class="mt-2" justify="center">
               <v-col v-for="(restaurant, index) in restaurants" :key="index" cols="auto">
                 <RestaurantCard
@@ -94,7 +108,9 @@ export default {
       zoom: 6,
       center: [47.1749, 2.185],
       iconSize: 40,
-      icon: null
+      icon: null,
+      items: ['Brest', 'Paris', 'Rennes', 'Toulouse'],
+      search: null
     }
   },
   computed: {
