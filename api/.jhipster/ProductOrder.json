@@ -31,6 +31,12 @@
       "relationshipName": "product",
       "relationshipType": "many-to-one",
       "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "order",
+      "otherEntityRelationshipName": "productOrder",
+      "relationshipName": "order",
+      "relationshipType": "many-to-one"
     }
   ],
   "service": "no"

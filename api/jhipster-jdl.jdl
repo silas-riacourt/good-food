@@ -71,6 +71,7 @@ entity IngredientOrder {
 }
 relationship OneToMany {
 	Client{order} to Order{client(fullname)}
+    Order to ProductOrder
 }
 relationship OneToOne {
 	Order{restaurant(name)} to Restaurant{order}

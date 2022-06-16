@@ -11,6 +11,8 @@ import OrderService from '@/entities/order/order.service';
 
 import RestaurantService from '@/entities/restaurant/restaurant.service';
 
+import ProductOrderService from '@/entities/product-order/product-order.service';
+
 import ClientService from '@/entities/client/client.service';
 import AlertService from '@/shared/alert/alert.service';
 
@@ -46,6 +48,11 @@ describe('Component Tests', () => {
 
           restaurantService: () =>
             sinon.createStubInstance<RestaurantService>(RestaurantService, {
+              retrieve: sinon.stub().resolves({}),
+            } as any),
+
+          productOrderService: () =>
+            sinon.createStubInstance<ProductOrderService>(ProductOrderService, {
               retrieve: sinon.stub().resolves({}),
             } as any),
 

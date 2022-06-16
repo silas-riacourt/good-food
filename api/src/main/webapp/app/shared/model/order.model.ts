@@ -1,4 +1,5 @@
 import { IRestaurant } from '@/shared/model/restaurant.model';
+import { IProductOrder } from '@/shared/model/product-order.model';
 import { IClient } from '@/shared/model/client.model';
 
 import { OrderStatus } from '@/shared/model/enumerations/order-status.model';
@@ -11,6 +12,7 @@ export interface IOrder {
   status?: OrderStatus | null;
   paymentMethod?: PaymentMethod | null;
   restaurant?: IRestaurant | null;
+  productOrders?: IProductOrder[] | null;
   client?: IClient | null;
 }
 
@@ -23,6 +25,7 @@ export class Order implements IOrder {
     public status?: OrderStatus | null,
     public paymentMethod?: PaymentMethod | null,
     public restaurant?: IRestaurant | null,
+    public productOrders?: IProductOrder[] | null,
     public client?: IClient | null
   ) {}
 }
