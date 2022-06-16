@@ -40,6 +40,9 @@ class SupplierResourceIT {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
+    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
+    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
+
     private static final String DEFAULT_NUMBER = "AAAAAAAAAA";
     private static final String UPDATED_NUMBER = "BBBBBBBBBB";
 
@@ -73,7 +76,11 @@ class SupplierResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Supplier createEntity(EntityManager em) {
-        Supplier supplier = new Supplier().name(DEFAULT_NAME).number(DEFAULT_NUMBER).address(DEFAULT_ADDRESS);
+        Supplier supplier = new Supplier()
+            .name(DEFAULT_NAME)
+            .description(DEFAULT_DESCRIPTION)
+            .number(DEFAULT_NUMBER)
+            .address(DEFAULT_ADDRESS);
         return supplier;
     }
 
@@ -84,7 +91,11 @@ class SupplierResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Supplier createUpdatedEntity(EntityManager em) {
-        Supplier supplier = new Supplier().name(UPDATED_NAME).number(UPDATED_NUMBER).address(UPDATED_ADDRESS);
+        Supplier supplier = new Supplier()
+            .name(UPDATED_NAME)
+            .description(UPDATED_DESCRIPTION)
+            .number(UPDATED_NUMBER)
+            .address(UPDATED_ADDRESS);
         return supplier;
     }
 
@@ -107,6 +118,7 @@ class SupplierResourceIT {
         assertThat(supplierList).hasSize(databaseSizeBeforeCreate + 1);
         Supplier testSupplier = supplierList.get(supplierList.size() - 1);
         assertThat(testSupplier.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testSupplier.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testSupplier.getNumber()).isEqualTo(DEFAULT_NUMBER);
         assertThat(testSupplier.getAddress()).isEqualTo(DEFAULT_ADDRESS);
     }
@@ -142,6 +154,7 @@ class SupplierResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(supplier.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].number").value(hasItem(DEFAULT_NUMBER)))
             .andExpect(jsonPath("$.[*].address").value(hasItem(DEFAULT_ADDRESS)));
     }
@@ -177,6 +190,7 @@ class SupplierResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(supplier.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
             .andExpect(jsonPath("$.number").value(DEFAULT_NUMBER))
             .andExpect(jsonPath("$.address").value(DEFAULT_ADDRESS));
     }
@@ -200,7 +214,7 @@ class SupplierResourceIT {
         Supplier updatedSupplier = supplierRepository.findById(supplier.getId()).get();
         // Disconnect from session so that the updates on updatedSupplier are not directly saved in db
         em.detach(updatedSupplier);
-        updatedSupplier.name(UPDATED_NAME).number(UPDATED_NUMBER).address(UPDATED_ADDRESS);
+        updatedSupplier.name(UPDATED_NAME).description(UPDATED_DESCRIPTION).number(UPDATED_NUMBER).address(UPDATED_ADDRESS);
 
         restSupplierMockMvc
             .perform(
@@ -215,6 +229,7 @@ class SupplierResourceIT {
         assertThat(supplierList).hasSize(databaseSizeBeforeUpdate);
         Supplier testSupplier = supplierList.get(supplierList.size() - 1);
         assertThat(testSupplier.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testSupplier.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testSupplier.getNumber()).isEqualTo(UPDATED_NUMBER);
         assertThat(testSupplier.getAddress()).isEqualTo(UPDATED_ADDRESS);
     }
@@ -287,7 +302,7 @@ class SupplierResourceIT {
         Supplier partialUpdatedSupplier = new Supplier();
         partialUpdatedSupplier.setId(supplier.getId());
 
-        partialUpdatedSupplier.number(UPDATED_NUMBER);
+        partialUpdatedSupplier.description(UPDATED_DESCRIPTION).address(UPDATED_ADDRESS);
 
         restSupplierMockMvc
             .perform(
@@ -302,8 +317,9 @@ class SupplierResourceIT {
         assertThat(supplierList).hasSize(databaseSizeBeforeUpdate);
         Supplier testSupplier = supplierList.get(supplierList.size() - 1);
         assertThat(testSupplier.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testSupplier.getNumber()).isEqualTo(UPDATED_NUMBER);
-        assertThat(testSupplier.getAddress()).isEqualTo(DEFAULT_ADDRESS);
+        assertThat(testSupplier.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testSupplier.getNumber()).isEqualTo(DEFAULT_NUMBER);
+        assertThat(testSupplier.getAddress()).isEqualTo(UPDATED_ADDRESS);
     }
 
     @Test
@@ -318,7 +334,7 @@ class SupplierResourceIT {
         Supplier partialUpdatedSupplier = new Supplier();
         partialUpdatedSupplier.setId(supplier.getId());
 
-        partialUpdatedSupplier.name(UPDATED_NAME).number(UPDATED_NUMBER).address(UPDATED_ADDRESS);
+        partialUpdatedSupplier.name(UPDATED_NAME).description(UPDATED_DESCRIPTION).number(UPDATED_NUMBER).address(UPDATED_ADDRESS);
 
         restSupplierMockMvc
             .perform(
@@ -333,6 +349,7 @@ class SupplierResourceIT {
         assertThat(supplierList).hasSize(databaseSizeBeforeUpdate);
         Supplier testSupplier = supplierList.get(supplierList.size() - 1);
         assertThat(testSupplier.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testSupplier.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testSupplier.getNumber()).isEqualTo(UPDATED_NUMBER);
         assertThat(testSupplier.getAddress()).isEqualTo(UPDATED_ADDRESS);
     }

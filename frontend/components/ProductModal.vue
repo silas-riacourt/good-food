@@ -106,6 +106,7 @@ export default {
   methods: {
     addProduct () {
       this.$emit('add-product', { product: this.product, quantity: this.quantity })
+      this.quantity = 1
     }
   }
 

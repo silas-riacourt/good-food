@@ -21,6 +21,18 @@
             />
           </div>
           <div class="form-group">
+            <label class="form-control-label" for="supplier-description">Description</label>
+            <input
+              type="text"
+              class="form-control"
+              name="description"
+              id="supplier-description"
+              data-cy="description"
+              :class="{ valid: !$v.supplier.description.$invalid, invalid: $v.supplier.description.$invalid }"
+              v-model="$v.supplier.description.$model"
+            />
+          </div>
+          <div class="form-group">
             <label class="form-control-label" for="supplier-number">Number</label>
             <input
               type="text"

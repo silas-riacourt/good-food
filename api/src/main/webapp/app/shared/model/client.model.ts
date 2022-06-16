@@ -8,7 +8,7 @@ export interface IClient {
   lastName?: string | null;
   phone?: string | null;
   mail?: string | null;
-  user?: IUser;
+  internalUser?: IUser | null;
   orders?: IOrder[] | null;
 }
 
@@ -20,7 +20,7 @@ export class Client implements IClient {
     public lastName?: string | null,
     public phone?: string | null,
     public mail?: string | null,
-    public user?: IUser,
+    public internalUser?: IUser | null,
     public orders?: IOrder[] | null
   ) {}
 }

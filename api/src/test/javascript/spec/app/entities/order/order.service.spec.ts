@@ -35,7 +35,7 @@ describe('Service Tests', () => {
     beforeEach(() => {
       service = new OrderService();
       currentDate = new Date();
-      elemDefault = new Order(123, 0, currentDate, OrderStatus.IN_PROGRESS, PaymentMethod.CREDITCARD);
+      elemDefault = new Order(123, 'AAAAAAA', 0, currentDate, OrderStatus.IN_PROGRESS, PaymentMethod.CREDITCARD);
     });
 
     describe('Service methods', () => {
@@ -98,6 +98,7 @@ describe('Service Tests', () => {
       it('should update a Order', async () => {
         const returnedFromService = Object.assign(
           {
+            name: 'BBBBBB',
             totalPrice: 1,
             date: dayjs(currentDate).format(DATE_FORMAT),
             status: 'BBBBBB',
@@ -133,8 +134,9 @@ describe('Service Tests', () => {
       it('should partial update a Order', async () => {
         const patchObject = Object.assign(
           {
-            totalPrice: 1,
-            status: 'BBBBBB',
+            name: 'BBBBBB',
+            date: dayjs(currentDate).format(DATE_FORMAT),
+            paymentMethod: 'BBBBBB',
           },
           new Order()
         );
@@ -167,6 +169,7 @@ describe('Service Tests', () => {
       it('should return a list of Order', async () => {
         const returnedFromService = Object.assign(
           {
+            name: 'BBBBBB',
             totalPrice: 1,
             date: dayjs(currentDate).format(DATE_FORMAT),
             status: 'BBBBBB',

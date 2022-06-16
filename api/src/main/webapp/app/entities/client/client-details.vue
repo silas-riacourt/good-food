@@ -35,10 +35,10 @@
             <span>{{ client.mail }}</span>
           </dd>
           <dt>
-            <span>User</span>
+            <span>Internal User</span>
           </dt>
           <dd>
-            {{ client.user ? client.user.login : '' }}
+            {{ client.internalUser ? client.internalUser.login : '' }}
           </dd>
         </dl>
         <button type="submit" v-on:click.prevent="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

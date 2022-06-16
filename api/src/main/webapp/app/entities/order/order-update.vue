@@ -9,6 +9,18 @@
             <input type="text" class="form-control" id="id" name="id" v-model="order.id" readonly />
           </div>
           <div class="form-group">
+            <label class="form-control-label" for="order-name">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              name="name"
+              id="order-name"
+              data-cy="name"
+              :class="{ valid: !$v.order.name.$invalid, invalid: $v.order.name.$invalid }"
+              v-model="$v.order.name.$model"
+            />
+          </div>
+          <div class="form-group">
             <label class="form-control-label" for="order-totalPrice">Total Price</label>
             <input
               type="number"

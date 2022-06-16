@@ -5,7 +5,6 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
-import javax.validation.constraints.*;
 
 /**
  * A Client.
@@ -37,13 +36,12 @@ public class Client implements Serializable {
     @Column(name = "mail")
     private String mail;
 
-    @OneToOne(optional = false)
-    @NotNull
+    @OneToOne
     @JoinColumn(unique = true)
-    private User user;
+    private User internalUser;
 
     @OneToMany(mappedBy = "client")
-    @JsonIgnoreProperties(value = { "restaurant", "productOrders", "client" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "restaurant", "client" }, allowSetters = true)
     private Set<Order> orders = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -126,16 +124,16 @@ public class Client implements Serializable {
         this.mail = mail;
     }
 
-    public User getUser() {
-        return this.user;
+    public User getInternalUser() {
+        return this.internalUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setInternalUser(User user) {
+        this.internalUser = user;
     }
 
-    public Client user(User user) {
-        this.setUser(user);
+    public Client internalUser(User user) {
+        this.setInternalUser(user);
         return this;
     }
 

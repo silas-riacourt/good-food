@@ -28,6 +28,7 @@
         <thead>
           <tr>
             <th scope="row"><span>ID</span></th>
+            <th scope="row"><span>Name</span></th>
             <th scope="row"><span>Total Price</span></th>
             <th scope="row"><span>Date</span></th>
             <th scope="row"><span>Status</span></th>
@@ -42,6 +43,7 @@
             <td>
               <router-link :to="{ name: 'OrderView', params: { orderId: order.id } }">{{ order.id }}</router-link>
             </td>
+            <td>{{ order.name }}</td>
             <td>{{ order.totalPrice }}</td>
             <td>{{ order.date }}</td>
             <td>{{ order.status }}</td>

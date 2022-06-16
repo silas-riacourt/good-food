@@ -1,12 +1,16 @@
 {
   "applications": "*",
-  "changelogDate": "20220615120903",
+  "changelogDate": "20220616190354",
   "dto": "no",
   "embedded": false,
   "entityTableName": "supplier",
   "fields": [
     {
       "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
       "fieldType": "String"
     },
     {

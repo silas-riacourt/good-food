@@ -29,6 +29,7 @@
           <tr>
             <th scope="row"><span>ID</span></th>
             <th scope="row"><span>Name</span></th>
+            <th scope="row"><span>Description</span></th>
             <th scope="row"><span>Number</span></th>
             <th scope="row"><span>Address</span></th>
             <th scope="row"><span>Ingredient</span></th>
@@ -41,6 +42,7 @@
               <router-link :to="{ name: 'SupplierView', params: { supplierId: supplier.id } }">{{ supplier.id }}</router-link>
             </td>
             <td>{{ supplier.name }}</td>
+            <td>{{ supplier.description }}</td>
             <td>{{ supplier.number }}</td>
             <td>{{ supplier.address }}</td>
             <td>

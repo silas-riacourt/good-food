@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity Restaurant.
+    -->
+    <changeSet id="20220616190344-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="restaurant_id"
+                                 baseTableName="rel_restaurant__categorie"
+                                 constraintName="fk_rel_restaurant__categorie__restaurant_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="restaurant"/>
+
+        <addForeignKeyConstraint baseColumnNames="categorie_id"
+                                 baseTableName="rel_restaurant__categorie"
+                                 constraintName="fk_rel_restaurant__categorie__categorie_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="categorie"/>
+    </changeSet>
+</databaseChangeLog>

@@ -5,6 +5,7 @@ package fr.cesi.goodfood.domain.enumeration;
  */
 public enum OrderStatus {
     IN_PROGRESS,
+    WAITING,
     ENDED,
     CANCELED,
 }

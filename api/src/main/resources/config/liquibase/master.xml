@@ -15,42 +15,28 @@
     <property name="datetimeType" value="datetime" dbms="oracle, mssql, postgresql, h2"/>
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220615092304_added_entity_Restaurant.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220615092305_added_entity_Categorie.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220615092306_added_entity_Product.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220615092307_added_entity_Ingredient.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220615092308_added_entity_Client.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220615092309_added_entity_Order.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220615092310_added_entity_ProductOrder.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220615092311_added_entity_Supplier.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220615094755_added_entity_Stock.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220615120856_added_entity_Restaurant.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220615120857_added_entity_Categorie.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220615120858_added_entity_Product.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220615120859_added_entity_Ingredient.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220615120900_added_entity_Client.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220615120901_added_entity_Order.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220615120902_added_entity_ProductOrder.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220615120903_added_entity_Supplier.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220615120904_added_entity_Stock.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220616190344_added_entity_Restaurant.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220616190345_added_entity_Categorie.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220616190346_added_entity_Product.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220616190347_added_entity_Ingredient.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220616190348_added_entity_Client.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220616190349_added_entity_Manager.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220616190350_added_entity_Stock.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220616190351_added_entity_Order.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220616190352_added_entity_IngredientOrder.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220616190353_added_entity_ProductOrder.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220616190354_added_entity_Supplier.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
-    <include file="config/liquibase/changelog/20220615092305_added_entity_constraints_Categorie.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220615092306_added_entity_constraints_Product.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220615092307_added_entity_constraints_Ingredient.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220615092308_added_entity_constraints_Client.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220615092309_added_entity_constraints_Order.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220615092310_added_entity_constraints_ProductOrder.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220615092311_added_entity_constraints_Supplier.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220615094755_added_entity_constraints_Stock.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220615092304_added_entity_constraints_Restaurant.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220615120856_added_entity_constraints_Restaurant.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220615120857_added_entity_constraints_Categorie.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220615120858_added_entity_constraints_Product.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220615120900_added_entity_constraints_Client.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220615120901_added_entity_constraints_Order.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220615120902_added_entity_constraints_ProductOrder.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220615120903_added_entity_constraints_Supplier.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220615120904_added_entity_constraints_Stock.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220616190344_added_entity_constraints_Restaurant.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220616190345_added_entity_constraints_Categorie.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220616190346_added_entity_constraints_Product.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220616190348_added_entity_constraints_Client.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220616190349_added_entity_constraints_Manager.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220616190350_added_entity_constraints_Stock.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220616190351_added_entity_constraints_Order.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220616190352_added_entity_constraints_IngredientOrder.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220616190353_added_entity_constraints_ProductOrder.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220616190354_added_entity_constraints_Supplier.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

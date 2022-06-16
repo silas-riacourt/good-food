@@ -69,20 +69,17 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" for="client-user">User</label>
-            <select class="form-control" id="client-user" data-cy="user" name="user" v-model="client.user" required>
-              <option v-if="!client.user" v-bind:value="null" selected></option>
+            <label class="form-control-label" for="client-internalUser">Internal User</label>
+            <select class="form-control" id="client-internalUser" data-cy="internalUser" name="internalUser" v-model="client.internalUser">
+              <option v-bind:value="null"></option>
               <option
-                v-bind:value="client.user && userOption.id === client.user.id ? client.user : userOption"
+                v-bind:value="client.internalUser && userOption.id === client.internalUser.id ? client.internalUser : userOption"
                 v-for="userOption in users"
                 :key="userOption.id"
               >
                 {{ userOption.login }}
               </option>
             </select>
-          </div>
-          <div v-if="$v.client.user.$anyDirty && $v.client.user.$invalid">
-            <small class="form-text text-danger" v-if="!$v.client.user.required"> This field is required. </small>
           </div>
         </div>
         <div>

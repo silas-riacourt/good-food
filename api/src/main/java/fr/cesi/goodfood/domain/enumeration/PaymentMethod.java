@@ -6,4 +6,5 @@ package fr.cesi.goodfood.domain.enumeration;
 public enum PaymentMethod {
     CREDITCARD,
     PAYPAL,
+    CASH,
 }
