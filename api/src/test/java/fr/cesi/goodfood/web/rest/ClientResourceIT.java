@@ -8,7 +8,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import fr.cesi.goodfood.IntegrationTest;
 import fr.cesi.goodfood.domain.Client;
-import fr.cesi.goodfood.domain.User;
 import fr.cesi.goodfood.repository.ClientRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -86,11 +85,6 @@ class ClientResourceIT {
             .lastName(DEFAULT_LAST_NAME)
             .phone(DEFAULT_PHONE)
             .mail(DEFAULT_MAIL);
-        // Add required entity
-        User user = UserResourceIT.createEntity(em);
-        em.persist(user);
-        em.flush();
-        client.setUser(user);
         return client;
     }
 
@@ -107,11 +101,6 @@ class ClientResourceIT {
             .lastName(UPDATED_LAST_NAME)
             .phone(UPDATED_PHONE)
             .mail(UPDATED_MAIL);
-        // Add required entity
-        User user = UserResourceIT.createEntity(em);
-        em.persist(user);
-        em.flush();
-        client.setUser(user);
         return client;
     }
 

@@ -1,0 +1,36 @@
+{
+  "applications": "*",
+  "changelogDate": "20220615120903",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "supplier",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "number",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "address",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Supplier",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "ingredient",
+      "otherEntityRelationshipName": "supplier",
+      "relationshipName": "ingredient",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

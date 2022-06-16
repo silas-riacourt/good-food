@@ -33,7 +33,7 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     #url: jdbc:h2:file:./target/h2db/db/goodfood;DB_CLOSE_DELAY=-1
-    url: jdbc:postgresql://silasriacourt.fr:5432/goodfood
+    url: jdbc:postgresql://silasriacourt.fr:5432/goodfood2
     username: dbuser
     password: ${DB_PASS}
     hikari:
@@ -47,7 +47,7 @@ spring:
     database-platform: tech.jhipster.domain.util.FixedPostgreSQL10Dialect
   liquibase:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
-    contexts: dev, faker
+    contexts: dev
   mail:
     host: smtp.gmail.com
     port: 587
@@ -104,7 +104,7 @@ jhipster:
     authentication:
       jwt:
         # This token must be encoded using Base64 and be at least 256 bits long (you can type `openssl rand -base64 64` on your command line to generate a 512 bits one)
-        base64-secret: NGIwMDYxYTdjNmMzYjRkMDI3OWQwYTM1ZmRiZWRmNDk0NTU4YWY0NTY5YmY5OWY4Y2NlOTNhMGY5YWQ4ZTNiNzdiYzVjMTUwNjhjM2Y0MDcwMDQ5NmFjZDA5MmRhYjZkYmZhZWQwMzBhMDI4OWViNzBiMmNhODExYjhlNWZmMTI=
+        base64-secret: NjAwNDkzZjlmYjhmNzM1NTAxODFmNTgwOGU2ZDQyOGRiNzljNzQ2YTIyNmJhMjZlYTQ2ZDYwYmI4N2UzOGM0M2ZiYTVhOTU5MTI2NDYzMDYxNTRlMDg3MDJiZThjNmNkY2ZlMmFlMDc0OGJlYWE1ODhiZTJmM2MwOTgwZmY1MjU=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 2592000

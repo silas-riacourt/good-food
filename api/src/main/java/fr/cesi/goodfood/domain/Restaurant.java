@@ -51,11 +51,15 @@ public class Restaurant implements Serializable {
     @JsonIgnoreProperties(value = { "products", "restaurants" }, allowSetters = true)
     private Set<Categorie> categories = new HashSet<>();
 
+    @JsonIgnoreProperties(value = { "restaurant" }, allowSetters = true)
+    @OneToOne(mappedBy = "restaurant")
+    private Manager manager;
+
     @JsonIgnoreProperties(value = { "restaurant", "ingredient" }, allowSetters = true)
     @OneToOne(mappedBy = "restaurant")
     private Stock stock;
 
-    @JsonIgnoreProperties(value = { "restaurant", "productOrders", "client" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "restaurant", "client" }, allowSetters = true)
     @OneToOne(mappedBy = "restaurant")
     private Order order;
 
@@ -187,6 +191,25 @@ public class Restaurant implements Serializable {
     public Restaurant removeCategorie(Categorie categorie) {
         this.categories.remove(categorie);
         categorie.getRestaurants().remove(this);
+        return this;
+    }
+
+    public Manager getManager() {
+        return this.manager;
+    }
+
+    public void setManager(Manager manager) {
+        if (this.manager != null) {
+            this.manager.setRestaurant(null);
+        }
+        if (manager != null) {
+            manager.setRestaurant(this);
+        }
+        this.manager = manager;
+    }
+
+    public Restaurant manager(Manager manager) {
+        this.setManager(manager);
         return this;
     }
 

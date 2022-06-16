@@ -43,6 +43,9 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class OrderResourceIT {
 
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
+
     private static final BigDecimal DEFAULT_TOTAL_PRICE = new BigDecimal(0);
     private static final BigDecimal UPDATED_TOTAL_PRICE = new BigDecimal(1);
 
@@ -50,7 +53,7 @@ class OrderResourceIT {
     private static final LocalDate UPDATED_DATE = LocalDate.now(ZoneId.systemDefault());
 
     private static final OrderStatus DEFAULT_STATUS = OrderStatus.IN_PROGRESS;
-    private static final OrderStatus UPDATED_STATUS = OrderStatus.ENDED;
+    private static final OrderStatus UPDATED_STATUS = OrderStatus.WAITING;
 
     private static final PaymentMethod DEFAULT_PAYMENT_METHOD = PaymentMethod.CREDITCARD;
     private static final PaymentMethod UPDATED_PAYMENT_METHOD = PaymentMethod.PAYPAL;
@@ -83,6 +86,7 @@ class OrderResourceIT {
      */
     public static Order createEntity(EntityManager em) {
         Order order = new Order()
+            .name(DEFAULT_NAME)
             .totalPrice(DEFAULT_TOTAL_PRICE)
             .date(DEFAULT_DATE)
             .status(DEFAULT_STATUS)
@@ -98,6 +102,7 @@ class OrderResourceIT {
      */
     public static Order createUpdatedEntity(EntityManager em) {
         Order order = new Order()
+            .name(UPDATED_NAME)
             .totalPrice(UPDATED_TOTAL_PRICE)
             .date(UPDATED_DATE)
             .status(UPDATED_STATUS)
@@ -123,6 +128,7 @@ class OrderResourceIT {
         List<Order> orderList = orderRepository.findAll();
         assertThat(orderList).hasSize(databaseSizeBeforeCreate + 1);
         Order testOrder = orderList.get(orderList.size() - 1);
+        assertThat(testOrder.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testOrder.getTotalPrice()).isEqualByComparingTo(DEFAULT_TOTAL_PRICE);
         assertThat(testOrder.getDate()).isEqualTo(DEFAULT_DATE);
         assertThat(testOrder.getStatus()).isEqualTo(DEFAULT_STATUS);
@@ -176,6 +182,7 @@ class OrderResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(order.getId().intValue())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].totalPrice").value(hasItem(sameNumber(DEFAULT_TOTAL_PRICE))))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
@@ -212,6 +219,7 @@ class OrderResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(order.getId().intValue()))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.totalPrice").value(sameNumber(DEFAULT_TOTAL_PRICE)))
             .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
@@ -237,7 +245,12 @@ class OrderResourceIT {
         Order updatedOrder = orderRepository.findById(order.getId()).get();
         // Disconnect from session so that the updates on updatedOrder are not directly saved in db
         em.detach(updatedOrder);
-        updatedOrder.totalPrice(UPDATED_TOTAL_PRICE).date(UPDATED_DATE).status(UPDATED_STATUS).paymentMethod(UPDATED_PAYMENT_METHOD);
+        updatedOrder
+            .name(UPDATED_NAME)
+            .totalPrice(UPDATED_TOTAL_PRICE)
+            .date(UPDATED_DATE)
+            .status(UPDATED_STATUS)
+            .paymentMethod(UPDATED_PAYMENT_METHOD);
 
         restOrderMockMvc
             .perform(
@@ -251,6 +264,7 @@ class OrderResourceIT {
         List<Order> orderList = orderRepository.findAll();
         assertThat(orderList).hasSize(databaseSizeBeforeUpdate);
         Order testOrder = orderList.get(orderList.size() - 1);
+        assertThat(testOrder.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testOrder.getTotalPrice()).isEqualByComparingTo(UPDATED_TOTAL_PRICE);
         assertThat(testOrder.getDate()).isEqualTo(UPDATED_DATE);
         assertThat(testOrder.getStatus()).isEqualTo(UPDATED_STATUS);
@@ -325,7 +339,7 @@ class OrderResourceIT {
         Order partialUpdatedOrder = new Order();
         partialUpdatedOrder.setId(order.getId());
 
-        partialUpdatedOrder.totalPrice(UPDATED_TOTAL_PRICE).status(UPDATED_STATUS).paymentMethod(UPDATED_PAYMENT_METHOD);
+        partialUpdatedOrder.name(UPDATED_NAME).date(UPDATED_DATE).status(UPDATED_STATUS).paymentMethod(UPDATED_PAYMENT_METHOD);
 
         restOrderMockMvc
             .perform(
@@ -339,8 +353,9 @@ class OrderResourceIT {
         List<Order> orderList = orderRepository.findAll();
         assertThat(orderList).hasSize(databaseSizeBeforeUpdate);
         Order testOrder = orderList.get(orderList.size() - 1);
-        assertThat(testOrder.getTotalPrice()).isEqualByComparingTo(UPDATED_TOTAL_PRICE);
-        assertThat(testOrder.getDate()).isEqualTo(DEFAULT_DATE);
+        assertThat(testOrder.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testOrder.getTotalPrice()).isEqualByComparingTo(DEFAULT_TOTAL_PRICE);
+        assertThat(testOrder.getDate()).isEqualTo(UPDATED_DATE);
         assertThat(testOrder.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testOrder.getPaymentMethod()).isEqualTo(UPDATED_PAYMENT_METHOD);
     }
@@ -357,7 +372,12 @@ class OrderResourceIT {
         Order partialUpdatedOrder = new Order();
         partialUpdatedOrder.setId(order.getId());
 
-        partialUpdatedOrder.totalPrice(UPDATED_TOTAL_PRICE).date(UPDATED_DATE).status(UPDATED_STATUS).paymentMethod(UPDATED_PAYMENT_METHOD);
+        partialUpdatedOrder
+            .name(UPDATED_NAME)
+            .totalPrice(UPDATED_TOTAL_PRICE)
+            .date(UPDATED_DATE)
+            .status(UPDATED_STATUS)
+            .paymentMethod(UPDATED_PAYMENT_METHOD);
 
         restOrderMockMvc
             .perform(
@@ -371,6 +391,7 @@ class OrderResourceIT {
         List<Order> orderList = orderRepository.findAll();
         assertThat(orderList).hasSize(databaseSizeBeforeUpdate);
         Order testOrder = orderList.get(orderList.size() - 1);
+        assertThat(testOrder.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testOrder.getTotalPrice()).isEqualByComparingTo(UPDATED_TOTAL_PRICE);
         assertThat(testOrder.getDate()).isEqualTo(UPDATED_DATE);
         assertThat(testOrder.getStatus()).isEqualTo(UPDATED_STATUS);

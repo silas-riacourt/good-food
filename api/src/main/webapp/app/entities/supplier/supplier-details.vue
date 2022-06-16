@@ -11,6 +11,12 @@
             <span>{{ supplier.name }}</span>
           </dd>
           <dt>
+            <span>Description</span>
+          </dt>
+          <dd>
+            <span>{{ supplier.description }}</span>
+          </dd>
+          <dt>
             <span>Number</span>
           </dt>
           <dd>

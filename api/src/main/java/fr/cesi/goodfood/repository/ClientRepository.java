@@ -27,14 +27,14 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
     }
 
     @Query(
-        value = "select distinct client from Client client left join fetch client.user",
+        value = "select distinct client from Client client left join fetch client.internalUser",
         countQuery = "select count(distinct client) from Client client"
     )
     Page<Client> findAllWithToOneRelationships(Pageable pageable);
 
-    @Query("select distinct client from Client client left join fetch client.user")
+    @Query("select distinct client from Client client left join fetch client.internalUser")
     List<Client> findAllWithToOneRelationships();
 
-    @Query("select client from Client client left join fetch client.user where client.id =:id")
+    @Query("select client from Client client left join fetch client.internalUser where client.id =:id")
     Optional<Client> findOneWithToOneRelationships(@Param("id") Long id);
 }

@@ -1,4 +1,5 @@
 import { ICategorie } from '@/shared/model/categorie.model';
+import { IManager } from '@/shared/model/manager.model';
 import { IStock } from '@/shared/model/stock.model';
 import { IOrder } from '@/shared/model/order.model';
 
@@ -12,6 +13,7 @@ export interface IRestaurant {
   locationLat?: number | null;
   locationLng?: number | null;
   categories?: ICategorie[] | null;
+  manager?: IManager | null;
   stock?: IStock | null;
   order?: IOrder | null;
 }
@@ -27,6 +29,7 @@ export class Restaurant implements IRestaurant {
     public locationLat?: number | null,
     public locationLng?: number | null,
     public categories?: ICategorie[] | null,
+    public manager?: IManager | null,
     public stock?: IStock | null,
     public order?: IOrder | null
   ) {

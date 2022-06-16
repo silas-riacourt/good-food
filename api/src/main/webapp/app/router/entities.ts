@@ -34,11 +34,29 @@ const ClientUpdate = () => import('@/entities/client/client-update.vue');
 // prettier-ignore
 const ClientDetails = () => import('@/entities/client/client-details.vue');
 // prettier-ignore
+const Manager = () => import('@/entities/manager/manager.vue');
+// prettier-ignore
+const ManagerUpdate = () => import('@/entities/manager/manager-update.vue');
+// prettier-ignore
+const ManagerDetails = () => import('@/entities/manager/manager-details.vue');
+// prettier-ignore
+const Stock = () => import('@/entities/stock/stock.vue');
+// prettier-ignore
+const StockUpdate = () => import('@/entities/stock/stock-update.vue');
+// prettier-ignore
+const StockDetails = () => import('@/entities/stock/stock-details.vue');
+// prettier-ignore
 const Order = () => import('@/entities/order/order.vue');
 // prettier-ignore
 const OrderUpdate = () => import('@/entities/order/order-update.vue');
 // prettier-ignore
 const OrderDetails = () => import('@/entities/order/order-details.vue');
+// prettier-ignore
+const IngredientOrder = () => import('@/entities/ingredient-order/ingredient-order.vue');
+// prettier-ignore
+const IngredientOrderUpdate = () => import('@/entities/ingredient-order/ingredient-order-update.vue');
+// prettier-ignore
+const IngredientOrderDetails = () => import('@/entities/ingredient-order/ingredient-order-details.vue');
 // prettier-ignore
 const ProductOrder = () => import('@/entities/product-order/product-order.vue');
 // prettier-ignore
@@ -51,12 +69,6 @@ const Supplier = () => import('@/entities/supplier/supplier.vue');
 const SupplierUpdate = () => import('@/entities/supplier/supplier-update.vue');
 // prettier-ignore
 const SupplierDetails = () => import('@/entities/supplier/supplier-details.vue');
-// prettier-ignore
-const Stock = () => import('@/entities/stock/stock.vue');
-// prettier-ignore
-const StockUpdate = () => import('@/entities/stock/stock-update.vue');
-// prettier-ignore
-const StockDetails = () => import('@/entities/stock/stock-details.vue');
 // jhipster-needle-add-entity-to-router-import - JHipster will import entities to the router here
 
 export default {
@@ -184,6 +196,54 @@ export default {
       meta: { authorities: [Authority.USER] },
     },
     {
+      path: 'manager',
+      name: 'Manager',
+      component: Manager,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'manager/new',
+      name: 'ManagerCreate',
+      component: ManagerUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'manager/:managerId/edit',
+      name: 'ManagerEdit',
+      component: ManagerUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'manager/:managerId/view',
+      name: 'ManagerView',
+      component: ManagerDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'stock',
+      name: 'Stock',
+      component: Stock,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'stock/new',
+      name: 'StockCreate',
+      component: StockUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'stock/:stockId/edit',
+      name: 'StockEdit',
+      component: StockUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'stock/:stockId/view',
+      name: 'StockView',
+      component: StockDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
       path: 'order',
       name: 'Order',
       component: Order,
@@ -205,6 +265,30 @@ export default {
       path: 'order/:orderId/view',
       name: 'OrderView',
       component: OrderDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'ingredient-order',
+      name: 'IngredientOrder',
+      component: IngredientOrder,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'ingredient-order/new',
+      name: 'IngredientOrderCreate',
+      component: IngredientOrderUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'ingredient-order/:ingredientOrderId/edit',
+      name: 'IngredientOrderEdit',
+      component: IngredientOrderUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'ingredient-order/:ingredientOrderId/view',
+      name: 'IngredientOrderView',
+      component: IngredientOrderDetails,
       meta: { authorities: [Authority.USER] },
     },
     {
@@ -253,30 +337,6 @@ export default {
       path: 'supplier/:supplierId/view',
       name: 'SupplierView',
       component: SupplierDetails,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'stock',
-      name: 'Stock',
-      component: Stock,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'stock/new',
-      name: 'StockCreate',
-      component: StockUpdate,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'stock/:stockId/edit',
-      name: 'StockEdit',
-      component: StockUpdate,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'stock/:stockId/view',
-      name: 'StockView',
-      component: StockDetails,
       meta: { authorities: [Authority.USER] },
     },
     // jhipster-needle-add-entity-to-router - JHipster will add entities to the router here

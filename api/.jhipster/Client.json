@@ -1,6 +1,6 @@
 {
   "applications": "*",
-  "changelogDate": "20220615120900",
+  "changelogDate": "20220616190348",
   "dto": "no",
   "embedded": false,
   "entityTableName": "client",
@@ -37,9 +37,8 @@
       "otherEntityName": "user",
       "otherEntityRelationshipName": "client",
       "ownerSide": true,
-      "relationshipName": "user",
-      "relationshipType": "one-to-one",
-      "relationshipValidateRules": "required"
+      "relationshipName": "internalUser",
+      "relationshipType": "one-to-one"
     },
     {
       "otherEntityName": "order",

@@ -1,0 +1,40 @@
+{
+  "applications": "*",
+  "changelogDate": "20220616190352",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "ingredient_order",
+  "fields": [
+    {
+      "fieldName": "date",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "IngredientOrderStatus",
+      "fieldValues": "NEW,WAITING,DELIVERED"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "IngredientOrder",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "supplier",
+      "otherEntityRelationshipName": "ingredientOrder",
+      "relationshipName": "supplifier",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "product",
+      "otherEntityRelationshipName": "ingredientOrder",
+      "relationshipName": "product",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

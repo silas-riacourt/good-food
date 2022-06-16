@@ -20,9 +20,21 @@
       <font-awesome-icon icon="asterisk" />
       <span>Client</span>
     </b-dropdown-item>
+    <b-dropdown-item to="/manager">
+      <font-awesome-icon icon="asterisk" />
+      <span>Manager</span>
+    </b-dropdown-item>
+    <b-dropdown-item to="/stock">
+      <font-awesome-icon icon="asterisk" />
+      <span>Stock</span>
+    </b-dropdown-item>
     <b-dropdown-item to="/order">
       <font-awesome-icon icon="asterisk" />
       <span>Order</span>
+    </b-dropdown-item>
+    <b-dropdown-item to="/ingredient-order">
+      <font-awesome-icon icon="asterisk" />
+      <span>Ingredient Order</span>
     </b-dropdown-item>
     <b-dropdown-item to="/product-order">
       <font-awesome-icon icon="asterisk" />
@@ -31,10 +43,6 @@
     <b-dropdown-item to="/supplier">
       <font-awesome-icon icon="asterisk" />
       <span>Supplier</span>
-    </b-dropdown-item>
-    <b-dropdown-item to="/stock">
-      <font-awesome-icon icon="asterisk" />
-      <span>Stock</span>
     </b-dropdown-item>
     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
   </div>

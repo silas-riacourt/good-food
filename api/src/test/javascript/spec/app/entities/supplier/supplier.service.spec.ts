@@ -29,7 +29,7 @@ describe('Service Tests', () => {
 
     beforeEach(() => {
       service = new SupplierService();
-      elemDefault = new Supplier(123, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA');
+      elemDefault = new Supplier(123, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -82,6 +82,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             name: 'BBBBBB',
+            description: 'BBBBBB',
             number: 'BBBBBB',
             address: 'BBBBBB',
           },
@@ -111,7 +112,7 @@ describe('Service Tests', () => {
         const patchObject = Object.assign(
           {
             name: 'BBBBBB',
-            number: 'BBBBBB',
+            description: 'BBBBBB',
           },
           new Supplier()
         );
@@ -140,6 +141,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             name: 'BBBBBB',
+            description: 'BBBBBB',
             number: 'BBBBBB',
             address: 'BBBBBB',
           },

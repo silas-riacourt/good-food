@@ -22,7 +22,7 @@
               </v-col>
             </v-row>
             <v-row v-if="!loading" align="center" class="mt-2" justify="center">
-              <v-col v-for="(restaurant, index) in restaurants" :key="index" cols="auto">
+              <v-col v-for="(restaurant, index) in filterRestaurant" :key="index" cols="auto">
                 <RestaurantCard
                   :id="restaurant.id"
                   :name="restaurant.name"
@@ -49,7 +49,7 @@
                 <l-map :options="{zoomControl: false}" style="height: 100%;z-index:0;" :zoom="zoom" :center="center" @ready="setIconStyles">
                   <l-tile-layer :url="url" :attribution="attribution" />
                   <l-marker
-                    v-for="(restaurant, index) in restaurants"
+                    v-for="(restaurant, index) in filterRestaurant"
                     :key="index"
                     :lat-lng="[restaurant.locationLat,restaurant.locationLng]"
 
@@ -109,8 +109,8 @@ export default {
       center: [47.1749, 2.185],
       iconSize: 40,
       icon: null,
-      items: ['Brest', 'Paris', 'Rennes', 'Toulouse'],
-      search: null
+      items: ['Toutes', 'Brest', 'Paris', 'Rennes', 'Toulouse'],
+      search: 'Toutes'
     }
   },
   computed: {
@@ -119,6 +119,13 @@ export default {
     },
     dynamicAnchor () {
       return [this.iconSize / 2, this.iconSize * 1.15]
+    },
+    filterRestaurant () {
+      if (this.search != null && this.search !== '' && this.search !== 'Toutes') {
+        return this.restaurants.filter(restaurant => restaurant.name.toLowerCase().includes(this.search.toLowerCase()))
+      } else {
+        return this.restaurants
+      }
     },
     ...mapGetters({
       restaurants: 'restaurant/getAll',

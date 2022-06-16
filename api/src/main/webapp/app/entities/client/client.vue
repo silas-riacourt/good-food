@@ -33,7 +33,7 @@
             <th scope="row"><span>Last Name</span></th>
             <th scope="row"><span>Phone</span></th>
             <th scope="row"><span>Mail</span></th>
-            <th scope="row"><span>User</span></th>
+            <th scope="row"><span>Internal User</span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -48,7 +48,7 @@
             <td>{{ client.phone }}</td>
             <td>{{ client.mail }}</td>
             <td>
-              {{ client.user ? client.user.login : '' }}
+              {{ client.internalUser ? client.internalUser.login : '' }}
             </td>
             <td class="text-right">
               <div class="btn-group">

@@ -1,0 +1,67 @@
+{
+  "applications": "*",
+  "changelogDate": "20220615120856",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "restaurant",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "locationName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "schedule",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "open",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "locationLat",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "locationLng",
+      "fieldType": "Double"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Restaurant",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "categorie",
+      "otherEntityRelationshipName": "restaurant",
+      "ownerSide": true,
+      "relationshipName": "categorie",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "stock",
+      "otherEntityRelationshipName": "restaurant",
+      "ownerSide": false,
+      "relationshipName": "stock",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "order",
+      "otherEntityRelationshipName": "restaurant",
+      "ownerSide": false,
+      "relationshipName": "order",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "no"
+}

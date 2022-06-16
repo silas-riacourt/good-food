@@ -169,6 +169,14 @@ public class RestaurantResource {
         @RequestParam(required = false) String filter,
         @RequestParam(required = false, defaultValue = "false") boolean eagerload
     ) {
+        if ("manager-is-null".equals(filter)) {
+            log.debug("REST request to get all Restaurants where manager is null");
+            return StreamSupport
+                .stream(restaurantRepository.findAll().spliterator(), false)
+                .filter(restaurant -> restaurant.getManager() == null)
+                .collect(Collectors.toList());
+        }
+
         if ("stock-is-null".equals(filter)) {
             log.debug("REST request to get all Restaurants where stock is null");
             return StreamSupport

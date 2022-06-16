@@ -36,10 +36,6 @@ public class ProductOrder implements Serializable {
     @JsonIgnoreProperties(value = { "ingredients", "categories" }, allowSetters = true)
     private Product product;
 
-    @ManyToOne
-    @JsonIgnoreProperties(value = { "restaurant", "productOrders", "client" }, allowSetters = true)
-    private Order order;
-
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
@@ -91,19 +87,6 @@ public class ProductOrder implements Serializable {
 
     public ProductOrder product(Product product) {
         this.setProduct(product);
-        return this;
-    }
-
-    public Order getOrder() {
-        return this.order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
-
-    public ProductOrder order(Order order) {
-        this.setOrder(order);
         return this;
     }
 

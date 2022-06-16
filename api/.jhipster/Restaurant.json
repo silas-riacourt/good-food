@@ -1,6 +1,6 @@
 {
   "applications": "*",
-  "changelogDate": "20220615120856",
+  "changelogDate": "20220616190344",
   "dto": "no",
   "embedded": false,
   "entityTableName": "restaurant",
@@ -47,6 +47,14 @@
       "ownerSide": true,
       "relationshipName": "categorie",
       "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityField": "fullname",
+      "otherEntityName": "manager",
+      "otherEntityRelationshipName": "restaurant",
+      "ownerSide": false,
+      "relationshipName": "manager",
+      "relationshipType": "one-to-one"
     },
     {
       "otherEntityName": "stock",

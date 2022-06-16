@@ -11,6 +11,7 @@ import SupplierService from './supplier.service';
 const validations: any = {
   supplier: {
     name: {},
+    description: {},
     number: {},
     address: {},
   },

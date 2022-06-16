@@ -11,6 +11,8 @@ import RestaurantService from '@/entities/restaurant/restaurant.service';
 
 import CategorieService from '@/entities/categorie/categorie.service';
 
+import ManagerService from '@/entities/manager/manager.service';
+
 import StockService from '@/entities/stock/stock.service';
 
 import OrderService from '@/entities/order/order.service';
@@ -48,6 +50,11 @@ describe('Component Tests', () => {
 
           categorieService: () =>
             sinon.createStubInstance<CategorieService>(CategorieService, {
+              retrieve: sinon.stub().resolves({}),
+            } as any),
+
+          managerService: () =>
+            sinon.createStubInstance<ManagerService>(ManagerService, {
               retrieve: sinon.stub().resolves({}),
             } as any),
 

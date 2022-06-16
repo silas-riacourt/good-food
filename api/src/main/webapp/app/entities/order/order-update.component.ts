@@ -7,9 +7,6 @@ import AlertService from '@/shared/alert/alert.service';
 import RestaurantService from '@/entities/restaurant/restaurant.service';
 import { IRestaurant } from '@/shared/model/restaurant.model';
 
-import ProductOrderService from '@/entities/product-order/product-order.service';
-import { IProductOrder } from '@/shared/model/product-order.model';
-
 import ClientService from '@/entities/client/client.service';
 import { IClient } from '@/shared/model/client.model';
 
@@ -20,6 +17,7 @@ import { PaymentMethod } from '@/shared/model/enumerations/payment-method.model'
 
 const validations: any = {
   order: {
+    name: {},
     totalPrice: {
       required,
       decimal,
@@ -43,10 +41,6 @@ export default class OrderUpdate extends Vue {
   @Inject('restaurantService') private restaurantService: () => RestaurantService;
 
   public restaurants: IRestaurant[] = [];
-
-  @Inject('productOrderService') private productOrderService: () => ProductOrderService;
-
-  public productOrders: IProductOrder[] = [];
 
   @Inject('clientService') private clientService: () => ClientService;
 
@@ -138,11 +132,6 @@ export default class OrderUpdate extends Vue {
       .retrieve()
       .then(res => {
         this.restaurants = res.data;
-      });
-    this.productOrderService()
-      .retrieve()
-      .then(res => {
-        this.productOrders = res.data;
       });
     this.clientService()
       .retrieve()

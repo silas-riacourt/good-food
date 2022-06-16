@@ -1,0 +1,45 @@
+{
+  "applications": "*",
+  "changelogDate": "20220616190349",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "manager",
+  "fields": [
+    {
+      "fieldName": "fullname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "firstName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "phone",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "mail",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Manager",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "restaurant",
+      "otherEntityRelationshipName": "manager",
+      "ownerSide": true,
+      "relationshipName": "restaurant",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "no"
+}

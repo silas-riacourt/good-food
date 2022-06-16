@@ -22,6 +22,9 @@ public class Supplier implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "description")
+    private String description;
+
     @Column(name = "number")
     private String number;
 
@@ -58,6 +61,19 @@ public class Supplier implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public Supplier description(String description) {
+        this.setDescription(description);
+        return this;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getNumber() {
@@ -124,6 +140,7 @@ public class Supplier implements Serializable {
         return "Supplier{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", description='" + getDescription() + "'" +
             ", number='" + getNumber() + "'" +
             ", address='" + getAddress() + "'" +
             "}";

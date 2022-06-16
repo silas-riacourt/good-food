@@ -123,6 +123,9 @@ public class OrderResource {
         Optional<Order> result = orderRepository
             .findById(order.getId())
             .map(existingOrder -> {
+                if (order.getName() != null) {
+                    existingOrder.setName(order.getName());
+                }
                 if (order.getTotalPrice() != null) {
                     existingOrder.setTotalPrice(order.getTotalPrice());
                 }

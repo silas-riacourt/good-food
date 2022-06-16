@@ -6,8 +6,6 @@ import fr.cesi.goodfood.domain.enumeration.PaymentMethod;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
@@ -26,6 +24,9 @@ public class Order implements Serializable {
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "name")
+    private String name;
+
     @NotNull
     @DecimalMin(value = "0")
     @Column(name = "total_price", precision = 21, scale = 2, nullable = false)
@@ -42,17 +43,13 @@ public class Order implements Serializable {
     @Column(name = "payment_method")
     private PaymentMethod paymentMethod;
 
-    @JsonIgnoreProperties(value = { "categories", "stock", "order" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "categories", "manager", "stock", "order" }, allowSetters = true)
     @OneToOne
     @JoinColumn(unique = true)
     private Restaurant restaurant;
 
-    @OneToMany(mappedBy = "order")
-    @JsonIgnoreProperties(value = { "product", "order" }, allowSetters = true)
-    private Set<ProductOrder> productOrders = new HashSet<>();
-
     @ManyToOne
-    @JsonIgnoreProperties(value = { "user", "orders" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "internalUser", "orders" }, allowSetters = true)
     private Client client;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -68,6 +65,19 @@ public class Order implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public Order name(String name) {
+        this.setName(name);
+        return this;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public BigDecimal getTotalPrice() {
@@ -135,37 +145,6 @@ public class Order implements Serializable {
         return this;
     }
 
-    public Set<ProductOrder> getProductOrders() {
-        return this.productOrders;
-    }
-
-    public void setProductOrders(Set<ProductOrder> productOrders) {
-        if (this.productOrders != null) {
-            this.productOrders.forEach(i -> i.setOrder(null));
-        }
-        if (productOrders != null) {
-            productOrders.forEach(i -> i.setOrder(this));
-        }
-        this.productOrders = productOrders;
-    }
-
-    public Order productOrders(Set<ProductOrder> productOrders) {
-        this.setProductOrders(productOrders);
-        return this;
-    }
-
-    public Order addProductOrder(ProductOrder productOrder) {
-        this.productOrders.add(productOrder);
-        productOrder.setOrder(this);
-        return this;
-    }
-
-    public Order removeProductOrder(ProductOrder productOrder) {
-        this.productOrders.remove(productOrder);
-        productOrder.setOrder(null);
-        return this;
-    }
-
     public Client getClient() {
         return this.client;
     }
@@ -203,6 +182,7 @@ public class Order implements Serializable {
     public String toString() {
         return "Order{" +
             "id=" + getId() +
+            ", name='" + getName() + "'" +
             ", totalPrice=" + getTotalPrice() +
             ", date='" + getDate() + "'" +
             ", status='" + getStatus() + "'" +

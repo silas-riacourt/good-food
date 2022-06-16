@@ -26,14 +26,6 @@
               }}</router-link>
             </div>
           </dd>
-          <dt>
-            <span>Order</span>
-          </dt>
-          <dd>
-            <div v-if="productOrder.order">
-              <router-link :to="{ name: 'OrderView', params: { orderId: productOrder.order.id } }">{{ productOrder.order.id }}</router-link>
-            </div>
-          </dd>
         </dl>
         <button type="submit" v-on:click.prevent="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
           <font-awesome-icon icon="arrow-left"></font-awesome-icon>&nbsp;<span> Back</span>

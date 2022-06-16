@@ -31,7 +31,6 @@
             <th scope="row"><span>Quantity</span></th>
             <th scope="row"><span>Total Price</span></th>
             <th scope="row"><span>Product</span></th>
-            <th scope="row"><span>Order</span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -48,13 +47,6 @@
               <div v-if="productOrder.product">
                 <router-link :to="{ name: 'ProductView', params: { productId: productOrder.product.id } }">{{
                   productOrder.product.name
-                }}</router-link>
-              </div>
-            </td>
-            <td>
-              <div v-if="productOrder.order">
-                <router-link :to="{ name: 'OrderView', params: { orderId: productOrder.order.id } }">{{
-                  productOrder.order.id
                 }}</router-link>
               </div>
             </td>

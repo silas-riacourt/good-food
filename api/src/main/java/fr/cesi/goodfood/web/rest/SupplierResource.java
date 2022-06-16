@@ -126,6 +126,9 @@ public class SupplierResource {
                 if (supplier.getName() != null) {
                     existingSupplier.setName(supplier.getName());
                 }
+                if (supplier.getDescription() != null) {
+                    existingSupplier.setDescription(supplier.getDescription());
+                }
                 if (supplier.getNumber() != null) {
                     existingSupplier.setNumber(supplier.getNumber());
                 }

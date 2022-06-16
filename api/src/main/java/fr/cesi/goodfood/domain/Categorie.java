@@ -40,7 +40,7 @@ public class Categorie implements Serializable {
     private Set<Product> products = new HashSet<>();
 
     @ManyToMany(mappedBy = "categories")
-    @JsonIgnoreProperties(value = { "categories", "stock", "order" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "categories", "manager", "stock", "order" }, allowSetters = true)
     private Set<Restaurant> restaurants = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

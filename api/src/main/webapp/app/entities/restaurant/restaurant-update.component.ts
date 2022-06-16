@@ -5,6 +5,9 @@ import AlertService from '@/shared/alert/alert.service';
 import CategorieService from '@/entities/categorie/categorie.service';
 import { ICategorie } from '@/shared/model/categorie.model';
 
+import ManagerService from '@/entities/manager/manager.service';
+import { IManager } from '@/shared/model/manager.model';
+
 import StockService from '@/entities/stock/stock.service';
 import { IStock } from '@/shared/model/stock.model';
 
@@ -38,6 +41,10 @@ export default class RestaurantUpdate extends Vue {
   @Inject('categorieService') private categorieService: () => CategorieService;
 
   public categories: ICategorie[] = [];
+
+  @Inject('managerService') private managerService: () => ManagerService;
+
+  public managers: IManager[] = [];
 
   @Inject('stockService') private stockService: () => StockService;
 
@@ -132,6 +139,11 @@ export default class RestaurantUpdate extends Vue {
       .retrieve()
       .then(res => {
         this.categories = res.data;
+      });
+    this.managerService()
+      .retrieve()
+      .then(res => {
+        this.managers = res.data;
       });
     this.stockService()
       .retrieve()

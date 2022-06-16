@@ -5,6 +5,12 @@
         <h2 class="jh-entity-heading" data-cy="orderDetailsHeading"><span>Order</span> {{ order.id }}</h2>
         <dl class="row jh-entity-details">
           <dt>
+            <span>Name</span>
+          </dt>
+          <dd>
+            <span>{{ order.name }}</span>
+          </dd>
+          <dt>
             <span>Total Price</span>
           </dt>
           <dd>

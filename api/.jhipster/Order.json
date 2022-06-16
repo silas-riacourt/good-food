@@ -1,10 +1,14 @@
 {
   "applications": "*",
-  "changelogDate": "20220615120901",
+  "changelogDate": "20220616190351",
   "dto": "no",
   "embedded": false,
   "entityTableName": "jhi_order",
   "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
     {
       "fieldName": "totalPrice",
       "fieldType": "BigDecimal",
@@ -18,12 +22,12 @@
     {
       "fieldName": "status",
       "fieldType": "OrderStatus",
-      "fieldValues": "IN_PROGRESS,ENDED,CANCELED"
+      "fieldValues": "IN_PROGRESS,WAITING,ENDED,CANCELED"
     },
     {
       "fieldName": "paymentMethod",
       "fieldType": "PaymentMethod",
-      "fieldValues": "CREDITCARD,PAYPAL"
+      "fieldValues": "CREDITCARD,PAYPAL,CASH"
     }
   ],
   "fluentMethods": true,
@@ -39,12 +43,6 @@
       "ownerSide": true,
       "relationshipName": "restaurant",
       "relationshipType": "one-to-one"
-    },
-    {
-      "otherEntityName": "productOrder",
-      "otherEntityRelationshipName": "order",
-      "relationshipName": "productOrder",
-      "relationshipType": "one-to-many"
     },
     {
       "otherEntityField": "fullname",

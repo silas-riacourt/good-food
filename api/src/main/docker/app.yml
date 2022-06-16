@@ -5,13 +5,10 @@ services:
     image: goodfood
     environment:
       - _JAVA_OPTIONS=-Xmx512m -Xms256m
-      - SPRING_PROFILES_ACTIVE=prod,api-docsc
+      - SPRING_PROFILES_ACTIVE=prod,api-docs
       - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://silasriacourt.fr:5432/goodfood
-      - SPRING_LIQUIBASE_URL=jdbc:postgresql://silasriacourt.fr:5432/goodfood
-      - SPRING_DATASOURCE_USERNAME=dbuser
-      - SPRING_DATASOURCE_PASSWORD=djhasds486165x
-      #jdbc:postgresql://goodfood-postgresql:5432/goodfood
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://goodfood-postgresql:5432/goodfood
+      - SPRING_LIQUIBASE_URL=jdbc:postgresql://goodfood-postgresql:5432/goodfood
       - JHIPSTER_SLEEP=30 # gives time for other services to boot before the application
     # If you want to expose these ports outside your dev PC,
     # remove the "127.0.0.1:" prefix
