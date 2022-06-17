@@ -42,7 +42,9 @@ public class ClientResource {
      * {@code POST  /clients} : Create a new client.
      *
      * @param client the client to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new client, or with status {@code 400 (Bad Request)} if the client has already an ID.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
+     *         body the new client, or with status {@code 400 (Bad Request)} if the
+     *         client has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/clients")
@@ -53,24 +55,28 @@ public class ClientResource {
         }
         Client result = clientRepository.save(client);
         return ResponseEntity
-            .created(new URI("/api/clients/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
-            .body(result);
+                .created(new URI("/api/clients/" + result.getId()))
+                .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME,
+                        result.getId().toString()))
+                .body(result);
     }
 
     /**
      * {@code PUT  /clients/:id} : Updates an existing client.
      *
-     * @param id the id of the client to save.
+     * @param id     the id of the client to save.
      * @param client the client to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated client,
-     * or with status {@code 400 (Bad Request)} if the client is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the client couldn't be updated.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the updated client,
+     *         or with status {@code 400 (Bad Request)} if the client is not valid,
+     *         or with status {@code 500 (Internal Server Error)} if the client
+     *         couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/clients/{id}")
-    public ResponseEntity<Client> updateClient(@PathVariable(value = "id", required = false) final Long id, @RequestBody Client client)
-        throws URISyntaxException {
+    public ResponseEntity<Client> updateClient(@PathVariable(value = "id", required = false) final Long id,
+            @RequestBody Client client)
+            throws URISyntaxException {
         log.debug("REST request to update Client : {}, {}", id, client);
         if (client.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
@@ -85,27 +91,30 @@ public class ClientResource {
 
         Client result = clientRepository.save(client);
         return ResponseEntity
-            .ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, client.getId().toString()))
-            .body(result);
+                .ok()
+                .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME,
+                        client.getId().toString()))
+                .body(result);
     }
 
     /**
-     * {@code PATCH  /clients/:id} : Partial updates given fields of an existing client, field will ignore if it is null
+     * {@code PATCH  /clients/:id} : Partial updates given fields of an existing
+     * client, field will ignore if it is null
      *
-     * @param id the id of the client to save.
+     * @param id     the id of the client to save.
      * @param client the client to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated client,
-     * or with status {@code 400 (Bad Request)} if the client is not valid,
-     * or with status {@code 404 (Not Found)} if the client is not found,
-     * or with status {@code 500 (Internal Server Error)} if the client couldn't be updated.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the updated client,
+     *         or with status {@code 400 (Bad Request)} if the client is not valid,
+     *         or with status {@code 404 (Not Found)} if the client is not found,
+     *         or with status {@code 500 (Internal Server Error)} if the client
+     *         couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/clients/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Client> partialUpdateClient(
-        @PathVariable(value = "id", required = false) final Long id,
-        @RequestBody Client client
-    ) throws URISyntaxException {
+            @PathVariable(value = "id", required = false) final Long id,
+            @RequestBody Client client) throws URISyntaxException {
         log.debug("REST request to partial update Client partially : {}, {}", id, client);
         if (client.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
@@ -119,39 +128,40 @@ public class ClientResource {
         }
 
         Optional<Client> result = clientRepository
-            .findById(client.getId())
-            .map(existingClient -> {
-                if (client.getFullname() != null) {
-                    existingClient.setFullname(client.getFullname());
-                }
-                if (client.getFirstName() != null) {
-                    existingClient.setFirstName(client.getFirstName());
-                }
-                if (client.getLastName() != null) {
-                    existingClient.setLastName(client.getLastName());
-                }
-                if (client.getPhone() != null) {
-                    existingClient.setPhone(client.getPhone());
-                }
-                if (client.getMail() != null) {
-                    existingClient.setMail(client.getMail());
-                }
+                .findById(client.getId())
+                .map(existingClient -> {
+                    if (client.getFullname() != null) {
+                        existingClient.setFullname(client.getFullname());
+                    }
+                    if (client.getFirstName() != null) {
+                        existingClient.setFirstName(client.getFirstName());
+                    }
+                    if (client.getLastName() != null) {
+                        existingClient.setLastName(client.getLastName());
+                    }
+                    if (client.getPhone() != null) {
+                        existingClient.setPhone(client.getPhone());
+                    }
+                    if (client.getMail() != null) {
+                        existingClient.setMail(client.getMail());
+                    }
 
-                return existingClient;
-            })
-            .map(clientRepository::save);
+                    return existingClient;
+                })
+                .map(clientRepository::save);
 
         return ResponseUtil.wrapOrNotFound(
-            result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, client.getId().toString())
-        );
+                result,
+                HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, client.getId().toString()));
     }
 
     /**
      * {@code GET  /clients} : get all the clients.
      *
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of clients in body.
+     * @param eagerload flag to eager load entities from relationships (This is
+     *                  applicable for many-to-many).
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
+     *         of clients in body.
      */
     @GetMapping("/clients")
     public List<Client> getAllClients(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
@@ -163,12 +173,27 @@ public class ClientResource {
      * {@code GET  /clients/:id} : get the "id" client.
      *
      * @param id the id of the client to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the client, or with status {@code 404 (Not Found)}.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the client, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/clients/{id}")
     public ResponseEntity<Client> getClient(@PathVariable Long id) {
         log.debug("REST request to get Client : {}", id);
         Optional<Client> client = clientRepository.findOneWithEagerRelationships(id);
+        return ResponseUtil.wrapOrNotFound(client);
+    }
+
+    /**
+     * {@code GET  /clients/:id} : get the "id" client.
+     *
+     * @param id the id of the client to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the client, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/clients/by-user-id/{id}")
+    public ResponseEntity<Client> getClientByUserId(@PathVariable Long id) {
+        log.debug("REST request to get Client by user id : {}", id);
+        Optional<Client> client = clientRepository.findOneByUserId(id);
         return ResponseUtil.wrapOrNotFound(client);
     }
 
@@ -183,8 +208,8 @@ public class ClientResource {
         log.debug("REST request to delete Client : {}", id);
         clientRepository.deleteById(id);
         return ResponseEntity
-            .noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
-            .build();
+                .noContent()
+                .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
+                .build();
     }
 }

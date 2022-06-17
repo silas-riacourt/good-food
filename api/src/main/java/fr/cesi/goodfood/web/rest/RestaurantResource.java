@@ -44,7 +44,9 @@ public class RestaurantResource {
      * {@code POST  /restaurants} : Create a new restaurant.
      *
      * @param restaurant the restaurant to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new restaurant, or with status {@code 400 (Bad Request)} if the restaurant has already an ID.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
+     *         body the new restaurant, or with status {@code 400 (Bad Request)} if
+     *         the restaurant has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/restaurants")
@@ -55,26 +57,29 @@ public class RestaurantResource {
         }
         Restaurant result = restaurantRepository.save(restaurant);
         return ResponseEntity
-            .created(new URI("/api/restaurants/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
-            .body(result);
+                .created(new URI("/api/restaurants/" + result.getId()))
+                .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME,
+                        result.getId().toString()))
+                .body(result);
     }
 
     /**
      * {@code PUT  /restaurants/:id} : Updates an existing restaurant.
      *
-     * @param id the id of the restaurant to save.
+     * @param id         the id of the restaurant to save.
      * @param restaurant the restaurant to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated restaurant,
-     * or with status {@code 400 (Bad Request)} if the restaurant is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the restaurant couldn't be updated.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the updated restaurant,
+     *         or with status {@code 400 (Bad Request)} if the restaurant is not
+     *         valid,
+     *         or with status {@code 500 (Internal Server Error)} if the restaurant
+     *         couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/restaurants/{id}")
     public ResponseEntity<Restaurant> updateRestaurant(
-        @PathVariable(value = "id", required = false) final Long id,
-        @RequestBody Restaurant restaurant
-    ) throws URISyntaxException {
+            @PathVariable(value = "id", required = false) final Long id,
+            @RequestBody Restaurant restaurant) throws URISyntaxException {
         log.debug("REST request to update Restaurant : {}, {}", id, restaurant);
         if (restaurant.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
@@ -89,27 +94,32 @@ public class RestaurantResource {
 
         Restaurant result = restaurantRepository.save(restaurant);
         return ResponseEntity
-            .ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, restaurant.getId().toString()))
-            .body(result);
+                .ok()
+                .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME,
+                        restaurant.getId().toString()))
+                .body(result);
     }
 
     /**
-     * {@code PATCH  /restaurants/:id} : Partial updates given fields of an existing restaurant, field will ignore if it is null
+     * {@code PATCH  /restaurants/:id} : Partial updates given fields of an existing
+     * restaurant, field will ignore if it is null
      *
-     * @param id the id of the restaurant to save.
+     * @param id         the id of the restaurant to save.
      * @param restaurant the restaurant to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated restaurant,
-     * or with status {@code 400 (Bad Request)} if the restaurant is not valid,
-     * or with status {@code 404 (Not Found)} if the restaurant is not found,
-     * or with status {@code 500 (Internal Server Error)} if the restaurant couldn't be updated.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the updated restaurant,
+     *         or with status {@code 400 (Bad Request)} if the restaurant is not
+     *         valid,
+     *         or with status {@code 404 (Not Found)} if the restaurant is not
+     *         found,
+     *         or with status {@code 500 (Internal Server Error)} if the restaurant
+     *         couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/restaurants/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Restaurant> partialUpdateRestaurant(
-        @PathVariable(value = "id", required = false) final Long id,
-        @RequestBody Restaurant restaurant
-    ) throws URISyntaxException {
+            @PathVariable(value = "id", required = false) final Long id,
+            @RequestBody Restaurant restaurant) throws URISyntaxException {
         log.debug("REST request to partial update Restaurant partially : {}, {}", id, restaurant);
         if (restaurant.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
@@ -123,74 +133,74 @@ public class RestaurantResource {
         }
 
         Optional<Restaurant> result = restaurantRepository
-            .findById(restaurant.getId())
-            .map(existingRestaurant -> {
-                if (restaurant.getName() != null) {
-                    existingRestaurant.setName(restaurant.getName());
-                }
-                if (restaurant.getLocationName() != null) {
-                    existingRestaurant.setLocationName(restaurant.getLocationName());
-                }
-                if (restaurant.getDescription() != null) {
-                    existingRestaurant.setDescription(restaurant.getDescription());
-                }
-                if (restaurant.getSchedule() != null) {
-                    existingRestaurant.setSchedule(restaurant.getSchedule());
-                }
-                if (restaurant.getOpen() != null) {
-                    existingRestaurant.setOpen(restaurant.getOpen());
-                }
-                if (restaurant.getLocationLat() != null) {
-                    existingRestaurant.setLocationLat(restaurant.getLocationLat());
-                }
-                if (restaurant.getLocationLng() != null) {
-                    existingRestaurant.setLocationLng(restaurant.getLocationLng());
-                }
+                .findById(restaurant.getId())
+                .map(existingRestaurant -> {
+                    if (restaurant.getName() != null) {
+                        existingRestaurant.setName(restaurant.getName());
+                    }
+                    if (restaurant.getLocationName() != null) {
+                        existingRestaurant.setLocationName(restaurant.getLocationName());
+                    }
+                    if (restaurant.getDescription() != null) {
+                        existingRestaurant.setDescription(restaurant.getDescription());
+                    }
+                    if (restaurant.getSchedule() != null) {
+                        existingRestaurant.setSchedule(restaurant.getSchedule());
+                    }
+                    if (restaurant.getOpen() != null) {
+                        existingRestaurant.setOpen(restaurant.getOpen());
+                    }
+                    if (restaurant.getLocationLat() != null) {
+                        existingRestaurant.setLocationLat(restaurant.getLocationLat());
+                    }
+                    if (restaurant.getLocationLng() != null) {
+                        existingRestaurant.setLocationLng(restaurant.getLocationLng());
+                    }
 
-                return existingRestaurant;
-            })
-            .map(restaurantRepository::save);
+                    return existingRestaurant;
+                })
+                .map(restaurantRepository::save);
 
         return ResponseUtil.wrapOrNotFound(
-            result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, restaurant.getId().toString())
-        );
+                result,
+                HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, restaurant.getId().toString()));
     }
 
     /**
      * {@code GET  /restaurants} : get all the restaurants.
      *
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
-     * @param filter the filter of the request.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of restaurants in body.
+     * @param eagerload flag to eager load entities from relationships (This is
+     *                  applicable for many-to-many).
+     * @param filter    the filter of the request.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
+     *         of restaurants in body.
      */
     @GetMapping("/restaurants")
     public List<Restaurant> getAllRestaurants(
-        @RequestParam(required = false) String filter,
-        @RequestParam(required = false, defaultValue = "false") boolean eagerload
-    ) {
+            @RequestParam(required = false) String filter,
+            @RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         if ("manager-is-null".equals(filter)) {
             log.debug("REST request to get all Restaurants where manager is null");
             return StreamSupport
-                .stream(restaurantRepository.findAll().spliterator(), false)
-                .filter(restaurant -> restaurant.getManager() == null)
-                .collect(Collectors.toList());
+                    .stream(restaurantRepository.findAll().spliterator(), false)
+                    .filter(restaurant -> restaurant.getManager() == null)
+                    .collect(Collectors.toList());
         }
 
         if ("stock-is-null".equals(filter)) {
             log.debug("REST request to get all Restaurants where stock is null");
             return StreamSupport
-                .stream(restaurantRepository.findAll().spliterator(), false)
-                .filter(restaurant -> restaurant.getStock() == null)
-                .collect(Collectors.toList());
+                    .stream(restaurantRepository.findAll().spliterator(), false)
+                    .filter(restaurant -> restaurant.getStock() == null)
+                    .collect(Collectors.toList());
         }
 
         if ("order-is-null".equals(filter)) {
             log.debug("REST request to get all Restaurants where order is null");
             return StreamSupport
-                .stream(restaurantRepository.findAll().spliterator(), false)
-                .filter(restaurant -> restaurant.getOrder() == null)
-                .collect(Collectors.toList());
+                    .stream(restaurantRepository.findAll().spliterator(), false)
+                    .filter(restaurant -> restaurant.getOrder() == null)
+                    .collect(Collectors.toList());
         }
         log.debug("REST request to get all Restaurants");
         return restaurantRepository.findAllWithEagerRelationships();
@@ -200,7 +210,8 @@ public class RestaurantResource {
      * {@code GET  /restaurants/:id} : get the "id" restaurant.
      *
      * @param id the id of the restaurant to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the restaurant, or with status {@code 404 (Not Found)}.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the restaurant, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/restaurants/{id}")
     public ResponseEntity<Restaurant> getRestaurant(@PathVariable Long id) {
@@ -220,8 +231,8 @@ public class RestaurantResource {
         log.debug("REST request to delete Restaurant : {}", id);
         restaurantRepository.deleteById(id);
         return ResponseEntity
-            .noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
-            .build();
+                .noContent()
+                .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
+                .build();
     }
 }

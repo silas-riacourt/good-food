@@ -26,10 +26,7 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
         return this.findAllWithToOneRelationships(pageable);
     }
 
-    @Query(
-        value = "select distinct client from Client client left join fetch client.internalUser",
-        countQuery = "select count(distinct client) from Client client"
-    )
+    @Query(value = "select distinct client from Client client left join fetch client.internalUser", countQuery = "select count(distinct client) from Client client")
     Page<Client> findAllWithToOneRelationships(Pageable pageable);
 
     @Query("select distinct client from Client client left join fetch client.internalUser")
@@ -37,4 +34,7 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
 
     @Query("select client from Client client left join fetch client.internalUser where client.id =:id")
     Optional<Client> findOneWithToOneRelationships(@Param("id") Long id);
+
+    @Query("select client from Client client left join fetch client.internalUser u where u.id =:id")
+    Optional<Client> findOneByUserId(@Param("id") Long id);
 }
