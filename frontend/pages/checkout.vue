@@ -249,7 +249,7 @@ export default {
         .finally(() => { this.loading = false })
     },
     getClientId () {
-      this.$axios.$get('/clients/by-user-id/' + this.$auth.user.id, this.order)
+      this.$axios.$get('/api/clients/by-user-id/' + this.$auth.user.id, this.order)
         .then((response) => {
           this.client = response
         })

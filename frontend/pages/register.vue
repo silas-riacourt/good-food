@@ -1,8 +1,8 @@
 <template>
   <v-container fill-height fluid>
     <v-row align="center" justify="center">
-      <v-col cols="4">
-        <v-card class="elevation-6">
+      <v-col lg="4" cols="12">
+        <v-card class="elevation-4 pt-6 pb-6 pl-2 pr-2" rounded="10">
           <v-card-title>
             S'enregistrer
           </v-card-title>

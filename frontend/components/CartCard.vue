@@ -15,7 +15,7 @@
     </v-row>
     <v-card-actions class="justify-center pb-4">
       <div class="text-center">
-        <v-btn block color="warning" class=" text-none font-weight-light" to="/checkout">
+        <v-btn block color="warning" class=" text-none font-weight-light" to="/checkout" :disabled="cart.length <= 0">
           Valider mon panier
         </v-btn>
       </div>
