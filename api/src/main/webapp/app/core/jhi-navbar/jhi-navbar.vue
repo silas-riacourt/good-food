@@ -2,7 +2,7 @@
   <b-navbar data-cy="navbar" toggleable="md" type="dark" class="bg-primary">
     <b-navbar-brand class="logo" b-link to="/">
       <span class="logo-img"></span>
-      <span class="navbar-title">goodfood</span> <span class="navbar-version">{{ version }}</span>
+      <span class="navbar-title">Goodfood</span>
     </b-navbar-brand>
     <b-navbar-toggle
       right
@@ -22,6 +22,12 @@
           <span>
             <font-awesome-icon icon="home" />
             <span>Home</span>
+          </span>
+        </b-nav-item>
+        <b-nav-item to="/" exact v-if="hasAnyAuthority('ROLE_MANAGER') && authenticated">
+          <span>
+            <font-awesome-icon icon="home" />
+            <span>Restaurant</span>
           </span>
         </b-nav-item>
         <b-nav-item-dropdown right id="entity-menu" v-if="authenticated" active-class="active" class="pointer" data-cy="entity">
@@ -164,7 +170,7 @@
 
 .logo-img {
   height: 100%;
-  background: url('../../../content/images/logo-jhipster.png') no-repeat center center;
+  background: url('../../../content/images/goodfood.png') no-repeat center center;
   background-size: contain;
   width: 100%;
   filter: drop-shadow(0 0 0.05rem white);
