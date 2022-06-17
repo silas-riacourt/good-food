@@ -34,6 +34,7 @@
                 x-small
                 color="warning"
                 outlined
+                :disabled="quantity <= 0"
                 @click="quantity--"
               >
                 <v-icon color="black">
@@ -56,7 +57,7 @@
             </v-col>
             <v-col cols="12">
               <div class="text-center">
-                <v-btn block color="warning" class=" text-none" @click="addProduct">
+                <v-btn block color="warning" class=" text-none" :disabled="quantity <= 0" @click="addProduct">
                   Ajouter au panier : {{ finalPrice }} €
                 </v-btn>
               </div>

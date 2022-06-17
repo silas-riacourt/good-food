@@ -1,14 +1,23 @@
 export const state = () => ({
 
   loading: false,
-  products: [
-
-  ]
+  products: [{ id: 1107, name: 'Le Savoyard', description: 'Du bon gros fromage pour vos session de ski !', price: 16, image: 'savoyard', quantity: 1 }, { id: 1104, name: 'COCA-COLA®', description: 'COCA-COLA®', price: 3.1, image: 'coca', quantity: 1 }],
+  restaurant: {
+    id: 1001,
+    name: 'Goodfood BREST',
+    locationName: '19 rue de paris',
+    description: 'Goodfood BREST',
+    schedule: 'Ouvert du lundi au samedi de 11h à 14h et de 18h à 22h',
+    open: false
+  }
 })
 
 export const getters = {
   getCart (state) {
     return state.products
+  },
+  getRestaurant (state) {
+    return state.restaurant
   },
   isLoading (state) {
     return state.loading
@@ -27,6 +36,9 @@ export const mutations = {
   setLoading (state, loading) {
     state.loading = loading
   },
+  setRestaurant (state, restaurant) {
+    state.restaurant = restaurant.restaurant
+  },
   updateQuantityAddOne (state, { product }) {
     const index = state.products.indexOf(product)
     state.products[index].quantity++
@@ -41,7 +53,10 @@ export const mutations = {
   },
   addProductToCart (state, { product, quantity }) {
     const newProduct = JSON.parse(JSON.stringify(product))
-    const index = state.products.indexOf(product)
+
+    const index = state.products.findIndex(item => item.name === product.name)
+    console.log(index)
+
     if (index !== -1) {
       state.products[index].quantity++
     } else {
