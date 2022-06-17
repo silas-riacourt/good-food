@@ -28,13 +28,16 @@ public class IngredientOrder implements Serializable {
     @Column(name = "status")
     private IngredientOrderStatus status;
 
+    @Column(name = "quantity")
+    private Integer quantity;
+
     @ManyToOne
     @JsonIgnoreProperties(value = { "ingredient" }, allowSetters = true)
     private Supplier supplifier;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "ingredients", "categories" }, allowSetters = true)
-    private Product product;
+    @JsonIgnoreProperties(value = { "suppliers", "stocks", "products" }, allowSetters = true)
+    private Ingredient ingredient;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -77,6 +80,19 @@ public class IngredientOrder implements Serializable {
         this.status = status;
     }
 
+    public Integer getQuantity() {
+        return this.quantity;
+    }
+
+    public IngredientOrder quantity(Integer quantity) {
+        this.setQuantity(quantity);
+        return this;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
     public Supplier getSupplifier() {
         return this.supplifier;
     }
@@ -90,16 +106,16 @@ public class IngredientOrder implements Serializable {
         return this;
     }
 
-    public Product getProduct() {
-        return this.product;
+    public Ingredient getIngredient() {
+        return this.ingredient;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setIngredient(Ingredient ingredient) {
+        this.ingredient = ingredient;
     }
 
-    public IngredientOrder product(Product product) {
-        this.setProduct(product);
+    public IngredientOrder ingredient(Ingredient ingredient) {
+        this.setIngredient(ingredient);
         return this;
     }
 
@@ -129,6 +145,7 @@ public class IngredientOrder implements Serializable {
             "id=" + getId() +
             ", date='" + getDate() + "'" +
             ", status='" + getStatus() + "'" +
+            ", quantity=" + getQuantity() +
             "}";
     }
 }

@@ -27,18 +27,18 @@ public interface IngredientOrderRepository extends JpaRepository<IngredientOrder
     }
 
     @Query(
-        value = "select distinct ingredientOrder from IngredientOrder ingredientOrder left join fetch ingredientOrder.supplifier left join fetch ingredientOrder.product",
+        value = "select distinct ingredientOrder from IngredientOrder ingredientOrder left join fetch ingredientOrder.supplifier left join fetch ingredientOrder.ingredient",
         countQuery = "select count(distinct ingredientOrder) from IngredientOrder ingredientOrder"
     )
     Page<IngredientOrder> findAllWithToOneRelationships(Pageable pageable);
 
     @Query(
-        "select distinct ingredientOrder from IngredientOrder ingredientOrder left join fetch ingredientOrder.supplifier left join fetch ingredientOrder.product"
+        "select distinct ingredientOrder from IngredientOrder ingredientOrder left join fetch ingredientOrder.supplifier left join fetch ingredientOrder.ingredient"
     )
     List<IngredientOrder> findAllWithToOneRelationships();
 
     @Query(
-        "select ingredientOrder from IngredientOrder ingredientOrder left join fetch ingredientOrder.supplifier left join fetch ingredientOrder.product where ingredientOrder.id =:id"
+        "select ingredientOrder from IngredientOrder ingredientOrder left join fetch ingredientOrder.supplifier left join fetch ingredientOrder.ingredient where ingredientOrder.id =:id"
     )
     Optional<IngredientOrder> findOneWithToOneRelationships(@Param("id") Long id);
 }

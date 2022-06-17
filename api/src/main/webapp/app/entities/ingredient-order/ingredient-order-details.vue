@@ -17,6 +17,12 @@
             <span>{{ ingredientOrder.status }}</span>
           </dd>
           <dt>
+            <span>Quantity</span>
+          </dt>
+          <dd>
+            <span>{{ ingredientOrder.quantity }}</span>
+          </dd>
+          <dt>
             <span>Supplifier</span>
           </dt>
           <dd>
@@ -27,12 +33,12 @@
             </div>
           </dd>
           <dt>
-            <span>Product</span>
+            <span>Ingredient</span>
           </dt>
           <dd>
-            <div v-if="ingredientOrder.product">
-              <router-link :to="{ name: 'ProductView', params: { productId: ingredientOrder.product.id } }">{{
-                ingredientOrder.product.name
+            <div v-if="ingredientOrder.ingredient">
+              <router-link :to="{ name: 'IngredientView', params: { ingredientId: ingredientOrder.ingredient.id } }">{{
+                ingredientOrder.ingredient.name
               }}</router-link>
             </div>
           </dd>

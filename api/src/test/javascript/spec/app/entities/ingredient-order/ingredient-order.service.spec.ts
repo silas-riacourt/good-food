@@ -34,7 +34,7 @@ describe('Service Tests', () => {
     beforeEach(() => {
       service = new IngredientOrderService();
       currentDate = new Date();
-      elemDefault = new IngredientOrder(123, currentDate, IngredientOrderStatus.NEW);
+      elemDefault = new IngredientOrder(123, currentDate, IngredientOrderStatus.NEW, 0);
     });
 
     describe('Service methods', () => {
@@ -99,6 +99,7 @@ describe('Service Tests', () => {
           {
             date: dayjs(currentDate).format(DATE_FORMAT),
             status: 'BBBBBB',
+            quantity: 1,
           },
           elemDefault
         );
@@ -131,6 +132,7 @@ describe('Service Tests', () => {
         const patchObject = Object.assign(
           {
             date: dayjs(currentDate).format(DATE_FORMAT),
+            quantity: 1,
           },
           new IngredientOrder()
         );
@@ -165,6 +167,7 @@ describe('Service Tests', () => {
           {
             date: dayjs(currentDate).format(DATE_FORMAT),
             status: 'BBBBBB',
+            quantity: 1,
           },
           elemDefault
         );

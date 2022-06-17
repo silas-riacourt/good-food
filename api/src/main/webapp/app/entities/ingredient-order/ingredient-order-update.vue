@@ -58,6 +58,18 @@
             </select>
           </div>
           <div class="form-group">
+            <label class="form-control-label" for="ingredient-order-quantity">Quantity</label>
+            <input
+              type="number"
+              class="form-control"
+              name="quantity"
+              id="ingredient-order-quantity"
+              data-cy="quantity"
+              :class="{ valid: !$v.ingredientOrder.quantity.$invalid, invalid: $v.ingredientOrder.quantity.$invalid }"
+              v-model.number="$v.ingredientOrder.quantity.$model"
+            />
+          </div>
+          <div class="form-group">
             <label class="form-control-label" for="ingredient-order-supplifier">Supplifier</label>
             <select
               class="form-control"
@@ -81,17 +93,25 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" for="ingredient-order-product">Product</label>
-            <select class="form-control" id="ingredient-order-product" data-cy="product" name="product" v-model="ingredientOrder.product">
+            <label class="form-control-label" for="ingredient-order-ingredient">Ingredient</label>
+            <select
+              class="form-control"
+              id="ingredient-order-ingredient"
+              data-cy="ingredient"
+              name="ingredient"
+              v-model="ingredientOrder.ingredient"
+            >
               <option v-bind:value="null"></option>
               <option
                 v-bind:value="
-                  ingredientOrder.product && productOption.id === ingredientOrder.product.id ? ingredientOrder.product : productOption
+                  ingredientOrder.ingredient && ingredientOption.id === ingredientOrder.ingredient.id
+                    ? ingredientOrder.ingredient
+                    : ingredientOption
                 "
-                v-for="productOption in products"
-                :key="productOption.id"
+                v-for="ingredientOption in ingredients"
+                :key="ingredientOption.id"
               >
-                {{ productOption.name }}
+                {{ ingredientOption.name }}
               </option>
             </select>
           </div>

@@ -30,8 +30,9 @@
             <th scope="row"><span>ID</span></th>
             <th scope="row"><span>Date</span></th>
             <th scope="row"><span>Status</span></th>
+            <th scope="row"><span>Quantity</span></th>
             <th scope="row"><span>Supplifier</span></th>
-            <th scope="row"><span>Product</span></th>
+            <th scope="row"><span>Ingredient</span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -44,6 +45,7 @@
             </td>
             <td>{{ ingredientOrder.date }}</td>
             <td>{{ ingredientOrder.status }}</td>
+            <td>{{ ingredientOrder.quantity }}</td>
             <td>
               <div v-if="ingredientOrder.supplifier">
                 <router-link :to="{ name: 'SupplierView', params: { supplierId: ingredientOrder.supplifier.id } }">{{
@@ -52,9 +54,9 @@
               </div>
             </td>
             <td>
-              <div v-if="ingredientOrder.product">
-                <router-link :to="{ name: 'ProductView', params: { productId: ingredientOrder.product.id } }">{{
-                  ingredientOrder.product.name
+              <div v-if="ingredientOrder.ingredient">
+                <router-link :to="{ name: 'IngredientView', params: { ingredientId: ingredientOrder.ingredient.id } }">{{
+                  ingredientOrder.ingredient.name
                 }}</router-link>
               </div>
             </td>

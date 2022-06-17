@@ -14,10 +14,10 @@
                                  referencedColumnNames="id"
                                  referencedTableName="supplier"/>
 
-        <addForeignKeyConstraint baseColumnNames="product_id"
+        <addForeignKeyConstraint baseColumnNames="ingredient_id"
                                  baseTableName="ingredient_order"
-                                 constraintName="fk_ingredient_order__product_id"
+                                 constraintName="fk_ingredient_order__ingredient_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="product"/>
+                                 referencedTableName="ingredient"/>
     </changeSet>
 </databaseChangeLog>

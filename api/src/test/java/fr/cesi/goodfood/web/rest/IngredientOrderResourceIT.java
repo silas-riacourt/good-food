@@ -46,6 +46,9 @@ class IngredientOrderResourceIT {
     private static final IngredientOrderStatus DEFAULT_STATUS = IngredientOrderStatus.NEW;
     private static final IngredientOrderStatus UPDATED_STATUS = IngredientOrderStatus.WAITING;
 
+    private static final Integer DEFAULT_QUANTITY = 1;
+    private static final Integer UPDATED_QUANTITY = 2;
+
     private static final String ENTITY_API_URL = "/api/ingredient-orders";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -73,7 +76,7 @@ class IngredientOrderResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static IngredientOrder createEntity(EntityManager em) {
-        IngredientOrder ingredientOrder = new IngredientOrder().date(DEFAULT_DATE).status(DEFAULT_STATUS);
+        IngredientOrder ingredientOrder = new IngredientOrder().date(DEFAULT_DATE).status(DEFAULT_STATUS).quantity(DEFAULT_QUANTITY);
         return ingredientOrder;
     }
 
@@ -84,7 +87,7 @@ class IngredientOrderResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static IngredientOrder createUpdatedEntity(EntityManager em) {
-        IngredientOrder ingredientOrder = new IngredientOrder().date(UPDATED_DATE).status(UPDATED_STATUS);
+        IngredientOrder ingredientOrder = new IngredientOrder().date(UPDATED_DATE).status(UPDATED_STATUS).quantity(UPDATED_QUANTITY);
         return ingredientOrder;
     }
 
@@ -110,6 +113,7 @@ class IngredientOrderResourceIT {
         IngredientOrder testIngredientOrder = ingredientOrderList.get(ingredientOrderList.size() - 1);
         assertThat(testIngredientOrder.getDate()).isEqualTo(DEFAULT_DATE);
         assertThat(testIngredientOrder.getStatus()).isEqualTo(DEFAULT_STATUS);
+        assertThat(testIngredientOrder.getQuantity()).isEqualTo(DEFAULT_QUANTITY);
     }
 
     @Test
@@ -145,7 +149,8 @@ class IngredientOrderResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(ingredientOrder.getId().intValue())))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
+            .andExpect(jsonPath("$.[*].quantity").value(hasItem(DEFAULT_QUANTITY)));
     }
 
     @SuppressWarnings({ "unchecked" })
@@ -179,7 +184,8 @@ class IngredientOrderResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(ingredientOrder.getId().intValue()))
             .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()));
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
+            .andExpect(jsonPath("$.quantity").value(DEFAULT_QUANTITY));
     }
 
     @Test
@@ -201,7 +207,7 @@ class IngredientOrderResourceIT {
         IngredientOrder updatedIngredientOrder = ingredientOrderRepository.findById(ingredientOrder.getId()).get();
         // Disconnect from session so that the updates on updatedIngredientOrder are not directly saved in db
         em.detach(updatedIngredientOrder);
-        updatedIngredientOrder.date(UPDATED_DATE).status(UPDATED_STATUS);
+        updatedIngredientOrder.date(UPDATED_DATE).status(UPDATED_STATUS).quantity(UPDATED_QUANTITY);
 
         restIngredientOrderMockMvc
             .perform(
@@ -217,6 +223,7 @@ class IngredientOrderResourceIT {
         IngredientOrder testIngredientOrder = ingredientOrderList.get(ingredientOrderList.size() - 1);
         assertThat(testIngredientOrder.getDate()).isEqualTo(UPDATED_DATE);
         assertThat(testIngredientOrder.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testIngredientOrder.getQuantity()).isEqualTo(UPDATED_QUANTITY);
     }
 
     @Test
@@ -305,6 +312,7 @@ class IngredientOrderResourceIT {
         IngredientOrder testIngredientOrder = ingredientOrderList.get(ingredientOrderList.size() - 1);
         assertThat(testIngredientOrder.getDate()).isEqualTo(DEFAULT_DATE);
         assertThat(testIngredientOrder.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testIngredientOrder.getQuantity()).isEqualTo(DEFAULT_QUANTITY);
     }
 
     @Test
@@ -319,7 +327,7 @@ class IngredientOrderResourceIT {
         IngredientOrder partialUpdatedIngredientOrder = new IngredientOrder();
         partialUpdatedIngredientOrder.setId(ingredientOrder.getId());
 
-        partialUpdatedIngredientOrder.date(UPDATED_DATE).status(UPDATED_STATUS);
+        partialUpdatedIngredientOrder.date(UPDATED_DATE).status(UPDATED_STATUS).quantity(UPDATED_QUANTITY);
 
         restIngredientOrderMockMvc
             .perform(
@@ -335,6 +343,7 @@ class IngredientOrderResourceIT {
         IngredientOrder testIngredientOrder = ingredientOrderList.get(ingredientOrderList.size() - 1);
         assertThat(testIngredientOrder.getDate()).isEqualTo(UPDATED_DATE);
         assertThat(testIngredientOrder.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testIngredientOrder.getQuantity()).isEqualTo(UPDATED_QUANTITY);
     }
 
     @Test

@@ -5,8 +5,8 @@ import AlertService from '@/shared/alert/alert.service';
 import SupplierService from '@/entities/supplier/supplier.service';
 import { ISupplier } from '@/shared/model/supplier.model';
 
-import ProductService from '@/entities/product/product.service';
-import { IProduct } from '@/shared/model/product.model';
+import IngredientService from '@/entities/ingredient/ingredient.service';
+import { IIngredient } from '@/shared/model/ingredient.model';
 
 import { IIngredientOrder, IngredientOrder } from '@/shared/model/ingredient-order.model';
 import IngredientOrderService from './ingredient-order.service';
@@ -16,6 +16,7 @@ const validations: any = {
   ingredientOrder: {
     date: {},
     status: {},
+    quantity: {},
   },
 };
 
@@ -32,9 +33,9 @@ export default class IngredientOrderUpdate extends Vue {
 
   public suppliers: ISupplier[] = [];
 
-  @Inject('productService') private productService: () => ProductService;
+  @Inject('ingredientService') private ingredientService: () => IngredientService;
 
-  public products: IProduct[] = [];
+  public ingredients: IIngredient[] = [];
   public ingredientOrderStatusValues: string[] = Object.keys(IngredientOrderStatus);
   public isSaving = false;
   public currentLanguage = '';
@@ -122,10 +123,10 @@ export default class IngredientOrderUpdate extends Vue {
       .then(res => {
         this.suppliers = res.data;
       });
-    this.productService()
+    this.ingredientService()
       .retrieve()
       .then(res => {
-        this.products = res.data;
+        this.ingredients = res.data;
       });
   }
 }
