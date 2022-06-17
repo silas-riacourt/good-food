@@ -8,7 +8,7 @@
     :dark="selected"
     :elevation="fromMap ? '0' : '2'"
   >
-    <v-card-title class="text-uppercase">
+    <v-card-title class="text-uppercase" style="font-size: 1.10rem;">
       <v-icon left>
         mdi-silverware-fork-knife
       </v-icon>
@@ -19,7 +19,7 @@
       <v-icon :color="open ? 'green' : 'red'">
         {{ open ? "mdi-check" : "mdi-close" }}
       </v-icon>
-      {{ open ? "Ouvert" : "Fermé" }} | 10 kms
+      {{ open ? "Ouvert" : "Fermé" }} | {{ getRandomNumber() }} kms
     </v-card-subtitle>
 
     <v-card-text>
@@ -59,6 +59,11 @@ export default {
     },
     selected: Boolean,
     fromMap: Boolean
+  },
+  methods: {
+    getRandomNumber () {
+      return Math.floor(Math.random() * (400 - 10 + 1) + 10)
+    }
   }
 }
 </script>

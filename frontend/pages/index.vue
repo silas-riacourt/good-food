@@ -57,7 +57,7 @@
                     @mouseenter="checkRestaurant(restaurant)"
                     @mouseleave="uncheckRestaurant(restaurant)"
                   >
-                    <l-popup>
+                    <l-popup style="margin:0px">
                       <RestaurantCard
                         :id="restaurant.id"
                         :name="restaurant.name"
@@ -170,4 +170,8 @@ export default {
 .container {
   margin-left: 0!important;
 }
+.leaflet-popup-content {
+    margin:0;
+    }
+
 </style>

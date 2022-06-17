@@ -1,8 +1,8 @@
 <template>
   <v-container fill-height fluid>
     <v-row align="center" justify="center">
-      <v-col cols="4">
-        <v-card class="elevation-6">
+      <v-col cols="12" lg="4">
+        <v-card class="elevation-4 pt-6 pb-6 pl-2 pr-2" rounded="10">
           <v-card-title>
             Se connecter
           </v-card-title>
@@ -29,7 +29,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer />
-            <v-btn color="warning" :loading="loading" @click="login()">
+            <v-btn color="warning" :loading="loading" block @click="login()">
               Se connecter
             </v-btn>
           </v-card-actions>
