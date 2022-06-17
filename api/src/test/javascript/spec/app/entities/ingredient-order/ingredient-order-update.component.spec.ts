@@ -11,7 +11,7 @@ import IngredientOrderService from '@/entities/ingredient-order/ingredient-order
 
 import SupplierService from '@/entities/supplier/supplier.service';
 
-import ProductService from '@/entities/product/product.service';
+import IngredientService from '@/entities/ingredient/ingredient.service';
 import AlertService from '@/shared/alert/alert.service';
 
 const localVue = createLocalVue();
@@ -49,8 +49,8 @@ describe('Component Tests', () => {
               retrieve: sinon.stub().resolves({}),
             } as any),
 
-          productService: () =>
-            sinon.createStubInstance<ProductService>(ProductService, {
+          ingredientService: () =>
+            sinon.createStubInstance<IngredientService>(IngredientService, {
               retrieve: sinon.stub().resolves({}),
             } as any),
         },

@@ -129,6 +129,9 @@ public class IngredientOrderResource {
                 if (ingredientOrder.getStatus() != null) {
                     existingIngredientOrder.setStatus(ingredientOrder.getStatus());
                 }
+                if (ingredientOrder.getQuantity() != null) {
+                    existingIngredientOrder.setQuantity(ingredientOrder.getQuantity());
+                }
 
                 return existingIngredientOrder;
             })

@@ -1,13 +1,14 @@
 import { ISupplier } from '@/shared/model/supplier.model';
-import { IProduct } from '@/shared/model/product.model';
+import { IIngredient } from '@/shared/model/ingredient.model';
 
 import { IngredientOrderStatus } from '@/shared/model/enumerations/ingredient-order-status.model';
 export interface IIngredientOrder {
   id?: number;
   date?: Date | null;
   status?: IngredientOrderStatus | null;
+  quantity?: number | null;
   supplifier?: ISupplier | null;
-  product?: IProduct | null;
+  ingredient?: IIngredient | null;
 }
 
 export class IngredientOrder implements IIngredientOrder {
@@ -15,7 +16,8 @@ export class IngredientOrder implements IIngredientOrder {
     public id?: number,
     public date?: Date | null,
     public status?: IngredientOrderStatus | null,
+    public quantity?: number | null,
     public supplifier?: ISupplier | null,
-    public product?: IProduct | null
+    public ingredient?: IIngredient | null
   ) {}
 }

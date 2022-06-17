@@ -68,6 +68,7 @@ entity Order {
 entity IngredientOrder {
 	date LocalDate
     status IngredientOrderStatus
+    quantity Integer
 }
 relationship OneToMany {
 	Client{order} to Order{client(fullname)}
@@ -83,7 +84,7 @@ entity ProductOrder {
 relationship ManyToOne {
     ProductOrder{product(name) required} to Product
     IngredientOrder{supplifier(name)} to Supplier
-    IngredientOrder{product(name)} to Product
+    IngredientOrder{ingredient(name)} to Ingredient
 }
 entity Supplier {
 	name String,
