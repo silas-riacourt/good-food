@@ -6,7 +6,7 @@
           Commander
         </h1>
       </v-col>
-      <v-col cols="8">
+      <v-col cols="12" lg="8">
         <v-stepper v-model="step" color="warning">
           <v-stepper-header>
             <v-stepper-step
@@ -36,18 +36,90 @@
 
           <v-stepper-items>
             <v-stepper-content step="1">
-              <p>Récapitulatif</p>
+              <h3 class="pb-2">
+                Récapitulatif de votre commande
+              </h3>
+              <p>
+                Restaurant : <strong>{{ restaurant.name }}</strong>
+                <v-row align="center" class="mb-2 mt-2">
+                  <v-col v-for="(product,i) in products" :key="i" cols="auto">
+                    <v-card outlined min-width="350px" max-width="350px">
+                      <v-list-item>
+                        <v-list-item-avatar class="mr-0">
+                          <v-img :src="require(`~/assets/${product.image}.png`)" max-width="50" />
+                        </v-list-item-avatar>
 
-              <v-btn
-                color="warning"
-                @click="step = 2"
-              >
-                Suivant
-              </v-btn>
+                        <v-list-item-content>
+                          <v-card-title class="text-uppercase" style="word-break:normal;">
+                            {{ product.name }}
+                          </v-card-title>
+                          <v-card-subtitle>{{ product.price }} €</v-card-subtitle>
+                          <v-row justify="space-between" align="center">
+                            <v-col cols="8">
+                              <v-btn
+                                class="mx-2"
+                                fab
+                                x-small
+                                color="warning"
+                                outlined
+                                @click="$store.commit('cart/updateQuantityRemoveOne', {product})"
+                              >
+                                <v-icon color="black">
+                                  mdi-minus
+                                </v-icon>
+                              </v-btn>
+                              {{ product.quantity }}
+                              <v-btn
+                                class="mx-2"
+                                fab
+                                x-small
+                                color="warning"
+                                outlined
+                                @click="$store.commit('cart/updateQuantityAddOne', {product})"
+                              >
+                                <v-icon color="black">
+                                  mdi-plus
+                                </v-icon>
+                              </v-btn>
+                            </v-col>
+                            <v-col :key="product.quantity" cols="4">
+                              {{ (product.price * product.quantity).toFixed(2) }} €
+                            </v-col>
+                          </v-row>
+                        </v-list-item-content>
+                      </v-list-item>
+                    </v-card>
+                  </v-col>
+                </v-row>
+                <v-row justify="space-between" no-gutters class="pb-4">
+                  <v-col>
+                    <h2> Total (TTC)</h2>
+                  </v-col>
+                  <v-col class="text-right">
+                    <h2> {{ totalPrice.toFixed(2) }}€</h2>
+                  </v-col>
+                </v-row>
+                <v-btn
+                  color="warning"
+                  @click="step = 2"
+                >
+                  Suivant
+                </v-btn>
+              </p>
             </v-stepper-content>
 
             <v-stepper-content step="2">
-              <p>Vos coordonnées</p>
+              <h3 class="pb-2">
+                Vos coordonnées
+              </h3>
+              <v-row>
+                <v-col cols="6">
+                  <v-text-field v-model="email" label="mail" />
+                </v-col>
+                <v-col cols="6">
+                  <v-text-field v-model="phone" label="Numéro téléphone" />
+                </v-col>
+              </v-row>
               <v-btn
                 color="warning"
                 @click="step = 3"
@@ -61,6 +133,9 @@
             </v-stepper-content>
 
             <v-stepper-content step="3">
+              <h3 class="pb-2">
+                Payement
+              </h3>
               <v-container fluid>
                 <v-radio-group v-model="order.paymentMethod" col>
                   <template #label>
@@ -89,6 +164,18 @@
                 Retour
               </v-btn>
             </v-stepper-content>
+            <v-stepper-content step="4">
+              <h3 class="pb-2">
+                Merci pour votre commande !
+              </h3>
+
+              <v-btn
+                color="warning"
+                to="/orders"
+              >
+                Voir mes commandes
+              </v-btn>
+            </v-stepper-content>
           </v-stepper-items>
         </v-stepper>
       </v-col>
@@ -102,6 +189,7 @@ export default {
   name: 'CheckoutPage',
   data () {
     return {
+      phone: '',
       step: 1,
       payementMethod: null,
       order: {
@@ -110,6 +198,7 @@ export default {
         status: 'IN_PROGRESS',
         paymentMethod: null
       },
+      client: null,
       productOrder: {
         quantity: 1,
         totalPrice: 8,
@@ -123,11 +212,23 @@ export default {
   },
   computed: {
     ...mapGetters({
-      cart: 'cart/getCart',
+      products: 'cart/getCart',
+      restaurant: 'cart/getRestaurant',
       loading: 'cart/isLoading',
       totalPrice: 'cart/totalPrice'
-    })
+    }),
+    email: {
+      get () {
+        return this.$auth.user.email
+      },
+      set (value) {
 
+      }
+    }
+  },
+  mounted () {
+    console.log(this.cart)
+    this.getClientId()
   },
   methods: {
     checkout () {
@@ -135,10 +236,22 @@ export default {
     },
     checkoutRequest () {
       this.order.totalPrice = this.totalPrice
+      this.order.restaurant = this.restaurant
+      this.order.client = this.client
       this.$axios.$post('/api/orders', this.order)
         .then((response) => {
           const id = response.id
           this.createProductOrders(id)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+        .finally(() => { this.loading = false })
+    },
+    getClientId () {
+      this.$axios.$get('/clients/by-user-id/' + this.$auth.user.id, this.order)
+        .then((response) => {
+          this.client = response
         })
         .catch((error) => {
           console.log(error)
@@ -150,7 +263,7 @@ export default {
       console.log(idOrder)
 
       const productOrder = this.productOrder
-      this.cart.forEach((product) => {
+      this.products.forEach((product) => {
         productOrder.quantity = product.quantity
         productOrder.totalPrice = product.quantity * product.price
         productOrder.product = product
@@ -165,7 +278,9 @@ export default {
           })
           .finally(() => { this.loading = false })
       })
+      this.step = 4
     }
+
   }
 }
 </script>

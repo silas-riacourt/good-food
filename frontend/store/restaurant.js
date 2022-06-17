@@ -103,6 +103,7 @@ export const actions = {
       const restaurant = await this.$axios.$get('/api/restaurants/' + id)
       context.commit('setRestaurant', { restaurant })
       context.dispatch('categorie/getCategorieById', restaurant.categories[0].id, { root: true })
+      context.commit('cart/setRestaurant', { restaurant }, { root: true })
     } catch (error) {
       context.commit('setLoading', false)
     }
