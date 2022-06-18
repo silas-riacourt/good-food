@@ -33,9 +33,10 @@ spring:
       enabled: false
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5432/goodfood
-    username: goodfood
-    password:
+    #url: jdbc:h2:file:./target/h2db/db/goodfood;DB_CLOSE_DELAY=-1
+    url: jdbc:postgresql://silasriacourt.fr:5432/goodfood2
+    username: dbuser
+    password: ${DB_PASS}
     hikari:
       poolName: Hikari
       auto-commit: false
@@ -45,10 +46,13 @@ spring:
   liquibase:
     contexts: prod
   mail:
-    host: localhost
-    port: 25
-    username:
-    password:
+    host: smtp.gmail.com
+    port: 587
+    username: goodfoodchain.company@gmail.com
+    password: ${GMAIL_TOKEN}
+    properties.mail.smtp:
+        auth: true
+        starttls.enable: true
   thymeleaf:
     cache: true
   sleuth:

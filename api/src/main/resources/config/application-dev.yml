@@ -52,7 +52,7 @@ spring:
     host: smtp.gmail.com
     port: 587
     username: goodfoodchain.company@gmail.com
-    password: rysbkecucigsdmvw
+    password: ${GMAIL_TOKEN}
     properties.mail.smtp:
         auth: true
         starttls.enable: true
