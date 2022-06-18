@@ -33,6 +33,9 @@
       "Supplier"
     ],
     "entitySuffix": "",
+    "herokuAppName": "goodfood-application",
+    "herokuDeployType": "git",
+    "herokuJavaVersion": "11",
     "jhiPrefix": "jhi",
     "jhipsterVersion": "7.8.1",
     "jwtSecretKey": "NjAwNDkzZjlmYjhmNzM1NTAxODFmNTgwOGU2ZDQyOGRiNzljNzQ2YTIyNmJhMjZlYTQ2ZDYwYmI4N2UzOGM0M2ZiYTVhOTU5MTI2NDYzMDYxNTRlMDg3MDJiZThjNmNkY2ZlMmFlMDc0OGJlYWE1ODhiZTJmM2MwOTgwZmY1MjU=",
