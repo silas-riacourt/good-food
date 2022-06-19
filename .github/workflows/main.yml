@@ -68,8 +68,11 @@ jobs:
     # if: "github.ref == 'refs/heads/master' && !contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.pull_request.title, '[skip ci]') && !contains(github.event.pull_request.title, '[ci skip]')"
     timeout-minutes: 40
     env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      NODE_VERSION: 16.14.0
+      SPRING_OUTPUT_ANSI_ENABLED: DETECT
+      SPRING_JPA_SHOW_SQL: false
+      JHI_DISABLE_WEBPACK_LOGS: true
+      NG_CLI_ANALYTICS: false
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -79,6 +82,10 @@ jobs:
         with:
           distribution: "temurin"
           java-version: 11
+      - name: Analyze code with SonarQube
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       working-directory: ./api
       run: |
         if [ ! -z "$SONAR_TOKEN" ]; then
@@ -87,6 +94,7 @@ jobs:
         else
             echo No SONAR_TOKEN, skipping...
         fi
+  
 
   # SonarQube:
   #   name: SonarQube
