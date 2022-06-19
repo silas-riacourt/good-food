@@ -91,6 +91,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         working-directory: ./api
+        run: echo ${{ secrets.SONAR_HOST_URL }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=silas-riacourt_good-food_AYF70FtEPMgeUdkSqz15
   Package_Application :
     name: Package Application 
