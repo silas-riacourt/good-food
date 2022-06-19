@@ -91,7 +91,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         working-directory: ./api
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.host.url=http://51.75.127.24:9000 -Dsonar.projectKey=silas-riacourt_good-food_AYF70FtEPMgeUdkSqz15
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar  -Dsonar.projectKey=silas-riacourt_good-food_AYF70FtEPMgeUdkSqz15
   Package_Application :
     name: Package Application 
     runs-on: ubuntu-latest
