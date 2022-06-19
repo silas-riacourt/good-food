@@ -73,6 +73,8 @@ jobs:
       SPRING_JPA_SHOW_SQL: false
       JHI_DISABLE_WEBPACK_LOGS: true
       NG_CLI_ANALYTICS: false
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -83,9 +85,7 @@ jobs:
           distribution: "temurin"
           java-version: 11
       - name: Analyze code with SonarQube
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      
       working-directory: ./api
       run: |
         if [ ! -z "$SONAR_TOKEN" ]; then
