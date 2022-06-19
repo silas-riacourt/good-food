@@ -84,16 +84,12 @@ jobs:
         with:
           distribution: "temurin"
           java-version: 11
-      - name: Analyze code with SonarQube
-      
-      working-directory: ./api
-      run: |
-        if [ ! -z "$SONAR_TOKEN" ]; then
-            chmod +x mvnw
-            ./mvnw -ntp initialize sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=silas-riacourt_good-food
-        else
-            echo No SONAR_TOKEN, skipping...
-        fi
+      - name: Install node.js packages
+        working-directory: ./api
+        run: npm install
+      - name: Run frontend test
+        working-directory: ./api
+        run: npm run ci:frontend:test
   
 
   # SonarQube:
