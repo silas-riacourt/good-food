@@ -64,20 +64,20 @@ jobs:
         run: npm run ci:frontend:test
   SonarQube:
     name: SonarQube
-      runs-on: ubuntu-latest
-      steps:
-        - name: Analyze code with SonarQube
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        working-directory: ./api
-        run: |
-          if [ ! -z "$SONAR_TOKEN" ]; then
-              chmod +x mvnw
-              ./mvnw -ntp initialize sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=silas-riacourt_good-food
-          else
-              echo No SONAR_TOKEN, skipping...
-          fi
+    runs-on: ubuntu-latest
+    steps:
+      - name: Analyze code with SonarQube
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      working-directory: ./api
+      run: |
+        if [ ! -z "$SONAR_TOKEN" ]; then
+            chmod +x mvnw
+            ./mvnw -ntp initialize sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=silas-riacourt_good-food
+        else
+            echo No SONAR_TOKEN, skipping...
+        fi
   Package_Application: 
     name: Package Application 
     runs-on: ubuntu-latest
