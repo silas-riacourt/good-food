@@ -8,7 +8,7 @@ on:
     branches:   
       - master
 jobs:
-  Back Unit testing:
+  Back_Unit_testing:
     name: Back Unit testing
     runs-on: ubuntu-latest
     # if: "github.ref == 'refs/heads/master' && !contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.pull_request.title, '[skip ci]') && !contains(github.event.pull_request.title, '[ci skip]')"
@@ -36,7 +36,7 @@ jobs:
         run: |
           chmod +x mvnw
           npm run ci:backend:test
-  Front Unit testing :
+  Front_Unit_testing :
     name: Front Unit testing 
     runs-on: ubuntu-latest
     if: "github.ref == 'refs/heads/master' && !contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.pull_request.title, '[skip ci]') && !contains(github.event.pull_request.title, '[ci skip]')"
