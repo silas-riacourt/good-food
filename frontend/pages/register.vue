@@ -86,9 +86,12 @@ export default {
       this.loading = true
       try {
         await this.$axios.post('/api/register', this.user)
+        this.$toast.success('Votre compte a bien été crée', { duration: 5000 })
         this.loading = false
+        this.$router.push('/login')
       } catch (error) {
         this.loading = false
+        this.$toast.error('Erreur : vérifier vos informations', { duration: 5000 })
       }
     }
   }
