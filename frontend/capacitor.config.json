@@ -1,0 +1,6 @@
+{
+  "appId": "fr.cesi.goodfood",
+  "appName": "goodfood",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}
