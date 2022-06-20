@@ -26,15 +26,15 @@ public interface ManagerRepository extends JpaRepository<Manager, Long> {
         return this.findAllWithToOneRelationships(pageable);
     }
 
-    @Query(
-        value = "select distinct manager from Manager manager left join fetch manager.restaurant",
-        countQuery = "select count(distinct manager) from Manager manager"
-    )
+    @Query(value = "select distinct manager from Manager manager left join fetch manager.internalUser left join fetch manager.restaurant", countQuery = "select count(distinct manager) from Manager manager")
     Page<Manager> findAllWithToOneRelationships(Pageable pageable);
 
-    @Query("select distinct manager from Manager manager left join fetch manager.restaurant")
+    @Query("select distinct manager from Manager manager left join fetch manager.internalUser left join fetch manager.restaurant")
     List<Manager> findAllWithToOneRelationships();
 
-    @Query("select manager from Manager manager left join fetch manager.restaurant where manager.id =:id")
+    @Query("select manager from Manager manager left join fetch manager.internalUser left join fetch manager.restaurant where manager.id =:id")
     Optional<Manager> findOneWithToOneRelationships(@Param("id") Long id);
+
+    @Query("select manager from Manager manager left join fetch manager.internalUser u where u.id =:id")
+    Optional<Manager> findOneByUserId(@Param("id") Long id);
 }

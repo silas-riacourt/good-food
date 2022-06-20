@@ -2,6 +2,8 @@ import { Component, Vue, Inject } from 'vue-property-decorator';
 
 import AlertService from '@/shared/alert/alert.service';
 
+import UserService from '@/entities/user/user.service';
+
 import RestaurantService from '@/entities/restaurant/restaurant.service';
 import { IRestaurant } from '@/shared/model/restaurant.model';
 
@@ -26,6 +28,10 @@ export default class ManagerUpdate extends Vue {
   @Inject('alertService') private alertService: () => AlertService;
 
   public manager: IManager = new Manager();
+
+  @Inject('userService') private userService: () => UserService;
+
+  public users: Array<any> = [];
 
   @Inject('restaurantService') private restaurantService: () => RestaurantService;
 
@@ -111,6 +117,11 @@ export default class ManagerUpdate extends Vue {
   }
 
   public initRelationships(): void {
+    this.userService()
+      .retrieve()
+      .then(res => {
+        this.users = res.data;
+      });
     this.restaurantService()
       .retrieve()
       .then(res => {

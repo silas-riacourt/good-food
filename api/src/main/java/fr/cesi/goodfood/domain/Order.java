@@ -46,8 +46,7 @@ public class Order implements Serializable {
     private PaymentMethod paymentMethod;
 
     @JsonIgnoreProperties(value = { "categories", "manager", "stock", "order" }, allowSetters = true)
-    @OneToOne
-    @JoinColumn(unique = true)
+    @ManyToOne
     private Restaurant restaurant;
 
     @OneToMany(mappedBy = "order")
@@ -195,7 +194,8 @@ public class Order implements Serializable {
         return this;
     }
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and
+    // setters here
 
     @Override
     public boolean equals(Object o) {
@@ -210,7 +210,8 @@ public class Order implements Serializable {
 
     @Override
     public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
+        // see
+        // https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
         return getClass().hashCode();
     }
 
@@ -218,12 +219,12 @@ public class Order implements Serializable {
     @Override
     public String toString() {
         return "Order{" +
-            "id=" + getId() +
-            ", name='" + getName() + "'" +
-            ", totalPrice=" + getTotalPrice() +
-            ", date='" + getDate() + "'" +
-            ", status='" + getStatus() + "'" +
-            ", paymentMethod='" + getPaymentMethod() + "'" +
-            "}";
+                "id=" + getId() +
+                ", name='" + getName() + "'" +
+                ", totalPrice=" + getTotalPrice() +
+                ", date='" + getDate() + "'" +
+                ", status='" + getStatus() + "'" +
+                ", paymentMethod='" + getPaymentMethod() + "'" +
+                "}";
     }
 }

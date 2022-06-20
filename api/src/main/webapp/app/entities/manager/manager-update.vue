@@ -69,6 +69,25 @@
             />
           </div>
           <div class="form-group">
+            <label class="form-control-label" for="manager-internalUser">Internal User</label>
+            <select
+              class="form-control"
+              id="manager-internalUser"
+              data-cy="internalUser"
+              name="internalUser"
+              v-model="manager.internalUser"
+            >
+              <option v-bind:value="null"></option>
+              <option
+                v-bind:value="manager.internalUser && userOption.id === manager.internalUser.id ? manager.internalUser : userOption"
+                v-for="userOption in users"
+                :key="userOption.id"
+              >
+                {{ userOption.login }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
             <label class="form-control-label" for="manager-restaurant">Restaurant</label>
             <select class="form-control" id="manager-restaurant" data-cy="restaurant" name="restaurant" v-model="manager.restaurant">
               <option v-bind:value="null"></option>

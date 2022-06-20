@@ -39,6 +39,7 @@ export default {
   name: 'OrderPage',
   data () {
     return {
+      client: 0,
       selectedOrder: {},
       orderModal: false,
       orders: [
@@ -199,6 +200,13 @@ export default {
       ]
     }
   },
+  mounted () {
+    this.getClientId()
+    setTimeout(
+      function () {
+
+      }, 5000)
+  },
   methods: {
     getColorBystatus (status) {
       switch (status) {
@@ -207,7 +215,7 @@ export default {
         case 'ENDED':
           return 'green'
         case 'IN_PROGRESS':
-          return 'yellow'
+          return 'warning'
         default:
           return 'black'
       }
@@ -227,6 +235,27 @@ export default {
     orderDetails (order) {
       this.selectedOrder = order
       this.orderModal = true
+    },
+    getClientId () {
+      this.$axios.$get('/api/clients/by-user-id/' + this.$auth.user.id)
+        .then((response) => {
+          this.client = response
+          this.getOrders()
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+        .finally(() => { this.loading = false })
+    },
+    getOrders () {
+      this.$axios.$get('/api/orders/by-user-id/' + this.client.id)
+        .then((response) => {
+          this.orders = response
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+        .finally(() => { this.loading = false })
     }
   }
 

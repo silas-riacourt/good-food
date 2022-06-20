@@ -33,6 +33,14 @@
   "readOnly": false,
   "relationships": [
     {
+      "otherEntityField": "login",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "manager",
+      "ownerSide": true,
+      "relationshipName": "internalUser",
+      "relationshipType": "one-to-one"
+    },
+    {
       "otherEntityField": "name",
       "otherEntityName": "restaurant",
       "otherEntityRelationshipName": "manager",

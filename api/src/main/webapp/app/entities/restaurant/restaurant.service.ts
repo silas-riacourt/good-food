@@ -31,6 +31,33 @@ export default class RestaurantService {
     });
   }
 
+  public retrieveByManager(managerId): Promise<any> {
+
+    return new Promise<any>((resolve, reject) => {
+      axios
+      .get(`${baseApiUrl}/by-manager/${managerId}`)
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
+  public getMnagerId(userId): Promise<any> {
+
+    return new Promise<any>((resolve, reject) => {
+      axios
+      .get(`/api/clients/by-user-id/${userId}`)
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
+  
   public delete(id: number): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios

@@ -1,0 +1,109 @@
+
+entity Restaurant {
+	name String
+    locationName String
+    description String
+    schedule String
+    open Boolean
+    locationLat Double
+    locationLng Double
+}
+entity Categorie {
+	name String
+    description String
+    image String
+}
+entity Product {
+	name String
+    description String
+    price Double
+    image String
+    
+}
+entity Ingredient {
+	name String
+    quantity Integer
+}
+
+entity Client {
+	fullname String,
+	firstName String,
+    lastName String,
+  	phone String,
+    mail String,
+}
+entity Manager {
+	fullname String,
+	firstName String,
+    lastName String,
+  	phone String,
+    mail String,
+}
+relationship OneToOne {
+  Client{internalUser(login)} to User
+  Manager{internalUser(login)} to User
+  Manager{restaurant(name)} to Restaurant{manager(fullname)}
+}
+entity Stock {
+	quantity Integer
+}
+relationship OneToOne {
+    Stock{restaurant(name)} to Restaurant{stock}
+}
+enum OrderStatus {
+    IN_PROGRESS, WAITING, ENDED, CANCELED
+}
+enum PaymentMethod {
+    CREDITCARD, PAYPAL, CASH
+}
+enum IngredientOrderStatus {
+	NEW, WAITING, DELIVERED
+}
+entity Order {
+	name String
+    totalPrice BigDecimal required min(0)
+    date LocalDate
+    status OrderStatus
+    paymentMethod PaymentMethod
+}
+entity IngredientOrder {
+	date LocalDate
+    status IngredientOrderStatus
+    quantity Integer
+}
+relationship OneToMany {
+	Client{order} to Order{client(fullname)}
+    Order to ProductOrder
+}
+relationship OneToOne {
+	Order{restaurant(name)} to Restaurant{order}
+}
+entity ProductOrder {
+    quantity Integer required min(0)
+    totalPrice BigDecimal required min(0)
+}
+relationship ManyToOne {
+    ProductOrder{product(name) required} to Product
+    IngredientOrder{supplifier(name)} to Supplier
+    IngredientOrder{ingredient(name)} to Ingredient
+}
+entity Supplier {
+	name String,
+    description String,
+    number String,
+    address String,
+}
+//
+relationship OneToMany {
+    Ingredient{supplier} to Supplier{ingredient(name)}
+    Ingredient{stock} to Stock{ingredient(name)}
+    
+}
+relationship ManyToMany {
+    Product{ingredient(name)} to Ingredient{product(name)}
+    Restaurant{categorie(name)} to Categorie{restaurant(name)} 
+    Categorie{product(name)} to Product{categorie(name)}
+}
+
+
+

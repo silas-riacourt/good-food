@@ -5,6 +5,7 @@ import fr.cesi.goodfood.repository.RestaurantRepository;
 import fr.cesi.goodfood.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -204,6 +205,31 @@ public class RestaurantResource {
         }
         log.debug("REST request to get all Restaurants");
         return restaurantRepository.findAllWithEagerRelationships();
+    }
+
+    /**
+     * {@code GET  /restaurants} : get all the restaurants.
+     *
+     * @param eagerload flag to eager load entities from relationships (This is
+     *                  applicable for many-to-many).
+     * @param filter    the filter of the request.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
+     *         of restaurants in body.
+     */
+    @GetMapping("/restaurants/by-manager/{id}")
+    public List<Restaurant> getAllRestaurantsByManager(@PathVariable String id) {
+
+        log.debug("REST request to get all Restaurants");
+
+        List<Restaurant> result = new ArrayList();
+        for (Restaurant restaurant : restaurantRepository.findAll()) {
+            log.info(restaurant.getManager().getId().toString());
+            log.info(id);
+            if (restaurant.getManager() != null && restaurant.getManager().getId().toString().equals(id)) {
+                result.add(restaurant);
+            }
+        }
+        return result;
     }
 
     /**

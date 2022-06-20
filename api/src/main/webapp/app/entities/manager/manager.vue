@@ -33,6 +33,7 @@
             <th scope="row"><span>Last Name</span></th>
             <th scope="row"><span>Phone</span></th>
             <th scope="row"><span>Mail</span></th>
+            <th scope="row"><span>Internal User</span></th>
             <th scope="row"><span>Restaurant</span></th>
             <th scope="row"></th>
           </tr>
@@ -47,6 +48,9 @@
             <td>{{ manager.lastName }}</td>
             <td>{{ manager.phone }}</td>
             <td>{{ manager.mail }}</td>
+            <td>
+              {{ manager.internalUser ? manager.internalUser.login : '' }}
+            </td>
             <td>
               <div v-if="manager.restaurant">
                 <router-link :to="{ name: 'RestaurantView', params: { restaurantId: manager.restaurant.id } }">{{

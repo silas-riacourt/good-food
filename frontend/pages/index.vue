@@ -110,7 +110,7 @@ export default {
       center: [47.1749, 2.185],
       iconSize: 40,
       icon: null,
-      items: ['Toutes', 'Brest', 'Paris', 'Rennes', 'Toulouse'],
+      items: ['Toutes', 'Brest', 'Paris', 'Rennes', 'LUXEMBOURG', 'BRUXELLES'],
       search: 'Toutes'
     }
   },

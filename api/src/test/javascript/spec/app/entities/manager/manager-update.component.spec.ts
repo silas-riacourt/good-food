@@ -9,6 +9,8 @@ import ManagerUpdateComponent from '@/entities/manager/manager-update.vue';
 import ManagerClass from '@/entities/manager/manager-update.component';
 import ManagerService from '@/entities/manager/manager.service';
 
+import UserService from '@/entities/user/user.service';
+
 import RestaurantService from '@/entities/restaurant/restaurant.service';
 import AlertService from '@/shared/alert/alert.service';
 
@@ -41,6 +43,8 @@ describe('Component Tests', () => {
         provide: {
           managerService: () => managerServiceStub,
           alertService: () => new AlertService(),
+
+          userService: () => new UserService(),
 
           restaurantService: () =>
             sinon.createStubInstance<RestaurantService>(RestaurantService, {

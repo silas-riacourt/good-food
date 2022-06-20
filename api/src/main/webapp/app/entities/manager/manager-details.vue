@@ -35,6 +35,12 @@
             <span>{{ manager.mail }}</span>
           </dd>
           <dt>
+            <span>Internal User</span>
+          </dt>
+          <dd>
+            {{ manager.internalUser ? manager.internalUser.login : '' }}
+          </dd>
+          <dt>
             <span>Restaurant</span>
           </dt>
           <dd>

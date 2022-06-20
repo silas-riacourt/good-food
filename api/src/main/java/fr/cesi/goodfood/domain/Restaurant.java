@@ -43,11 +43,7 @@ public class Restaurant implements Serializable {
     private Double locationLng;
 
     @ManyToMany
-    @JoinTable(
-        name = "rel_restaurant__categorie",
-        joinColumns = @JoinColumn(name = "restaurant_id"),
-        inverseJoinColumns = @JoinColumn(name = "categorie_id")
-    )
+    @JoinTable(name = "rel_restaurant__categorie", joinColumns = @JoinColumn(name = "restaurant_id"), inverseJoinColumns = @JoinColumn(name = "categorie_id"))
     @JsonIgnoreProperties(value = { "products", "restaurants" }, allowSetters = true)
     private Set<Categorie> categories = new HashSet<>();
 
@@ -60,8 +56,8 @@ public class Restaurant implements Serializable {
     private Stock stock;
 
     @JsonIgnoreProperties(value = { "restaurant", "productOrders", "client" }, allowSetters = true)
-    @OneToOne(mappedBy = "restaurant")
-    private Order order;
+    @OneToMany(mappedBy = "restaurant")
+    private Set<Order> order;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -232,26 +228,12 @@ public class Restaurant implements Serializable {
         return this;
     }
 
-    public Order getOrder() {
+    public Set<Order> getOrder() {
         return this.order;
     }
 
-    public void setOrder(Order order) {
-        if (this.order != null) {
-            this.order.setRestaurant(null);
-        }
-        if (order != null) {
-            order.setRestaurant(this);
-        }
-        this.order = order;
-    }
-
-    public Restaurant order(Order order) {
-        this.setOrder(order);
-        return this;
-    }
-
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and
+    // setters here
 
     @Override
     public boolean equals(Object o) {
@@ -266,7 +248,8 @@ public class Restaurant implements Serializable {
 
     @Override
     public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
+        // see
+        // https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
         return getClass().hashCode();
     }
 
@@ -274,14 +257,14 @@ public class Restaurant implements Serializable {
     @Override
     public String toString() {
         return "Restaurant{" +
-            "id=" + getId() +
-            ", name='" + getName() + "'" +
-            ", locationName='" + getLocationName() + "'" +
-            ", description='" + getDescription() + "'" +
-            ", schedule='" + getSchedule() + "'" +
-            ", open='" + getOpen() + "'" +
-            ", locationLat=" + getLocationLat() +
-            ", locationLng=" + getLocationLng() +
-            "}";
+                "id=" + getId() +
+                ", name='" + getName() + "'" +
+                ", locationName='" + getLocationName() + "'" +
+                ", description='" + getDescription() + "'" +
+                ", schedule='" + getSchedule() + "'" +
+                ", open='" + getOpen() + "'" +
+                ", locationLat=" + getLocationLat() +
+                ", locationLng=" + getLocationLng() +
+                "}";
     }
 }

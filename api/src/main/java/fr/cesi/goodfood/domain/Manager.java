@@ -34,6 +34,10 @@ public class Manager implements Serializable {
     @Column(name = "mail")
     private String mail;
 
+    @OneToOne
+    @JoinColumn(unique = true)
+    private User internalUser;
+
     @JsonIgnoreProperties(value = { "categories", "manager", "stock", "order" }, allowSetters = true)
     @OneToOne
     @JoinColumn(unique = true)
@@ -117,6 +121,19 @@ public class Manager implements Serializable {
 
     public void setMail(String mail) {
         this.mail = mail;
+    }
+
+    public User getInternalUser() {
+        return this.internalUser;
+    }
+
+    public void setInternalUser(User user) {
+        this.internalUser = user;
+    }
+
+    public Manager internalUser(User user) {
+        this.setInternalUser(user);
+        return this;
     }
 
     public Restaurant getRestaurant() {

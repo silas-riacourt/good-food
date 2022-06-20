@@ -6,7 +6,7 @@
           <v-col cols="12" sm="12" md="12" xl="8">
             <v-row align="center" justify="center">
               <v-col cols="auto" class="pa-0">
-                <v-img :src="require(`~/assets/goodfood.png`)" max-width="120" />
+                <v-img :src="require(`~/assets/goodfood.png`)" max-width="120" @click="$router.push('/')" />
               </v-col>
               <v-col cols="10">
                 <v-row justify="space-between">

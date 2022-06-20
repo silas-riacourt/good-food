@@ -26,10 +26,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
         return this.findAllWithToOneRelationships(pageable);
     }
 
-    @Query(
-        value = "select distinct jhiOrder from Order jhiOrder left join fetch jhiOrder.restaurant left join fetch jhiOrder.client",
-        countQuery = "select count(distinct jhiOrder) from Order jhiOrder"
-    )
+    @Query(value = "select distinct jhiOrder from Order jhiOrder left join fetch jhiOrder.restaurant left join fetch jhiOrder.client", countQuery = "select count(distinct jhiOrder) from Order jhiOrder")
     Page<Order> findAllWithToOneRelationships(Pageable pageable);
 
     @Query("select distinct jhiOrder from Order jhiOrder left join fetch jhiOrder.restaurant left join fetch jhiOrder.client")
@@ -37,4 +34,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 
     @Query("select jhiOrder from Order jhiOrder left join fetch jhiOrder.restaurant left join fetch jhiOrder.client where jhiOrder.id =:id")
     Optional<Order> findOneWithToOneRelationships(@Param("id") Long id);
+
+    @Query("select jhiOrder from Order jhiOrder left join fetch jhiOrder.restaurant left join fetch jhiOrder.client c where c.id =:id")
+    List<Order> findByClientId(@Param("id") Long id);
 }
