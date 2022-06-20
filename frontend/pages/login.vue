@@ -56,7 +56,6 @@ export default {
   methods: {
     async login () {
       try {
-        console.log('login')
         this.loading = true
         await this.$auth.loginWith('local', {
           data: {
@@ -66,9 +65,11 @@ export default {
         })
         this.loading = false
         this.$router.push('/')
+        this.$toast.success('Vous êtes désormais connecté', { duration: 5000 })
       } catch (e) {
         console.log(e)
-        this.loading = true
+        this.loading = false
+        this.$toast.error('Identifiant ou mot de passe incorrect', { duration: 5000 })
       }
     }
   }

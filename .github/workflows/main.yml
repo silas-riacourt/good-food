@@ -1,10 +1,17 @@
 name: Application CI
-on: [push, pull_request]
+
+on: 
+  push: 
+    branches: 
+      - nicolas
+  pull_request:
+    branches:   
+      - master
 jobs:
-  pipeline:
-    name: jhipster pipeline
+  Back_Unit_testing:
+    name: Back Unit testing
     runs-on: ubuntu-latest
-    if: "github.ref == 'refs/heads/master' && !contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.pull_request.title, '[skip ci]') && !contains(github.event.pull_request.title, '[ci skip]')"
+    # if: "github.ref == 'refs/heads/master' && !contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.pull_request.title, '[skip ci]') && !contains(github.event.pull_request.title, '[ci skip]')"
     timeout-minutes: 40
     env:
       NODE_VERSION: 16.14.0
@@ -29,28 +36,124 @@ jobs:
         run: |
           chmod +x mvnw
           npm run ci:backend:test
+  Front_Unit_testing :
+    name: Front Unit testing 
+    runs-on: ubuntu-latest
+    # if: "github.ref == 'refs/heads/master' && !contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.pull_request.title, '[skip ci]') && !contains(github.event.pull_request.title, '[ci skip]')"
+    timeout-minutes: 40
+    env:
+      NODE_VERSION: 16.14.0
+      SPRING_OUTPUT_ANSI_ENABLED: DETECT
+      SPRING_JPA_SHOW_SQL: false
+      JHI_DISABLE_WEBPACK_LOGS: true
+      NG_CLI_ANALYTICS: false
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16.14.0
+      - uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          java-version: 11
+      - name: Install node.js packages
+        working-directory: ./api
+        run: npm install
       - name: Run frontend test
         working-directory: ./api
         run: npm run ci:frontend:test
-      - name: Analyze code with SonarQube
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  SonarQube:
+    name: SonarQube
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Cache SonarQube packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Install node.js packages
+        working-directory: ./api
+        run: npm install
+      - name: Run backend test
         working-directory: ./api
         run: |
-          if [ ! -z "$SONAR_TOKEN" ]; then
-              chmod +x mvnw
-              ./mvnw -ntp initialize sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=silas-riacourt_good-food
-          else
-              echo No SONAR_TOKEN, skipping...
-          fi
+          chmod +x mvnw
+          npm run ci:backend:test
+      - name: Run frontend test
+        working-directory: ./api
+        run: npm run ci:frontend:test
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        working-directory: ./api
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar  -Dsonar.projectKey=silas-riacourt_good-food_AYF70FtEPMgeUdkSqz15
+  Package_Application :
+    name: Package Application 
+    runs-on: ubuntu-latest
+    # if: "github.ref == 'refs/heads/master' && !contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.pull_request.title, '[skip ci]') && !contains(github.event.pull_request.title, '[ci skip]')"
+    timeout-minutes: 40
+    env:
+      NODE_VERSION: 16.14.0
+      SPRING_OUTPUT_ANSI_ENABLED: DETECT
+      SPRING_JPA_SHOW_SQL: false
+      JHI_DISABLE_WEBPACK_LOGS: true
+      NG_CLI_ANALYTICS: false
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16.14.0
+      - uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          java-version: 11
+      - name: Package application
+        working-directory: ./api
+        run:  |
+          chmod +x mvnw
+          npm run java:jar:prod
+  Deployment :
+    name: Deployment
+    runs-on: ubuntu-latest
+    if: "github.ref == 'refs/heads/master' && !contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.pull_request.title, '[skip ci]') && !contains(github.event.pull_request.title, '[ci skip]')"
+    timeout-minutes: 40
+    env:
+      NODE_VERSION: 16.14.0
+      SPRING_OUTPUT_ANSI_ENABLED: DETECT
+      SPRING_JPA_SHOW_SQL: false
+      JHI_DISABLE_WEBPACK_LOGS: true
+      NG_CLI_ANALYTICS: false
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16.14.0
+      - uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          java-version: 11
       - name: Package application
         working-directory: ./api
         run:  |
           chmod +x mvnw
           npm run java:jar:prod
       - name: Deploy to Heroku
-
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         working-directory: ./api
@@ -60,9 +163,148 @@ jobs:
           else
               echo No HEROKU_API_KEY, skipping...
           fi
-      - name: Build and publish docker image
-        working-directory: ./api
-        run: |
-          GIT_TAG=:${GITHUB_REF#refs/tags/}
-          DOCKER_TAG=${GIT_TAG#:refs/heads/main}
-          ./mvnw -ntp jib:build -Djib.to.image=goodfood-api${DOCKER_TAG} -Djib.to.auth.username="${{ secrets.DOCKER_USERNAME }}" -Djib.to.auth.password="${{ secrets.DOCKER_PASSWORD }}" -Pprod
+  
+
+
+  # Package_Application: 
+  #   name: Package Application 
+  #   runs-on: ubuntu-latest
+  #   # if: "github.ref == 'refs/heads/master' && !contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.pull_request.title, '[skip ci]') && !contains(github.event.pull_request.title, '[ci skip]')"
+  #   timeout-minutes: 40
+  #   env:
+  #     NODE_VERSION: 16.14.0
+  #     SPRING_OUTPUT_ANSI_ENABLED: DETECT
+  #     SPRING_JPA_SHOW_SQL: false
+  #     JHI_DISABLE_WEBPACK_LOGS: true
+  #     NG_CLI_ANALYTICS: false
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: 16.14.0
+  #     - uses: actions/setup-java@v3
+  #       with:
+  #         distribution: "temurin"
+  #         java-version: 11
+  #     steps: 
+  #       - name: Package application
+  #       working-directory: ./api
+  #       run:  |
+  #         chmod +x mvnw
+  #         npm run java:jar:prod
+      
+
+
+
+      
+
+      
+# jobs:
+#   pipeline:
+#     name: Front Unit testing 
+#     runs-on: ubuntu-latest
+#     if: "github.ref == 'refs/heads/master' && !contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.pull_request.title, '[skip ci]') && !contains(github.event.pull_request.title, '[ci skip]')"
+#     timeout-minutes: 40
+#     env:
+#       NODE_VERSION: 16.14.0
+#       SPRING_OUTPUT_ANSI_ENABLED: DETECT
+#       SPRING_JPA_SHOW_SQL: false
+#       JHI_DISABLE_WEBPACK_LOGS: true
+#       NG_CLI_ANALYTICS: false
+#     steps:
+#       - uses: actions/checkout@v3
+#       - uses: actions/setup-node@v3
+#         with:
+#           node-version: 16.14.0
+#       - uses: actions/setup-java@v3
+#         with:
+#           distribution: "temurin"
+#           java-version: 11
+#       - name: Install node.js packages
+#         working-directory: ./api
+#         run: npm install
+#       - name: Run frontend test
+#         working-directory: ./api
+#         run: npm run ci:frontend:test
+
+
+# jobs:
+#   pipeline:
+#     name: SonarQube
+#       runs-on: ubuntu-latest
+#       steps:
+#         - name: Analyze code with SonarQube
+        # env:
+        #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        #   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        # working-directory: ./api
+        # run: |
+        #   if [ ! -z "$SONAR_TOKEN" ]; then
+        #       chmod +x mvnw
+        #       ./mvnw -ntp initialize sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=silas-riacourt_good-food
+        #   else
+        #       echo No SONAR_TOKEN, skipping...
+        #   fi
+
+
+# jobs: 
+#   pipeline: 
+#     name: Package Application 
+#     runs-on: ubuntu-latest
+#     if: "github.ref == 'refs/heads/master' && !contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.pull_request.title, '[skip ci]') && !contains(github.event.pull_request.title, '[ci skip]')"
+#     timeout-minutes: 40
+#     env:
+#       NODE_VERSION: 16.14.0
+#       SPRING_OUTPUT_ANSI_ENABLED: DETECT
+#       SPRING_JPA_SHOW_SQL: false
+#       JHI_DISABLE_WEBPACK_LOGS: true
+#       NG_CLI_ANALYTICS: false
+#     steps:
+#       - uses: actions/checkout@v3
+#       - uses: actions/setup-node@v3
+#         with:
+#           node-version: 16.14.0
+#       - uses: actions/setup-java@v3
+#         with:
+#           distribution: "temurin"
+#           java-version: 11
+#       steps: 
+#         - name: Package application
+#         working-directory: ./api
+#         run:  |
+#           chmod +x mvnw
+#           npm run java:jar:prod
+
+# jobs: 
+#   pipeline: 
+#     name: Deployment
+#       runs-on: ubuntu-latest
+#       if: "github.ref == 'refs/heads/master' && !contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.pull_request.title, '[skip ci]') && !contains(github.event.pull_request.title, '[ci skip]')"
+#       timeout-minutes: 40
+#       env:
+#         NODE_VERSION: 16.14.0
+#         SPRING_OUTPUT_ANSI_ENABLED: DETECT
+#         SPRING_JPA_SHOW_SQL: false
+#         JHI_DISABLE_WEBPACK_LOGS: true
+#         NG_CLI_ANALYTICS: false
+#       steps:
+#         - uses: actions/checkout@v3
+#         - uses: actions/setup-node@v3
+#           with:
+#             node-version: 16.14.0
+#         - uses: actions/setup-java@v3
+#           with:
+#             distribution: "temurin"
+#             java-version: 11
+#       steps: 
+#         - name: Deploy to Heroku
+#         env:
+#           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+#         working-directory: ./api
+#         run: |
+#           if [ ! -z "$HEROKU_API_KEY" ]; then
+#               ./mvnw -ntp com.heroku.sdk:heroku-maven-plugin:2.0.5:deploy -DskipTests -Pprod -Dheroku.buildpacks=heroku/jvm -Dheroku.appName=goodfood-application
+#           else
+#               echo No HEROKU_API_KEY, skipping...
+#           fi
+      

@@ -10,7 +10,13 @@
           </v-col>
           <v-col>
             <h1>{{ restaurant.name }}</h1>
+
             <p><v-icon>mdi-table-chair</v-icon> Sur place </p>
+          </v-col>
+          <v-col class="text-right">
+            <v-btn text class="text-none" to="/">
+              Modifier le restaurant <v-icon>mdi-chevron-right</v-icon>
+            </v-btn>
           </v-col>
         </v-row>
         <v-divider />
@@ -43,7 +49,7 @@
             <h2 v-if="!loading">
               {{ restaurant.categories[selectedCategorie].name }}
             </h2>
-            <v-row v-if="!loading" class="mt-2">
+            <v-row v-if="!loading" class="mt-2" justify="center" justify-sm="start">
               <v-col v-for="(product,i) in categorie.products" :key="i" cols="auto">
                 <v-card outlined min-width="280px" max-width="280px" @click="showProductModal(product)">
                   <v-list-item>
@@ -70,7 +76,7 @@
           </v-col>
         </v-row>
       </v-col>
-      <v-col cols="12" sm="1" md="2" class="mt-4 mb-4">
+      <v-col cols="10" sm="1" md="2" class="mt-4 mb-4">
         <CartCard />
       </v-col>
       <ProductModal :product="selectedProduct" :show="productModal" @add-product="addProductHandler" @close="productModal = false" />

@@ -150,10 +150,16 @@
         <span>Restaurants</span>
         <v-icon>mdi-map-marker-multiple</v-icon>
       </v-btn>
-      <v-btn value="commander" to="/restaurant/4">
+      <v-btn value="commander" to="/restaurant/10">
         <span>Commander</span>
         <v-icon>mdi-silverware-fork-knife</v-icon>
       </v-btn>
+
+      <v-btn value="panier" to="/checkout">
+        <span>panier</span>
+        <v-icon>mdi-cart</v-icon>
+      </v-btn>
+
       <v-btn value="compte" to="/account">
         <span>Compte</span>
         <v-icon>mdi-account</v-icon>
