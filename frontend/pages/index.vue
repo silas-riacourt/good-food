@@ -11,6 +11,9 @@
               <v-col cols="10" xs="10" lg="8">
                 <v-autocomplete
                   v-model="search"
+                  chips
+                  color="warning"
+                  clearable
                   filled
                   rounded
                   solo
@@ -29,6 +32,7 @@
                   :open="restaurant.open"
                   :location="restaurant.location"
                   :locationname="restaurant.locationName"
+                  :schedule="restaurant.schedule"
                   :selected="false"
                 />
               </v-col>
@@ -64,6 +68,7 @@
                         :open="restaurant.open"
                         :location="restaurant.location"
                         :locationname="restaurant.locationName"
+                        :schedule="restaurant.schedule"
                         :selected="false"
                         :from-map="true"
                       />
@@ -110,8 +115,8 @@ export default {
       center: [47.1749, 2.185],
       iconSize: 40,
       icon: null,
-      items: ['Toutes', 'Brest', 'Paris', 'Rennes', 'LUXEMBOURG', 'BRUXELLES'],
-      search: 'Toutes'
+      items: ['Toutes les villes', 'Brest', 'Paris', 'Rennes', 'LUXEMBOURG', 'BRUXELLES'],
+      search: 'Toutes les villes'
     }
   },
   computed: {
@@ -122,7 +127,7 @@ export default {
       return [this.iconSize / 2, this.iconSize * 1.15]
     },
     filterRestaurant () {
-      if (this.search != null && this.search !== '' && this.search !== 'Toutes') {
+      if (this.search != null && this.search !== '' && this.search !== 'Toutes les villes') {
         return this.restaurants.filter(restaurant => restaurant.name.toLowerCase().includes(this.search.toLowerCase()))
       } else {
         return this.restaurants

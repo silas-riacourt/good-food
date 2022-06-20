@@ -20,16 +20,11 @@
       <b-navbar-nav class="ml-auto">
         <b-nav-item to="/" exact>
           <span>
-            <font-awesome-icon icon="home" />
-            <span>Home</span>
+            <font-awesome-icon icon="th-list" />
+            <span>ERP</span>
           </span>
         </b-nav-item>
-        <b-nav-item to="/" exact v-if="hasAnyAuthority('ROLE_MANAGER') && authenticated">
-          <span>
-            <font-awesome-icon icon="home" />
-            <span>Restaurant</span>
-          </span>
-        </b-nav-item>
+
         <b-nav-item-dropdown right id="entity-menu" v-if="authenticated" active-class="active" class="pointer" data-cy="entity">
           <span slot="button-content" class="navbar-dropdown-menu">
             <font-awesome-icon icon="th-list" />

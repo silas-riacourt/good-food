@@ -20,6 +20,9 @@
                       <v-col cols="auto">
                         <v-btn text to="/" color="warning">
                           Nos restaurants
+                          <v-icon right>
+                            mdi-silverware-fork-knife
+                          </v-icon>
                         </v-btn>
                       </v-col>
                     </v-row>

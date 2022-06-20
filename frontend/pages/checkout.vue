@@ -227,7 +227,6 @@ export default {
     }
   },
   mounted () {
-    console.log(this.cart)
     this.getClientId()
   },
   methods: {
@@ -279,6 +278,7 @@ export default {
           .finally(() => { this.loading = false })
       })
       this.step = 4
+      this.$store.commit('cart/resetCart')
     }
 
   }

@@ -7,20 +7,32 @@
         </h1>
       </v-col>
       <v-col cols="8">
-        <h2 class="font-weight-light">
-          Suivi de mes commandes
-        </h2>
         <v-data-table
           :headers="headers"
           :items="orders"
           :items-per-page="10"
           :sort-by="['date', 'status']"
           :sort-desc="[true, true]"
+          no-data-text="Vous n'avez pas encore de commande"
         >
           <template #[`item.status`]="{ item }">
             <v-chip :color="getColorBystatus(item.status)" outlined>
               {{ getTextBystatus(item.status) }}
             </v-chip>
+          </template>
+          <template #[`item.date`]="{ item }">
+            {{ new Date(item.date).toLocaleDateString() }}
+          </template>
+          <template #[`item.paymentMethod`]="{ item }">
+            <div v-if="item.paymentMethod === 'PAYPAL'">
+              <v-icon>mdi-web</v-icon> Paypal
+            </div>
+            <div v-else>
+              <v-icon>mdi-credit-card</v-icon> Carte de crédit
+            </div>
+          </template>
+          <template #[`item.totalPrice`]="{ item }">
+            {{ item.totalPrice }} €
           </template>
           <template #[`item.id`]="{ item }">
             <v-icon @click="orderDetails(item)">
@@ -30,7 +42,7 @@
         </v-data-table>
       </v-col>
     </v-row>
-    <OrderModal :order="selectedOrder" :show="orderModal" @close="orderModal = false" />
+    <OrderModal v-if="orderModal" :order="selectedOrder" :products="filterProductOrders" :show="orderModal" @close="orderModal = false" />
   </v-container>
 </template>
 
@@ -42,134 +54,8 @@ export default {
       client: 0,
       selectedOrder: {},
       orderModal: false,
-      orders: [
-        {
-          id: 10,
-          totalPrice: 67206,
-          date: '2022-06-15',
-          status: 'CANCELED',
-          paymentMethod: 'CREDITCARD',
-          restaurant: null,
-          productOrders: null,
-          client: null
-        },
-        {
-          id: 1001,
-          totalPrice: 30,
-          date: '2022-06-15',
-          status: 'ENDED',
-          paymentMethod: 'PAYPAL',
-          restaurant: {
-            id: 10,
-            name: 'GoodFood BREST',
-            locationName: 'a brest lol',
-            description: 'Grocery',
-            schedule: 'OUVERT H24 FRERE',
-            open: false,
-            locationLat: 48.390392,
-            locationLng: -4.486076
-          },
-          productOrders: null,
-          client: {
-            id: 2,
-            fullname: 'XSS',
-            firstName: 'Odette',
-            lastName: 'Vidal',
-            phone: '0669204579',
-            mail: 'hard'
-          }
-        },
-        {
-          id: 2,
-          totalPrice: 74309,
-          date: '2022-06-14',
-          status: 'CANCELED',
-          paymentMethod: 'PAYPAL',
-          restaurant: null,
-          productOrders: null,
-          client: null
-        },
-        {
-          id: 6,
-          totalPrice: 77186,
-          date: '2022-06-15',
-          status: 'ENDED',
-          paymentMethod: 'CREDITCARD',
-          restaurant: null,
-          productOrders: null,
-          client: null
-        },
-        {
-          id: 9,
-          totalPrice: 17935,
-          date: '2022-06-14',
-          status: 'ENDED',
-          paymentMethod: 'CREDITCARD',
-          restaurant: null,
-          productOrders: null,
-          client: null
-        },
-        {
-          id: 5,
-          totalPrice: 20742,
-          date: '2022-06-14',
-          status: 'IN_PROGRESS',
-          paymentMethod: 'PAYPAL',
-          restaurant: null,
-          productOrders: null,
-          client: null
-        },
-        {
-          id: 4,
-          totalPrice: 57039,
-          date: '2022-06-14',
-          status: 'IN_PROGRESS',
-          paymentMethod: 'PAYPAL',
-          restaurant: null,
-          productOrders: null,
-          client: null
-        },
-        {
-          id: 8,
-          totalPrice: 96360,
-          date: '2022-06-14',
-          status: 'CANCELED',
-          paymentMethod: 'CREDITCARD',
-          restaurant: null,
-          productOrders: null,
-          client: null
-        },
-        {
-          id: 3,
-          totalPrice: 34818,
-          date: '2022-06-14',
-          status: 'ENDED',
-          paymentMethod: 'PAYPAL',
-          restaurant: null,
-          productOrders: null,
-          client: null
-        },
-        {
-          id: 1,
-          totalPrice: 48469,
-          date: '2022-06-15',
-          status: 'CANCELED',
-          paymentMethod: 'PAYPAL',
-          restaurant: null,
-          productOrders: null,
-          client: null
-        },
-        {
-          id: 7,
-          totalPrice: 39702,
-          date: '2022-06-15',
-          status: 'CANCELED',
-          paymentMethod: 'CREDITCARD',
-          restaurant: null,
-          productOrders: null,
-          client: null
-        }
-      ],
+      productOrders: [],
+      orders: [],
       headers: [
         {
           text: 'Date',
@@ -191,7 +77,14 @@ export default {
           align: 'start',
           sortable: false,
           value: 'status'
-        }, {
+        },
+        {
+          text: 'Mode réglement',
+          align: 'start',
+          sortable: false,
+          value: 'paymentMethod'
+        },
+        {
           text: 'Détail',
           align: 'start',
           sortable: false,
@@ -200,12 +93,13 @@ export default {
       ]
     }
   },
+  computed: {
+    filterProductOrders () {
+      return this.productOrders.filter(product => product.order.id === this.selectedOrder.id)
+    }
+  },
   mounted () {
     this.getClientId()
-    setTimeout(
-      function () {
-
-      }, 5000)
   },
   methods: {
     getColorBystatus (status) {
@@ -251,12 +145,24 @@ export default {
       this.$axios.$get('/api/orders/by-user-id/' + this.client.id)
         .then((response) => {
           this.orders = response
+          this.getProductOders()
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+        .finally(() => { this.loading = false })
+    },
+    getProductOders () {
+      this.$axios.$get('/api/product-orders')
+        .then((response) => {
+          this.productOrders = response
         })
         .catch((error) => {
           console.log(error)
         })
         .finally(() => { this.loading = false })
     }
+
   }
 
 }

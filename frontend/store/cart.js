@@ -1,7 +1,7 @@
 export const state = () => ({
 
   loading: false,
-  products: [{ id: 1107, name: 'Le Savoyard', description: 'Du bon gros fromage pour vos session de ski !', price: 16, image: 'savoyard', quantity: 1 }, { id: 1104, name: 'COCA-COLA®', description: 'COCA-COLA®', price: 3.1, image: 'coca', quantity: 1 }],
+  products: [],
   restaurant: {
     id: 1001,
     name: 'Goodfood BREST',
@@ -35,6 +35,9 @@ export const getters = {
 export const mutations = {
   setLoading (state, loading) {
     state.loading = loading
+  },
+  resetCart (state) {
+    state.product = []
   },
   setRestaurant (state, restaurant) {
     state.restaurant = restaurant.restaurant

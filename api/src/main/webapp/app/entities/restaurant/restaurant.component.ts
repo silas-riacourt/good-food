@@ -28,7 +28,6 @@ export default class Restaurant extends Vue {
     if(this.$store.getters.account.authorities.includes('ROLE_MANAGER')){
       this.retrieveAllRestaurantsByManager();
     }else{
-      console.log(this.$store)
       this.retrieveAllRestaurants();
     }
 

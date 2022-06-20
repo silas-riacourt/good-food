@@ -4,6 +4,7 @@
     min-width="290px"
     max-width="290px"
     max-height="220px"
+    min-height="220px"
     :color="selected ? '' :''"
     :dark="selected"
     :elevation="fromMap ? '0' : '2'"
@@ -22,8 +23,10 @@
       {{ open ? "Ouvert" : "Fermé" }} | {{ getRandomNumber() }} kms
     </v-card-subtitle>
 
-    <v-card-text>
+    <v-card-text class="pb-0">
       {{ locationname }}
+      <br>
+      <small>{{ schedule }}</small>
     </v-card-text>
 
     <v-card-actions class="justify-center pb-4">
@@ -52,6 +55,10 @@ export default {
     locationname: {
       type: String,
       required: true
+    },
+    schedule: {
+      type: String,
+      default: 'horaires'
     },
     id: {
       type: Number,
