@@ -6,7 +6,7 @@
           Mes commandes
         </h1>
       </v-col>
-      <v-col cols="12">
+      <v-col cols="8">
         <h2 class="font-weight-light">
           Suivi de mes commandes
         </h2>
@@ -19,7 +19,7 @@
         >
           <template #[`item.status`]="{ item }">
             <v-chip :color="getColorBystatus(item.status)" outlined>
-              {{ item.status }}
+              {{ getTextBystatus(item.status) }}
             </v-chip>
           </template>
           <template #[`item.id`]="{ item }">
@@ -208,6 +208,18 @@ export default {
           return 'green'
         case 'IN_PROGRESS':
           return 'yellow'
+        default:
+          return 'black'
+      }
+    },
+    getTextBystatus (status) {
+      switch (status) {
+        case 'CANCELED':
+          return 'Annulée'
+        case 'ENDED':
+          return 'Terminée'
+        case 'IN_PROGRESS':
+          return 'En cours de préparation'
         default:
           return 'black'
       }
