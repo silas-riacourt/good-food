@@ -10,7 +10,13 @@
           </v-col>
           <v-col>
             <h1>{{ restaurant.name }}</h1>
+
             <p><v-icon>mdi-table-chair</v-icon> Sur place </p>
+          </v-col>
+          <v-col class="text-right">
+            <v-btn text class="text-none" to="/">
+              Modifier le restaurant <v-icon>mdi-chevron-right</v-icon>
+            </v-btn>
           </v-col>
         </v-row>
         <v-divider />
