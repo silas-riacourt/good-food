@@ -210,9 +210,7 @@ public class RestaurantResource {
     /**
      * {@code GET  /restaurants} : get all the restaurants.
      *
-     * @param eagerload flag to eager load entities from relationships (This is
-     *                  applicable for many-to-many).
-     * @param filter    the filter of the request.
+     * @param id the id of the order to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
      *         of restaurants in body.
      */
