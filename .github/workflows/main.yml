@@ -6,6 +6,7 @@ on:
       - nicolas
       - rafael 
       - silas 
+      - master
   pull_request:
     branches:   
       - master
