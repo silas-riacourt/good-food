@@ -2,6 +2,7 @@
   <div class="text-center">
     <v-dialog
       v-model="dialog"
+      persistent
       width="fit-content"
     >
       <v-card>
