@@ -23,8 +23,7 @@ public class Stock implements Serializable {
     private Integer quantity;
 
     @JsonIgnoreProperties(value = { "categories", "manager", "stock", "order" }, allowSetters = true)
-    @OneToOne
-    @JoinColumn(unique = true)
+    @ManyToOne
     private Restaurant restaurant;
 
     @ManyToOne
@@ -85,7 +84,8 @@ public class Stock implements Serializable {
         return this;
     }
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and
+    // setters here
 
     @Override
     public boolean equals(Object o) {
@@ -100,7 +100,8 @@ public class Stock implements Serializable {
 
     @Override
     public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
+        // see
+        // https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
         return getClass().hashCode();
     }
 
@@ -108,8 +109,8 @@ public class Stock implements Serializable {
     @Override
     public String toString() {
         return "Stock{" +
-            "id=" + getId() +
-            ", quantity=" + getQuantity() +
-            "}";
+                "id=" + getId() +
+                ", quantity=" + getQuantity() +
+                "}";
     }
 }

@@ -50,13 +50,19 @@
           <v-col>
             <div id="map-wrap" style="height: 100vh" class="d-none d-sm-block">
               <client-only>
-                <l-map :options="{zoomControl: false}" style="height: 100%;z-index:0;" :zoom="zoom" :center="center" @ready="setIconStyles">
+                <l-map
+                  ref="map"
+                  :options="{zoomControl: false}"
+                  style="height: 100%;z-index:0;"
+                  :zoom="zoom"
+                  :center="center"
+                  @ready="setIconStyles"
+                >
                   <l-tile-layer :url="url" :attribution="attribution" />
                   <l-marker
                     v-for="(restaurant, index) in filterRestaurant"
                     :key="index"
                     :lat-lng="[restaurant.locationLat,restaurant.locationLng]"
-
                     :icon="icon"
                     @mouseenter="checkRestaurant(restaurant)"
                     @mouseleave="uncheckRestaurant(restaurant)"
@@ -137,7 +143,6 @@ export default {
       restaurants: 'restaurant/getAll',
       loading: 'restaurant/isLoading'
     })
-
   },
   mounted () {
     this.$store.dispatch('restaurant/getRestaurants')

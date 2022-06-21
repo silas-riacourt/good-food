@@ -52,8 +52,8 @@ public class Restaurant implements Serializable {
     private Manager manager;
 
     @JsonIgnoreProperties(value = { "restaurant", "ingredient" }, allowSetters = true)
-    @OneToOne(mappedBy = "restaurant")
-    private Stock stock;
+    @OneToMany(mappedBy = "restaurant")
+    private Set<Stock> stock;
 
     @JsonIgnoreProperties(value = { "restaurant", "productOrders", "client" }, allowSetters = true)
     @OneToMany(mappedBy = "restaurant")
@@ -209,24 +209,28 @@ public class Restaurant implements Serializable {
         return this;
     }
 
-    public Stock getStock() {
+    public Set<Stock> getStock() {
         return this.stock;
     }
 
-    public void setStock(Stock stock) {
-        if (this.stock != null) {
-            this.stock.setRestaurant(null);
-        }
-        if (stock != null) {
-            stock.setRestaurant(this);
-        }
-        this.stock = stock;
-    }
+    /*
+     * public void setStock(Stock stock) {
+     * if (this.stock != null) {
+     * this.stock.setRestaurant(null);
+     * }
+     * if (stock != null) {
+     * stock.setRestaurant(this);
+     * }
+     * this.stock = stock;
+     * }
+     */
 
-    public Restaurant stock(Stock stock) {
-        this.setStock(stock);
-        return this;
-    }
+    /*
+     * public Restaurant stock(Set<Stock> stock) {
+     * this.setStock(stock);
+     * return this;
+     * }
+     */
 
     public Set<Order> getOrder() {
         return this.order;

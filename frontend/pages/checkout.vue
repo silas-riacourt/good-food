@@ -258,9 +258,6 @@ export default {
         .finally(() => { this.loading = false })
     },
     createProductOrders (idOrder) {
-      console.log(this.cart)
-      console.log(idOrder)
-
       const productOrder = this.productOrder
       this.products.forEach((product) => {
         productOrder.quantity = product.quantity
@@ -271,14 +268,13 @@ export default {
         this.$axios.$post('/api/product-orders', productOrder)
           .then((response) => {
             console.log(response)
+            this.$store.commit('cart/resetCart')
           })
           .catch((error) => {
             console.log(error)
           })
-          .finally(() => { this.loading = false })
       })
       this.step = 4
-      this.$store.commit('cart/resetCart')
     }
 
   }

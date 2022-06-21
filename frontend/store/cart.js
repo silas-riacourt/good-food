@@ -37,7 +37,7 @@ export const mutations = {
     state.loading = loading
   },
   resetCart (state) {
-    state.product = []
+    state.products = []
   },
   setRestaurant (state, restaurant) {
     state.restaurant = restaurant.restaurant
