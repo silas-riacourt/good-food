@@ -67,27 +67,28 @@ public hasAnyAuthority(authorities: any): boolean {
       .then(
         res => {
           managerId = res.data.id;
-          this.isFetching = false;
+        
+          this.restaurantService()
+          .retrieveByManager(managerId)
+          .then(
+            res => {
+              this.restaurants = res.data;
+              this.isFetching = false;
+            },
+            err => {
+              this.isFetching = false;
+              this.alertService().showHttpError(this, err.response);
+            }
+          );
         },
         err => {
           this.isFetching = false;
           this.alertService().showHttpError(this, err.response);
         }
       );
-    console.log(managerId);
-    this.isFetching = true;
-    this.restaurantService()
-      .retrieveByManager(managerId)
-      .then(
-        res => {
-          this.restaurants = res.data;
-          this.isFetching = false;
-        },
-        err => {
-          this.isFetching = false;
-          this.alertService().showHttpError(this, err.response);
-        }
-      );
+ 
+
+  
   }
 
   public handleSyncList(): void {
