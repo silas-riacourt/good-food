@@ -184,6 +184,20 @@ public class ManagerResource {
     }
 
     /**
+     * {@code GET  /clients/:id} : get the "id" client.
+     *
+     * @param id the id of the client to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the client, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/managers/by-user-id/{id}")
+    public ResponseEntity<Manager> getClientByUserId(@PathVariable Long id) {
+        log.debug("REST request to get Manager by user id : {}", id);
+        Optional<Manager> client = managerRepository.findOneByUserId(id);
+        return ResponseUtil.wrapOrNotFound(client);
+    }
+
+    /**
      * {@code DELETE  /managers/:id} : delete the "id" manager.
      *
      * @param id the id of the manager to delete.

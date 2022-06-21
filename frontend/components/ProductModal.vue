@@ -8,7 +8,7 @@
         <v-card-text class="pb-0">
           <v-row justify="center" align="center">
             <v-col class="d-flex justify-center align-center">
-              <v-img :src="require(`~/assets/dessert.png`)" max-width="100" />
+              <v-img v-if="product.image" :src="require(`~/assets/${product.image}.png`)" max-width="100" />
             </v-col>
             <v-col cols="12">
               <h2 class="text-center">

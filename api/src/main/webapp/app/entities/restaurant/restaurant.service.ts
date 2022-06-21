@@ -48,7 +48,7 @@ export default class RestaurantService {
 
     return new Promise<any>((resolve, reject) => {
       axios
-      .get(`/api/clients/by-user-id/${userId}`)
+      .get(`/api/managers/by-user-id/${userId}`)
         .then(res => {
           resolve(res);
         })
