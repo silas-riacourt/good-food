@@ -9,12 +9,16 @@ export const state = () => ({
     description: 'Goodfood BREST',
     schedule: 'Ouvert du lundi au samedi de 11h à 14h et de 18h à 22h',
     open: false
-  }
+  },
+  orderType: ''
 })
 
 export const getters = {
   getCart (state) {
     return state.products
+  },
+  getOrderType (state) {
+    return state.orderType
   },
   getRestaurant (state) {
     return state.restaurant
@@ -35,6 +39,10 @@ export const getters = {
 export const mutations = {
   setLoading (state, loading) {
     state.loading = loading
+  },
+
+  setOrderType (state, type) {
+    state.orderType = type
   },
   resetCart (state) {
     state.products = []

@@ -11,7 +11,24 @@
           <v-col>
             <h1>{{ restaurant.name }}</h1>
 
-            <p><v-icon>mdi-table-chair</v-icon> Sur place </p>
+            <p v-if="orderType == 'place'">
+              <v-icon>mdi-table-chair</v-icon> Sur place
+              <v-btn text class="text-none" @click="orderTypeModal = true">
+                Modifier <v-icon>mdi-chevron-right</v-icon>
+              </v-btn>
+            </p>
+            <p v-if="orderType == 'delivery'">
+              <v-icon>mdi-moped</v-icon> Livraison
+              <v-btn text class="text-none" @click="orderTypeModal = true">
+                Modifier <v-icon>mdi-chevron-right</v-icon>
+              </v-btn>
+            </p>
+            <p v-if="orderType == 'clickandcollect'">
+              <v-icon>mdi-human-male-board</v-icon> Click and collect
+              <v-btn text class="text-none" @click="orderTypeModal = true">
+                Modifier <v-icon>mdi-chevron-right</v-icon>
+              </v-btn>
+            </p>
           </v-col>
           <v-col class="text-right">
             <v-btn text class="text-none" to="/">
@@ -80,6 +97,7 @@
         <CartCard />
       </v-col>
       <ProductModal :product="selectedProduct" :show="productModal" @add-product="addProductHandler" @close="productModal = false" />
+      <OrderTypeModal :show="orderTypeModal" @select-type="selectOrderType" @close="orderTypeModal = false" />
     </v-row>
   </v-container>
 </template>
@@ -88,11 +106,13 @@
 import { mapGetters } from 'vuex'
 import ProductModal from '../../components/ProductModal.vue'
 import CartCard from '../../components/CartCard.vue'
+import OrderTypeModal from '../../components/OrderTypeModal.vue'
 export default {
   name: 'AccountPage',
   components: {
     ProductModal,
-    CartCard
+    CartCard,
+    OrderTypeModal
   },
   validate ({ params }) {
     // Must be a number
@@ -101,6 +121,7 @@ export default {
   data: () => ({
     selectedCategorie: 0,
     productModal: false,
+    orderTypeModal: true,
     selectedProduct: {
       name: 'Burger 1',
       price: 4.95
@@ -111,7 +132,8 @@ export default {
     ...mapGetters({
       restaurant: 'restaurant/getRestaurant',
       loading: 'restaurant/isLoading',
-      categorie: 'categorie/getCategorie'
+      categorie: 'categorie/getCategorie',
+      orderType: 'cart/getOrderType'
     })
 
   },
@@ -124,6 +146,9 @@ export default {
     this.$store.dispatch('restaurant/getRestaurant', this.$route.params.id)
   },
   methods: {
+    selectOrderType (type) {
+      console.log(type)
+    },
     changeCategorie (categorie) {
       this.$store.dispatch('categorie/getCategorieById', categorie.id)
     },
