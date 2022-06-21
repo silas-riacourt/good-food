@@ -1,12 +1,12 @@
 <template>
   <v-container>
     <v-row justify="center" align="center">
-      <v-col cols="8">
+      <v-col cols="12" sm="8">
         <h1 class="font-weight-light">
           Mes commandes
         </h1>
       </v-col>
-      <v-col cols="8">
+      <v-col cols="12" sm="8">
         <v-data-table
           :headers="headers"
           :items="orders"
