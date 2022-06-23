@@ -35,6 +35,12 @@
             <span>{{ product.tva }}</span>
           </dd>
           <dt>
+            <span>Tva Take Away</span>
+          </dt>
+          <dd>
+            <span>{{ product.tvaTakeAway }}</span>
+          </dd>
+          <dt>
             <span>Ingredient</span>
           </dt>
           <dd>

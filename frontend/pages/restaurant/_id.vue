@@ -78,7 +78,10 @@
                       <v-card-title class="text-uppercase" style="word-break:normal;">
                         {{ product.name }}
                       </v-card-title>
-                      <v-card-subtitle>{{ product.price }} €</v-card-subtitle>
+                      <v-card-subtitle v-if="false">
+                        {{ (product.price).toFixed(2) }} € HT
+                      </v-card-subtitle>
+                      <v-card-subtitle>{{ (product.price * product.tva).toFixed(2) }} € TTC</v-card-subtitle>
                     </v-list-item-content>
                   </v-list-item>
                 </v-card>

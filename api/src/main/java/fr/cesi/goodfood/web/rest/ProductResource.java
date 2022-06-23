@@ -136,6 +136,9 @@ public class ProductResource {
                 if (product.getTva() != null) {
                     existingProduct.setTva(product.getTva());
                 }
+                if (product.getTvaTakeAway() != null) {
+                    existingProduct.setTvaTakeAway(product.getTvaTakeAway());
+                }
 
                 return existingProduct;
             })

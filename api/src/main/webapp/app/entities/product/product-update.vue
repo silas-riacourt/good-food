@@ -69,6 +69,18 @@
             />
           </div>
           <div class="form-group">
+            <label class="form-control-label" for="product-tvaTakeAway">Tva Take Away</label>
+            <input
+              type="number"
+              class="form-control"
+              name="tvaTakeAway"
+              id="product-tvaTakeAway"
+              data-cy="tvaTakeAway"
+              :class="{ valid: !$v.product.tvaTakeAway.$invalid, invalid: $v.product.tvaTakeAway.$invalid }"
+              v-model.number="$v.product.tvaTakeAway.$model"
+            />
+          </div>
+          <div class="form-group">
             <label for="product-ingredient">Ingredient</label>
             <select
               class="form-control"

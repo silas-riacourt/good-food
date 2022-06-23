@@ -56,7 +56,7 @@
             </v-btn>
           </v-col>
           <v-col :key="product.quantity" cols="4">
-            {{ (product.price * product.quantity).toFixed(2) }} €
+            {{ ((product.price *product.tva)* product.quantity).toFixed(2) }} €
           </v-col>
         </v-row>
       </div>

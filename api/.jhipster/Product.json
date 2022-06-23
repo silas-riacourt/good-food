@@ -24,6 +24,10 @@
     {
       "fieldName": "tva",
       "fieldType": "Double"
+    },
+    {
+      "fieldName": "tvaTakeAway",
+      "fieldType": "Double"
     }
   ],
   "fluentMethods": true,

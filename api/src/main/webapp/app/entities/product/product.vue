@@ -33,6 +33,7 @@
             <th scope="row"><span>Price</span></th>
             <th scope="row"><span>Image</span></th>
             <th scope="row"><span>Tva</span></th>
+            <th scope="row"><span>Tva Take Away</span></th>
             <th scope="row"><span>Ingredient</span></th>
             <th scope="row"></th>
           </tr>
@@ -47,6 +48,7 @@
             <td>{{ product.price }}</td>
             <td>{{ product.image }}</td>
             <td>{{ product.tva }}</td>
+            <td>{{ product.tvaTakeAway }}</td>
             <td>
               <span v-for="(ingredient, i) in product.ingredients" :key="ingredient.id"
                 >{{ i > 0 ? ', ' : '' }}

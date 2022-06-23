@@ -58,7 +58,7 @@
             <v-col cols="12">
               <div class="text-center">
                 <v-btn block color="warning" class=" text-none" :disabled="quantity <= 0" @click="addProduct">
-                  Ajouter au panier : {{ finalPrice }} €
+                  Ajouter au panier : {{ finalPrice.toFixed(2) }} €
                 </v-btn>
               </div>
             </v-col>
@@ -101,7 +101,7 @@ export default {
 
     finalPrice () {
       // `this` pointe sur l'instance vm
-      return this.quantity * this.product.price
+      return this.quantity * (this.product.price * this.product.tva)
     }
   },
   methods: {

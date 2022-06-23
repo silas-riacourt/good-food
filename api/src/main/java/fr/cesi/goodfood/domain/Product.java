@@ -36,6 +36,9 @@ public class Product implements Serializable {
     @Column(name = "tva")
     private Double tva;
 
+    @Column(name = "tva_take_away")
+    private Double tvaTakeAway;
+
     @ManyToMany
     @JoinTable(
         name = "rel_product__ingredient",
@@ -129,6 +132,19 @@ public class Product implements Serializable {
         this.tva = tva;
     }
 
+    public Double getTvaTakeAway() {
+        return this.tvaTakeAway;
+    }
+
+    public Product tvaTakeAway(Double tvaTakeAway) {
+        this.setTvaTakeAway(tvaTakeAway);
+        return this;
+    }
+
+    public void setTvaTakeAway(Double tvaTakeAway) {
+        this.tvaTakeAway = tvaTakeAway;
+    }
+
     public Set<Ingredient> getIngredients() {
         return this.ingredients;
     }
@@ -214,6 +230,7 @@ public class Product implements Serializable {
             ", price=" + getPrice() +
             ", image='" + getImage() + "'" +
             ", tva=" + getTva() +
+            ", tvaTakeAway=" + getTvaTakeAway() +
             "}";
     }
 }

@@ -83,12 +83,28 @@
                               </v-btn>
                             </v-col>
                             <v-col :key="product.quantity" cols="4">
-                              {{ (product.price * product.quantity).toFixed(2) }} €
+                              {{ ((product.price * product.tva) * product.quantity).toFixed(2) }} € TTC
                             </v-col>
                           </v-row>
                         </v-list-item-content>
                       </v-list-item>
                     </v-card>
+                  </v-col>
+                </v-row>
+                <v-row justify="space-between" no-gutters class="pb-4">
+                  <v-col>
+                    <h2> Total (HT)</h2>
+                  </v-col>
+                  <v-col class="text-right">
+                    <h2> {{ totalPriceHT.toFixed(2) }}€</h2>
+                  </v-col>
+                </v-row>
+                <v-row justify="space-between" no-gutters class="pb-4">
+                  <v-col>
+                    <h2> TVA</h2>
+                  </v-col>
+                  <v-col class="text-right">
+                    <h2> {{ (totalPrice - totalPriceHT).toFixed(2) }}€</h2>
                   </v-col>
                 </v-row>
                 <v-row justify="space-between" no-gutters class="pb-4">
@@ -215,7 +231,8 @@ export default {
       products: 'cart/getCart',
       restaurant: 'cart/getRestaurant',
       loading: 'cart/isLoading',
-      totalPrice: 'cart/totalPrice'
+      totalPrice: 'cart/totalPrice',
+      totalPriceHT: 'cart/totalPriceHT'
     }),
     email: {
       get () {

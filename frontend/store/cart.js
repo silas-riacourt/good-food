@@ -28,7 +28,13 @@ export const getters = {
   },
   totalPrice (state) {
     let sum = 0
-
+    state.products.forEach((product) => {
+      sum += ((product.price * product.tva) * product.quantity)
+    })
+    return sum
+  },
+  totalPriceHT (state) {
+    let sum = 0
     state.products.forEach((product) => {
       sum += (product.price * product.quantity)
     })
