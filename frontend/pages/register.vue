@@ -7,7 +7,7 @@
             S'enregistrer
           </v-card-title>
           <v-card-text>
-            <v-form>
+            <v-form v-model="valid">
               <v-text-field
                 v-model="user.login"
                 color="warning"
@@ -44,13 +44,14 @@
                 label="Mot de passe"
                 :type="showPassword ? 'text' : 'password'"
                 :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                :rules="passwordRules"
                 @click:append="showPassword = !showPassword"
               />
             </v-form>
           </v-card-text>
           <v-card-actions>
             <v-spacer />
-            <v-btn color="warning" @click="register()">
+            <v-btn color="warning" :disabled="!valid" @click="register()">
               Valider
             </v-btn>
           </v-card-actions>
@@ -77,7 +78,16 @@ export default {
         password: ''
       },
       showPassword: false,
-      loading: false
+      loading: false,
+      valid: false,
+      passwordRules: [
+        v => !!v || 'Password is required',
+        v => (v && v.length >= 5) || 'Password must have 5+ characters',
+        v => /(?=.*[A-Z])/.test(v) || 'Must have one uppercase character',
+        v => /(?=.*\d)/.test(v) || 'Must have one number',
+        v => /([!@$%])/.test(v) || 'Must have one special character [!@#$%]'
+      ]
+
     }
   },
 

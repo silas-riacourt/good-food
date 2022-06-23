@@ -29,6 +29,12 @@
             <span>{{ product.image }}</span>
           </dd>
           <dt>
+            <span>Tva</span>
+          </dt>
+          <dd>
+            <span>{{ product.tva }}</span>
+          </dd>
+          <dt>
             <span>Ingredient</span>
           </dt>
           <dd>

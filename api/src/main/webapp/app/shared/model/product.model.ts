@@ -7,6 +7,7 @@ export interface IProduct {
   description?: string | null;
   price?: number | null;
   image?: string | null;
+  tva?: number | null;
   ingredients?: IIngredient[] | null;
   categories?: ICategorie[] | null;
 }
@@ -18,6 +19,7 @@ export class Product implements IProduct {
     public description?: string | null,
     public price?: number | null,
     public image?: string | null,
+    public tva?: number | null,
     public ingredients?: IIngredient[] | null,
     public categories?: ICategorie[] | null
   ) {}

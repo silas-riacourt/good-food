@@ -17,6 +17,7 @@ const validations: any = {
     description: {},
     price: {},
     image: {},
+    tva: {},
   },
 };
 

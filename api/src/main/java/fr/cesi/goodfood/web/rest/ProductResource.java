@@ -133,6 +133,9 @@ public class ProductResource {
                 if (product.getImage() != null) {
                     existingProduct.setImage(product.getImage());
                 }
+                if (product.getTva() != null) {
+                    existingProduct.setTva(product.getTva());
+                }
 
                 return existingProduct;
             })

@@ -20,6 +20,10 @@
     {
       "fieldName": "image",
       "fieldType": "String"
+    },
+    {
+      "fieldName": "tva",
+      "fieldType": "Double"
     }
   ],
   "fluentMethods": true,

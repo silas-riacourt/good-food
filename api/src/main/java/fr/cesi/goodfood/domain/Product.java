@@ -33,6 +33,9 @@ public class Product implements Serializable {
     @Column(name = "image")
     private String image;
 
+    @Column(name = "tva")
+    private Double tva;
+
     @ManyToMany
     @JoinTable(
         name = "rel_product__ingredient",
@@ -111,6 +114,19 @@ public class Product implements Serializable {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public Double getTva() {
+        return this.tva;
+    }
+
+    public Product tva(Double tva) {
+        this.setTva(tva);
+        return this;
+    }
+
+    public void setTva(Double tva) {
+        this.tva = tva;
     }
 
     public Set<Ingredient> getIngredients() {
@@ -197,6 +213,7 @@ public class Product implements Serializable {
             ", description='" + getDescription() + "'" +
             ", price=" + getPrice() +
             ", image='" + getImage() + "'" +
+            ", tva=" + getTva() +
             "}";
     }
 }

@@ -57,6 +57,18 @@
             />
           </div>
           <div class="form-group">
+            <label class="form-control-label" for="product-tva">Tva</label>
+            <input
+              type="number"
+              class="form-control"
+              name="tva"
+              id="product-tva"
+              data-cy="tva"
+              :class="{ valid: !$v.product.tva.$invalid, invalid: $v.product.tva.$invalid }"
+              v-model.number="$v.product.tva.$model"
+            />
+          </div>
+          <div class="form-group">
             <label for="product-ingredient">Ingredient</label>
             <select
               class="form-control"
