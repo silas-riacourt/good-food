@@ -20,7 +20,7 @@
       <v-icon :color="open ? 'green' : 'red'">
         {{ open ? "mdi-check" : "mdi-close" }}
       </v-icon>
-      {{ open ? "Ouvert" : "Fermé" }} | {{ getRandomNumber() }} kms
+      {{ open ? "Ouvert" : "Fermé" }}
     </v-card-subtitle>
 
     <v-card-text class="pb-0">
@@ -68,9 +68,6 @@ export default {
     fromMap: Boolean
   },
   methods: {
-    getRandomNumber () {
-      return Math.floor(Math.random() * (400 - 10 + 1) + 10)
-    }
   }
 }
 </script>
