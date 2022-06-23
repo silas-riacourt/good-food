@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<databaseChangeLog
-    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
     <!--
@@ -12,7 +8,7 @@
     <changeSet id="20220616190346-1" author="jhipster">
         <createTable tableName="product">
             <column name="id" type="bigint">
-                <constraints primaryKey="true" nullable="false"/>
+                <constraints primaryKey="true" nullable="false" />
             </column>
             <column name="name" type="varchar(255)">
                 <constraints nullable="true" />
@@ -21,6 +17,12 @@
                 <constraints nullable="true" />
             </column>
             <column name="price" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="tva" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="tva_take_away" type="double">
                 <constraints nullable="true" />
             </column>
             <column name="image" type="varchar(255)">
@@ -34,14 +36,14 @@
 
         <createTable tableName="rel_product__ingredient">
             <column name="ingredient_id" type="bigint">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
             <column name="product_id" type="bigint">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
         </createTable>
 
-        <addPrimaryKey columnNames="product_id, ingredient_id" tableName="rel_product__ingredient"/>
+        <addPrimaryKey columnNames="product_id, ingredient_id" tableName="rel_product__ingredient" />
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
@@ -55,16 +57,12 @@
           Spring Boot configuration key.
     -->
     <changeSet id="20220616190346-1-data" author="jhipster" context="faker">
-        <loadData
-                  file="config/liquibase/fake-data/product.csv"
-                  separator=";"
-                  tableName="product"
-                  usePreparedStatements="true">
-            <column name="id" type="numeric"/>
-            <column name="name" type="string"/>
-            <column name="description" type="string"/>
-            <column name="price" type="numeric"/>
-            <column name="image" type="string"/>
+        <loadData file="config/liquibase/fake-data/product.csv" separator=";" tableName="product" usePreparedStatements="true">
+            <column name="id" type="numeric" />
+            <column name="name" type="string" />
+            <column name="description" type="string" />
+            <column name="price" type="numeric" />
+            <column name="image" type="string" />
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>
