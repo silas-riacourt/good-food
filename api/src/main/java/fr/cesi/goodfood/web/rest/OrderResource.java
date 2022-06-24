@@ -2,6 +2,7 @@ package fr.cesi.goodfood.web.rest;
 
 import fr.cesi.goodfood.domain.Order;
 import fr.cesi.goodfood.repository.OrderRepository;
+import fr.cesi.goodfood.service.MailService;
 import fr.cesi.goodfood.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -36,8 +37,11 @@ public class OrderResource {
 
     private final OrderRepository orderRepository;
 
-    public OrderResource(OrderRepository orderRepository) {
+    private final MailService mailService;
+
+    public OrderResource(OrderRepository orderRepository, MailService mailService) {
         this.orderRepository = orderRepository;
+        this.mailService = mailService;
     }
 
     /**
@@ -56,6 +60,7 @@ public class OrderResource {
             throw new BadRequestAlertException("A new order cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Order result = orderRepository.save(order);
+        mailService.sendOrderEmail(order.getClient().getInternalUser());
         return ResponseEntity
                 .created(new URI("/api/orders/" + result.getId()))
                 .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME,

@@ -54,7 +54,7 @@ export default {
   axios: {
     // 'https://goodfood-application.herokuapp.com/' | http://localhost:8080/
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: process.env.BASE_URL || 'https://goodfood-application.herokuapp.com/'
+    baseURL: process.env.BASE_URL || 'http://localhost:8080/'
   },
   router: {
     middleware: ['auth']

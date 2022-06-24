@@ -40,11 +40,10 @@ public class MailService {
     private final SpringTemplateEngine templateEngine;
 
     public MailService(
-        JHipsterProperties jHipsterProperties,
-        JavaMailSender javaMailSender,
-        MessageSource messageSource,
-        SpringTemplateEngine templateEngine
-    ) {
+            JHipsterProperties jHipsterProperties,
+            JavaMailSender javaMailSender,
+            MessageSource messageSource,
+            SpringTemplateEngine templateEngine) {
         this.jHipsterProperties = jHipsterProperties;
         this.javaMailSender = javaMailSender;
         this.messageSource = messageSource;
@@ -54,13 +53,12 @@ public class MailService {
     @Async
     public void sendEmail(String to, String subject, String content, boolean isMultipart, boolean isHtml) {
         log.debug(
-            "Send email[multipart '{}' and html '{}'] to '{}' with subject '{}' and content={}",
-            isMultipart,
-            isHtml,
-            to,
-            subject,
-            content
-        );
+                "Send email[multipart '{}' and html '{}'] to '{}' with subject '{}' and content={}",
+                isMultipart,
+                isHtml,
+                to,
+                subject,
+                content);
 
         // Prepare message using a Spring helper
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
@@ -108,5 +106,11 @@ public class MailService {
     public void sendPasswordResetMail(User user) {
         log.debug("Sending password reset email to '{}'", user.getEmail());
         sendEmailFromTemplate(user, "mail/passwordResetEmail", "email.reset.title");
+    }
+
+    @Async
+    public void sendOrderEmail(User user) {
+        log.debug("Sending order email '{}'", user.getEmail());
+        sendEmailFromTemplate(user, "order", "order.title");
     }
 }
